@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="1.1" data-basepath=".." data-revision="1461840494774">
+    <div class="book" data-level="1.1" data-basepath=".." data-revision="1461842909065">
     
 
 <div class="book-summary">
@@ -2859,18 +2859,25 @@
                     <section class="normal" id="section-gitbook_1">
                     
                         <h2 id="11-comments">1.1 Comments</h2>
-<p>Any program requires comments and indeed Rust supports
-a few different varieties:</p>
+<!--- Any program requires comments and indeed Rust supports --->
+<!--- a few different varieties: --->
+<p>あらゆるプログラムにはコメントが必要です。ラストには何種類かのコメントがあります</p>
+<!--- * *Regular comments* which are ignored by the compiler: --->
+<!---  - `// Line comments which go to the end of the line.` --->
+<!---  - `/* Block comments which go to the closing delimiter. */` --->
+<!--- * *Doc comments* which are parsed into HTML library --->
+<!--- [documentation][docs]: --->
+<!---  - `/// Generate library docs for the following item.` --->
+<!---  - `//! Generate library docs for the enclosing item.` --->
 <ul>
-<li><em>Regular comments</em> which are ignored by the compiler:<ul>
-<li><code>// Line comments which go to the end of the line.</code></li>
-<li><code>/* Block comments which go to the closing delimiter. */</code></li>
+<li><em>通常のコメント</em> これはコンパイラによって完全に無視されます。<ul>
+<li><code>// 行末までコメントアウト</code></li>
+<li><code>/* ブロックによって囲まれた部分をコメントアウト */</code></li>
 </ul>
 </li>
-<li><em>Doc comments</em> which are parsed into HTML library
-<a href="/meta/doc.html">documentation</a>:<ul>
-<li><code>/// Generate library docs for the following item.</code></li>
-<li><code>//! Generate library docs for the enclosing item.</code></li>
+<li><em>ドキュメンテーションコメント</em> ライブラリのドキュメンテーションとしてhtmlにパースされます。<ul>
+<li><code>/// このコメントの下の内容に関するドキュメントとなります</code></li>
+<li><code>//! このコメントを含むソースのドキュメントになります</code></li>
 </ul>
 </li>
 </ul>
@@ -2907,7 +2914,7 @@ a few different varieties:</p>
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="/meta/doc.html">Library documentation</a></p>
+<p><a href="/meta/doc.html">ライブラリドキュメンテーション</a></p>
 
                     
                     </section>
