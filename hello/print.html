@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="1.2" data-basepath=".." data-revision="1461854333317">
+    <div class="book" data-level="1.2" data-basepath=".." data-revision="1461918084256">
     
 
 <div class="book-summary">
@@ -2859,83 +2859,93 @@
                     <section class="normal" id="section-gitbook_6">
                     
                         <h2 id="12-formatted-print">1.2 Formatted print</h2>
-<p>Printing is handled by a series of <a href="/macros.html"><code>macros</code></a> defined in <a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>
-some of which include:</p>
+<!--- Printing is handled by a series of [`macros`][macros] defined in [`std::fmt`][fmt] --->
+<!--- some of which include: --->
+<p>プリント関係の機能は<a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>で定義される幾つかの<a href="/macros.html">マクロ</a>によって扱われます。このマクロには以下が含まれます。</p>
+<!--- * `format!`: write formatted text to [`String`][string] --->
 <ul>
-<li><code>format!</code>: write formatted text to <a href="/std/str.html"><code>String</code></a></li>
-<li><code>print!</code>: same as <code>format!</code> but the text is printed to the console.</li>
-<li><code>println!</code>: same as <code>print!</code> but a newline is appended.</li>
+<li><code>format!</code>: フォーマットされたテキストを文字列(String)型に書き込みます。<!--- * `print!`: same as `format!` but the text is printed to the console. ---></li>
+<li><code>print!</code>: <code>format!</code> と同様ですが、コンソールにそのテキストを出力します。<!--- * `println!`: same as `print!` but a newline is appended. ---></li>
+<li><code>println!</code>: <code>print!</code>: と同じですが改行が付け加えられます。</li>
 </ul>
-<p>All parse text in the same fashion. A plus is that the formatting correctness will
-be checked at compile time.</p>
+<!--- All parse text in the same fashion. A plus is that the formatting correctness will --->
+<!--- be checked at compile time. --->
+<p>すべて同じやり方でテキストをパースし、正しくフォーマットできるかコンパイル時にチェックします。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // In general, the &#96;{}&#96; will be automatically replaced with any
-    // arguments. These will be stringified.
+    // 一般的に &#96;{} &#96;はどんな引数であろうと自動的に置き換えられます。
+    // 例えば以下は文字列に変換されます
     println!(&quot;{} days&quot;, 31);
 
-    // Without a suffix, 31 becomes an i32. You can change what type 31 is,
-    // with a suffix.
+    // サフィックスで型を指定しなければ31はi32として扱われます。
+    // サフィックスの指定により、31の型を自由に変換することができます。
 
-    // There are various optional patterns this works with. Positional
-    // arguments can be used.
+    // 引数の位置から埋め込まれる場所を指定することができます。
     println!(&quot;{0}, this is {1}. {1}, this is {0}&quot;, &quot;Alice&quot;, &quot;Bob&quot;);
 
-    // As can named arguments.
+    // 名前での指定も可能です。
     println!(&quot;{subject} {verb} {object}&quot;,
              object=&quot;the lazy dog&quot;,
              subject=&quot;the quick brown fox&quot;,
              verb=&quot;jumps over&quot;);
 
-    // Special formatting can be specified after a &#96;:&#96;.
+    // &#96;:&#96; のあとにフォーマット型を指定することによる特殊なフォーマットも可能です.
     println!(&quot;{} of {:b} people know binary, the other half don&#39;t&quot;, 1, 2);
 
-    // You can right-align text with a specified width. This will output
-    // &quot;     1&quot;. 5 white spaces and a &quot;1&quot;.
+    // 指定した幅の中に、右寄せで文字列を挿入することができます。
+    // 以下の例では&quot;     1&quot;. というように、５つの半角空白のあとに&quot;1&quot;が入ります.
     println!(&quot;{number:&gt;width&#36;}&quot;, number=1, width=6);
 
-    // You can pad numbers with extra zeroes. This will output &quot;000001&quot;.
+    // 空白の代わりに0を使うこともできます. このアウトプットは &quot;000001&quot; になります.
     println!(&quot;{number:&gt;0width&#36;}&quot;, number=1, width=6);
 
-    // It will even check to make sure the correct number of arguments are
-    // used.
+    // 引数の数が正しいかのチェックも行ってくれます。
     println!(&quot;My name is {0}, {1} {0}&quot;, &quot;Bond&quot;);
     // FIXME ^ Add the missing argument: &quot;James&quot;
 
-    // Create a structure which contains an &#96;i32&#96;. Name it &#96;Structure&#96;.
+    // &#96;i32&#96;保持する &#96;Structure&#96; という名の構造体を定義します.
     struct Structure(i32);
 
     // However, custom types such as this structure require more complicated
-    // handling. This will not work.
+    // このようにカスタム型を用いる場合、少々扱いが複雑になります。
+    // 以下は動作しません。
     println!(&quot;This struct &#96;{}&#96; won&#39;t print...&quot;, Structure(3));
     // FIXME ^ Comment out this line.
 }</div>
 <div id="result"></div>
 </div>
 
-<p><a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a> contains many <a href="/trait.html"><code>traits</code></a> which govern the display
-of text. The base form of two important ones are listed below:</p>
+<!--- [`std::fmt`][fmt] contains many [`traits`][traits] which govern the display --->
+<!--- of text. The base form of two important ones are listed below: --->
+<p><a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>はいくつもの<a href="/trait.html">トレイト</a>を持ち、それによってどのようにディスプレイに表示されるかが決まります。
+特に大事な形式は以下の２つです。</p>
+<!--- * `fmt::Debug`: Uses the `{:?}` marker. Format text for debugging purposes. --->
+<!--- * `fmt::Display`: Uses the `{}` marker. Format text in a more elegant, user --->
+<!--- friendly fashion. --->
 <ul>
-<li><code>fmt::Debug</code>: Uses the <code>{:?}</code> marker. Format text for debugging purposes.</li>
-<li><code>fmt::Display</code>: Uses the <code>{}</code> marker. Format text in a more elegant, user
-friendly fashion.</li>
+<li><code>fmt::Debug</code>: は、<code>{:?}</code>というマーカーを使用し、デバッギング目的に使われます。</li>
+<li><code>fmt::Display</code>: は <code>{}</code>というマーカーを使用し、より美しく、ユーザフレンドリーに表示します。</li>
 </ul>
-<p>Here, <code>fmt::Display</code> was used because the std library provides implementations
-for these types. To print text for custom types, more steps are required.</p>
-<h3 id="activities">Activities</h3>
+<!--- Here, `fmt::Display` was used because the std library provides implementations --->
+<!--- for these types. To print text for custom types, more steps are required. --->
+<p>この例で用いられている型は、標準ライブラリに含まれているため、ここでは<code>fmt::Display</code>を使用しています。他の型の場合、もうちょっと複雑なステップが要求される場合があります。</p>
+<h3 id="">実践</h3>
+<!---  * Fix the two issues in the above code (see FIXME) so that it runs without --->
+   <!--- error. --->
 <ul>
-<li>Fix the two issues in the above code (see FIXME) so that it runs without
-error.</li>
-<li>Add a <code>println!</code> macro that prints: <code>Pi is roughly 3.143</code>, using twenty-two
-divided by seven to generate the estimate for Pi. (Hint: you may need to
-check the <a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a> documentation for setting the number of
-decimals to display)</li>
+<li>上の例を実行した際に生じるエラーを修復しましょう。</li>
+<li><code>println!</code>マクロを追加し、<code>Pi is rough ly 3.143</code>,という文字列を出力しましょう。
+ただし、3.143は22を7で割ることで作成してください。(ヒント: 10進数の数を出力する方法については、<a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>をチェックする必要があるかもしれません。)<!---  * Add a `println!` macro that prints: `Pi is roughly 3.143`, using twenty-two --->
+<!--- divided by seven to generate the estimate for Pi. (Hint: you may need to --->
+<!--- check the [`std::fmt`][fmt] documentation for setting the number of --->
+<!--- decimals to display) --->
+</li>
 </ul>
 <h3 id="see-also">See also</h3>
-<p><a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>, <a href="/macros.html"><code>macros</code></a>, <a href="/custom_types/structs.html"><code>struct</code></a>,
-and <a href="/trait.html"><code>traits</code></a></p>
+<p><a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>,<a href="/macros.html">マクロ</a>,<a href="/custom_types/structs.html">構造体</a>,
+and <a href="/trait.html">トレイト</a></p>
 
                     
                     </section>
@@ -2975,6 +2985,10 @@ and <a href="/trait.html"><code>traits</code></a></p>
 
     
     <script src="../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>

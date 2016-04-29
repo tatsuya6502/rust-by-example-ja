@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="1.2.1" data-basepath="../.." data-revision="1461854333317">
+    <div class="book" data-level="1.2.1" data-basepath="../.." data-revision="1461918084256">
     
 
 <div class="book-summary">
@@ -2859,59 +2859,66 @@
                     <section class="normal" id="section-gitbook_3">
                     
                         <h3 id="121-debug">1.2.1 Debug</h3>
-<p>All types which want to use <code>std::fmt</code> formatting <code>traits</code> require an
-implementation to be printable. Automatic implementations are only provided
-for types such as in the <code>std</code> library. All others <em>must</em> be manually
-implemented somehow.</p>
-<p>The <code>fmt::Debug</code> <code>trait</code> makes this very straightforward. <em>All</em> types can
-<code>derive</code> (automatically create) the <code>fmt::Debug</code> implementation. This is
-not true for <code>fmt::Display</code> which must be manually implemented.</p>
-<pre><code class="lang-rust"><span class="hljs-comment">// This structure cannot be printed either with `fmt::Display` or</span>
-<span class="hljs-comment">// with `fmt::Debug`</span>
+<!--- All types which want to use `std::fmt` formatting `traits` require an --->
+<!--- implementation to be printable. Automatic implementations are only provided --->
+<!--- for types such as in the `std` library. All others *must* be manually --->
+<!--- implemented somehow. --->
+<p><code>std::fmt</code>のフォーマット用<code>トレイト</code>を使用したい型は、プリント可能である用に実装されている必要があります。<code>std</code>ライブラリの型のように自動でプリント可能なものもありますが、他はすべて<em>手動で実装する必要があります。</em></p>
+<!--- The `fmt::Debug` `trait` makes this very straightforward. *All* types can --->
+<!--- `derive` (automatically create) the `fmt::Debug` implementation. This is --->
+<!--- not true for `fmt::Display` which must be manually implemented. --->
+<p><code>fmt::Debug</code>という<code>トレイト</code>はこれを簡略化します。<em>すべての</em>型は<code>fmt::Debug</code>の実装を<code>derive</code>、（すなわち自動で作成）することができるためです。
+<code>fmt::Display</code>の場合はやはり手動で実装しなくてはなりません。</p>
+<pre><code class="lang-rust"><span class="hljs-comment">// この構造体は`fmt::Display`、`fmt::Debug`のいずれによっても</span>
+<span class="hljs-comment">// プリントすることができません。</span>
 <span class="hljs-keyword">struct</span> UnPrintable(<span class="hljs-keyword">i32</span>);
 
-<span class="hljs-comment">// The `derive` attribute automatically creates the implementation</span>
-<span class="hljs-comment">// required to make this `struct` printable with `fmt::Debug`.</span>
+<span class="hljs-comment">// `derive`アトリビュートは、</span>
+<span class="hljs-comment">// この構造体を`fmt::Debug`でプリントするための実装を自動で提供します。</span>
 <span class="hljs-preprocessor">#[derive(Debug)]</span>
 <span class="hljs-keyword">struct</span> DebugPrintable(<span class="hljs-keyword">i32</span>);
 </code></pre>
-<p>All <code>std</code> library types automatically are printable with <code>{:?}</code> too:</p>
+<!--- All `std` library types automatically are printable with `{:?}` too: --->
+<p><code>std</code>ライブラリの型の場合は、自動的に<code>{:?}</code>によりプリント可能になっています。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// Derive the &#96;fmt::Debug&#96; implementation for &#96;Structure&#96;. &#96;Structure&#96;
-// is a structure which contains a single &#96;i32&#96;.
+<div id="editor">// &#96;Structure&#96;という構造体のための&#96;fmt::Debug&#96;をderiveしています。
+// &#96;Structure&#96;は単一の&#96;i32&#96;をメンバに持っています。
 #[derive(Debug)]
 struct Structure(i32);
 
-// Put a &#96;Structure&#96; inside of the structure &#96;Deep&#96;. Make it printable
-// also.
+// &#96;Deep&#96;という構造体の中に&#96;Structure&#96;を入れます。
+// また、これをプリント可能にしています。
 #[derive(Debug)]
 struct Deep(Structure);
 
 fn main() {
-    // Printing with &#96;{:?}&#96; is similar to with &#96;{}&#96;.
+    // &#96;{:?}&#96;によるプリントは &#96;{}&#96;に似ています。
     println!(&quot;{:?} months in a year.&quot;, 12);
     println!(&quot;{1:?} {0:?} is the {actor:?} name.&quot;,
              &quot;Slater&quot;,
              &quot;Christian&quot;,
              actor=&quot;actor&#39;s&quot;);
 
-    // &#96;Structure&#96; is printable!
+    // &#96;Structure&#96;はプリント可能です！
     println!(&quot;Now {:?} will print!&quot;, Structure(3));
 
-    // The problem with &#96;derive&#96; is there is no control over how
-    // the results look. What if I want this to just show a &#96;7&#96;?
+    // &#96;derive&#96;を用いることの問題は、結果がどのように見えるか
+    // コントロールする方法がないことです。
+    // 出力を&#96;7&#96;だけにするためにはどうしたらよいでしょう？
     println!(&quot;Now {:?} will print!&quot;, Deep(Structure(7)));
 }</div>
 <div id="result"></div>
 </div>
 
-<p>So <code>fmt::Debug</code> definitely makes this printable but sacrifices some
-elegance. Manually implementing <code>fmt::Display</code> will fix that.</p>
+<!--- So `fmt::Debug` definitely makes this printable but sacrifices some --->
+<!--- elegance. Manually implementing `fmt::Display` will fix that. --->
+<p><code>fmt::Debug</code>は確実にプリント可能にしてくれるのですが、一方である種の美しさを犠牲にしています。
+<code>fmt::Display</code>を手動で実装すればその美しさを取り戻す事ができるでしょう。</p>
 <h3 id="see-also">See also</h3>
-<p><a href="http://doc.rust-lang.org/reference.html#attributes" target="_blank">attributes</a>, <a href="/trait/derive.html"><code>derive</code></a>, <a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>,
-and <a href="/custom_types/structs.html"><code>struct</code></a></p>
+<p><a href="http://doc.rust-lang.org/reference.html#attributes" target="_blank">アトリビュート</a>, <a href="/trait/derive.html"><code>derive</code></a>, <a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>,
+and <a href="/custom_types/structs.html">構造体</a></p>
 
                     
                     </section>
@@ -2951,6 +2958,10 @@ and <a href="/custom_types/structs.html"><code>struct</code></a></p>
 
     
     <script src="../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>

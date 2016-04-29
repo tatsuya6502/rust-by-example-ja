@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="1" data-basepath="." data-revision="1461854333317">
+    <div class="book" data-level="1" data-basepath="." data-revision="1461918084256">
     
 
 <div class="book-summary">
@@ -2860,22 +2860,22 @@
                     
                         <h1 id="1-hello-world">1 Hello World</h1>
 <!--- This is the source code of the traditional Hello World program. --->
-<p>ここでは伝統的な&quot;Hello World!&quot;プログラムのソースを紹介します</p>
+<p>ここでは伝統的な&quot;Hello World!&quot;プログラムのソースを紹介します。　</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// This is a comment, and will be ignored by the compiler
-// You can test this code by clicking the &quot;Run&quot; button over there -&gt;
-// or if prefer to use your keyboard, you can use the &quot;Ctrl + Enter&quot; shortcut
+<div id="editor">// これはコメントです。コンパイラによって無視されます。
+// 右にある「Run」ボタンからこのコードをテストできます。
+// キーボードを使いたければ「Ctrl + Enter」もOKです。
 
-// This code is editable, feel free to hack it!
-// You can always return to the original code by clicking the &quot;Reset&quot; button -&gt;
+// このコードは編集可能です。ぜひハックしてみましょう！
+// 「Reset」ボタンでいつでも元のコードに戻すことができます -&gt;
 
-// This is the main function
+// main関数です
 fn main() {
-    // The statements here will be executed when the compiled binary is called
+    // コンパイルされたバイナリが実行されるとこの関数が呼び出されます
 
-    // Print text to the console
+    // コンソールに文字列を出力する
     println!(&quot;Hello World!&quot;);
 }</div>
 <div id="result"></div>
@@ -2885,18 +2885,18 @@ fn main() {
 <!--- `println!` is a [*macro*][macros] that prints text to the console --->
 <p><code>println!</code> は文字列をコンソールにプリントするための <a href="./macros.html"><em>マクロ</em></a>です。</p>
 <!--- A binary can be generated using the Rust compiler: `rustc`. --->
-<p>バイナリファイルは<code>rustc</code>と呼ばれるRustのコンパイラを用いて生成することができます</p>
+<p>バイナリファイルは<code>rustc</code>と呼ばれるRustのコンパイラを用いて生成することができます。</p>
 <pre><code>$ rustc hello.rs
 </code></pre><!--- `rustc` will produce a `hello` binary that can be executed. --->
 <p>すると<code>hello</code>という名前の実行可能なバイナリファイルができます。</p>
 <pre><code>$ ./hello
 Hello World!
 </code></pre><!--- ### Activity --->
-<h3 id="activity">Activity</h3>
+<h3 id="">実践</h3>
 <!--- Click 'Run' above to see the expected output. Next, add a new --->
 <!--- line with a second `println!` macro so that the output --->
 <p>上に書いている&#39;Run&#39;をクリックしてアウトプットを見てみましょう。
-次に、<code>println!</code>マクロをもう一行追加してアウトプットがどうなるか見てみましょう</p>
+次に、<code>println!</code>マクロをもう一行追加してアウトプットがどうなるか見てみましょう。</p>
 <p>shows:</p>
 <pre><code>Hello World!
 I&#39;m a Rustacean!
@@ -2939,6 +2939,10 @@ I&#39;m a Rustacean!
 
     
     <script src="gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>

@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="1.2.2.1" data-basepath="../../.." data-revision="1461854333317">
+    <div class="book" data-level="1.2.2.1" data-basepath="../../.." data-revision="1461918084256">
     
 
 <div class="book-summary">
@@ -2859,43 +2859,46 @@
                     <section class="normal" id="section-gitbook_4">
                     
                         <h4 id="1221-testcase-list">1.2.2.1 Testcase: List</h4>
-<p>Implementing <code>fmt::Display</code> for a structure where the elements must each be
-handled sequentially is tricky. The problem is that each <code>write!</code> generates a
-<code>fmt::Result</code>. Proper handling of this requires dealing with <em>all</em> the
-results. Rust provides the <code>try!</code> macro for exactly this purpose.</p>
-<p>Using <code>try!</code> on <code>write!</code> looks like this:</p>
-<pre><code class="lang-rust"><span class="hljs-comment">// Try `write!` to see if it errors. If it errors, return</span>
-<span class="hljs-comment">// the error. Otherwise continue.</span>
+<!--- Implementing `fmt::Display` for a structure where the elements must each be --->
+<!--- handled sequentially is tricky. The problem is that each `write!` generates a --->
+<!--- `fmt::Result`. Proper handling of this requires dealing with *all* the --->
+<!--- results. Rust provides the `try!` macro for exactly this purpose. --->
+<p>構造体のそれぞれの要素を別々に扱う<code>fmt::Display</code>を実装するのはトリッキーです。というのも、それぞれの<code>write!</code>が別々の<code>fmt::Result</code>を生成するためです。適切に処理するためには<em>すべての</em>resultに対して処理を書かなくてはなりません。このような場合は<code>try!</code>マクロを使用するのが適当です。</p>
+<!--- Using `try!` on `write!` looks like this: --->
+<p>以下のように<code>try!</code>を<code>write!</code>に対して使用します。</p>
+<pre><code class="lang-rust"><span class="hljs-comment">// `write!`を実行し、エラーが生じた場合はerrorを返す。そうでなければ実行を継続する。</span>
 <span class="hljs-built_in">try!</span>(<span class="hljs-built_in">write!</span>(f, <span class="hljs-string">"{}"</span>, value));
 </code></pre>
-<p>With <code>try!</code> available, implementing <code>fmt::Display</code> for a <code>Vec</code> is
-straightforward:</p>
+<!--- With `try!` available, implementing `fmt::Display` for a `Vec` is --->
+<!--- straightforward: --->
+<p><code>try!</code>を使用できれば、<code>Vec</code>用の<code>fmt::Display</code>はより簡単に実装できます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">use std::fmt; // Import the &#96;fmt&#96; module.
 
-// Define a structure named &#96;List&#96; containing a &#96;Vec&#96;.
+// &#96;Vec&#96;を含む&#96;List&#96;という名の構造体を定義
 struct List(Vec&lt;i32&gt;);
 
 impl fmt::Display for List {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
-        // Dereference &#96;self&#96; and create a reference to &#96;vec&#96;
-        // via destructuring.
+        // &#96;self&#96;をデリファレンスし、 デストラクトすることで
+        // &#96;vec&#96;へのリファレンスを作成する
         let List(ref vec) = &#42;self;
 
         try!(write!(f, &quot;[&quot;));
 
-        // Iterate over &#96;vec&#96; in &#96;v&#96; while enumerating the iteration
-        // count in &#96;count&#96;.
+        // &#96;v&#96;を介して&#96;vec&#96;をイテレーションし、同時にカウントを
+        // &#96;enumerate&#96;で取得する
         for (count, v) in vec.iter().enumerate() {
-            // For every element except the first, add a comma
-            // before calling &#96;write!&#96;. Use &#96;try!&#96; to return on errors.
+            // 初回を除き、&#96;write!&#96;を呼ぶ前にカンマを加える。
+            // エラーを返すために&#96;try!&#96;を使用する
             if count != 0 { try!(write!(f, &quot;, &quot;)); }
             try!(write!(f, &quot;{}&quot;, v));
         }
 
         // Close the opened bracket and return a fmt::Result value
+        // 開きっぱなしのブラケットを閉じて、&#96;fmt::Result&#96;の値を返す。
         write!(f, &quot;]&quot;)
     }
 }
@@ -2908,7 +2911,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also</h3>
-<p><a href="/flow_control/for.html"><code>for</code></a>, <a href="/scope/borrow/ref.html"><code>ref</code></a>, <a href="/std/result.html"><code>Result</code></a>, <a href="/custom_types/structs.html"><code>struct</code></a>,
+<p><a href="/flow_control/for.html"><code>for</code></a>, <a href="/scope/borrow/ref.html"><code>ref</code></a>, <a href="/std/result.html"><code>Result</code></a>, <a href="/custom_types/structs.html">構造体</a>,
 <a href="/std/result/try.html"><code>try!</code></a>, and <a href="/std/vec.html"><code>vec!</code></a></p>
 
                     
@@ -2949,6 +2952,10 @@ fn main() {
 
     
     <script src="../../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>

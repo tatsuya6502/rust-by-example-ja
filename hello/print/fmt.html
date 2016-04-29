@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="1.2.3" data-basepath="../.." data-revision="1461854333317">
+    <div class="book" data-level="1.2.3" data-basepath="../.." data-revision="1461918084256">
     
 
 <div class="book-summary">
@@ -2859,18 +2859,22 @@
                     <section class="normal" id="section-gitbook_2">
                     
                         <h3 id="123-formatting">1.2.3 Formatting</h3>
-<p>We&#39;ve seen that formatting is specified via a <em>format string</em>:</p>
+<!--- We've seen that formatting is specified via a *format string*: --->
+<p>これまで、文字列がどのようにフォーマットされるかは<em>フォーマット文字列</em>によって決まるということを見てきました 。</p>
 <ul>
 <li><code>format!(&quot;{}&quot;, foo)</code> -&gt; <code>&quot;3735928559&quot;</code></li>
 <li><code>format!(&quot;0x{:X}&quot;, foo)</code> -&gt;
 <a href="https://en.wikipedia.org/wiki/Deadbeef#Magic_debug_values" target="_blank"><code>&quot;0xDEADBEEF&quot;</code></a></li>
 <li><code>format!(&quot;0o{:o}&quot;, foo)</code> -&gt; <code>&quot;0o33653337357&quot;</code></li>
 </ul>
-<p>The same variable (<code>foo</code>) can be formatted differently depending on which
-<em>argument type</em> is used: <code>X</code> vs <code>o</code> vs <em>unspecified</em>.</p>
-<p>This formatting functionality is implemented via traits, and there is one trait
-for each argument type. The most common formatting trait is <code>Display</code>, which
-handles cases where the argument type is left unspecified: <code>{}</code> for instance.</p>
+<!--- The same variable (`foo`) can be formatted differently depending on which --->
+<!--- *argument type* is used: `X` vs `o` vs *unspecified*. --->
+<p>ここでは （<code>foo</code>）という単一の変数が<code>X</code>、<code>o</code>、<em>指定なし</em>、という様々な<em>引数タイプ</em>(argument type)に応じてフォーマットされています。</p>
+<!--- This formatting functionality is implemented via traits, and there is one trait --->
+<!--- for each argument type. The most common formatting trait is `Display`, which --->
+<!--- handles cases where the argument type is left unspecified: `{}` for instance. --->
+<p>フォーマットの機能はそれぞれの引数タイプごとに個別のトレイトを用いて実装されています。
+最も一般的なトレイトは<code>Display</code>で、これは引数タイプが未指定（たとえば<code>{}</code>）の時に呼び出されます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2878,20 +2882,21 @@ handles cases where the argument type is left unspecified: <code>{}</code> for i
 
 struct City {
     name: &amp;&#39;static str,
-    // Latitude
+    // 緯度
     lat: f32,
-    // Longitude
+    // 経度
     lon: f32,
 }
 
 impl Display for City {
-    // &#96;f&#96; is a buffer, this method must write the formatted string into it
+    // &#96;f&#96; はバッファです。このメソッドは
+    // ここにフォーマットされた文字列を書き込みます。
     fn fmt(&amp;self, f: &amp;mut Formatter) -&gt; fmt::Result {
         let lat&#95;c = if self.lat &gt;= 0.0 { &#39;N&#39; } else { &#39;S&#39; };
         let lon&#95;c = if self.lon &gt;= 0.0 { &#39;E&#39; } else { &#39;W&#39; };
 
-        // &#96;write!&#96; is like &#96;format!&#96;, but it will write the formatted string
-        // into a buffer (the first argument)
+        // &#96;write!&#96;は&#96;format!&#96;に似ていますが、フォーマットされた文字列を
+        // バッファ(第一引数)に書き込みます。
         write!(f, &quot;{}: {:.3}°{} {:.3}°{}&quot;,
                self.name, self.lat.abs(), lat&#95;c, self.lon.abs(), lon&#95;c)
     }
@@ -2917,26 +2922,31 @@ fn main() {
         Color { red: 0, green: 3, blue: 254 },
         Color { red: 0, green: 0, blue: 0 },
     ].iter() {
-        // Switch this to use {} once you&#39;ve added an implementation
-        // for fmt::Display
+        // fmt::Displayに実装を追加したら、 {} を使用するように変更してください。
         println!(&quot;{:?}&quot;, &#42;color)
     }
 }</div>
 <div id="result"></div>
 </div>
 
-<p>You can view a <a href="http://doc.rust-lang.org/std/fmt/#formatting-traits" target="_blank">full list of formatting traits</a> and their argument
-types in the <a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a> documentation.</p>
-<h3 id="activity">Activity</h3>
-<p>Add an implementation of the <code>fmt::Display</code> trait for the <code>Color</code> struct above
-so that the output displays as:</p>
+<!--- You can view a [full list of formatting traits][fmt_traits] and their argument --->
+<!--- types in the [`std::fmt`][fmt] documentation. --->
+<p>フォーマット用トレイトの全リスト、及び引数の型は<a href="http://doc.rust-lang.org/std/fmt/#formatting-traits" target="_blank">こちら</a>から、引数の型については<a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code>のドキュメンテーション</a>から参照できます。</p>
+<!--- ### Activity --->
+<h3 id="">実践</h3>
+<!--- Add an implementation of the `fmt::Display` trait for the `Color` struct above --->
+<!--- so that the output displays as: --->
+<p>上にあるソースコード中の<code>Color</code>という構造体のための<code>fmt::Display</code>トレイトの実装を追加ましょう。アウトプットは以下のように表示されるはずです。</p>
 <pre><code>RGB (128, 255, 90) 0x80FF5A
 RGB (0, 3, 254) 0x0003FE
 RGB (0, 0, 0) 0x000000
-</code></pre><p>Two hints if you get stuck:</p>
+</code></pre><!--- Two hints if you get stuck: --->
+<p>詰まったら以下の2つがヒントになります。
+<!---  * You [may need to list each color more than once][argument_types], --->
+<!---  * You can [pad with zeros to a width of 2][fmt_width] with `:02`. ---></p>
 <ul>
-<li>You <a href="http://doc.rust-lang.org/std/fmt/#argument-types" target="_blank">may need to list each color more than once</a>,</li>
-<li>You can <a href="http://doc.rust-lang.org/std/fmt/#width" target="_blank">pad with zeros to a width of 2</a> with <code>:02</code>.</li>
+<li>[それぞれの色を2回以上記述する必要があるかもしれません。][argument_typs]</li>
+<li><code>:02</code>で、<a href="http://doc.rust-lang.org/std/fmt/#width" target="_blank">幅を2に指定し、空白を0で埋める事ができます。</a></li>
 </ul>
 <h3 id="see-also">See also</h3>
 <p><a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a></p>
@@ -2979,6 +2989,10 @@ RGB (0, 0, 0) 0x000000
 
     
     <script src="../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>

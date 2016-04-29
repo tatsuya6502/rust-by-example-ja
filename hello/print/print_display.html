@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="1.2.2" data-basepath="../.." data-revision="1461854333317">
+    <div class="book" data-level="1.2.2" data-basepath="../.." data-revision="1461918084256">
     
 
 <div class="book-summary">
@@ -2859,55 +2859,61 @@
                     <section class="normal" id="section-gitbook_5">
                     
                         <h3 id="122-display">1.2.2 Display</h3>
-<p><code>fmt::Debug</code> hardly looks compact and clean, so it is often advantageous to
-customize the output appearance. This is done by manually implementing
-<a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>fmt::Display</code></a>, which uses the <code>{}</code> print marker. Implementing it
-looks like this:</p>
-<pre><code class="lang-rust"><span class="hljs-comment">// Import (via `use`) the `fmt` module to make it available.</span>
+<!--- `fmt::Debug` hardly looks compact and clean, so it is often advantageous to --->
+<!--- customize the output appearance. This is done by manually implementing --->
+<!--- [`fmt::Display`][fmt], which uses the `{}` print marker. Implementing it --->
+<!--- looks like this: --->
+<p><code>fmt::Debug</code>はコンパクトでクリーンであるようには見えませんね。大抵の場合は、アウトプットの見た目をカスタマイズしたほうが好ましいでしょう。これは<code>{}</code>を使用する<a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>fmt::Display</code></a>を手動で実装することで可能です。</p>
+<pre><code class="lang-rust"><span class="hljs-comment">// （`use`を使用し、）`fmt`モジュールをインポートします。</span>
+
 <span class="hljs-keyword">use</span> std::fmt;
 
-<span class="hljs-comment">// Define a structure which `fmt::Display` will be implemented for. This is simply</span>
-<span class="hljs-comment">// a tuple struct containing an `i32` bound to the name `Structure`.</span>
+<span class="hljs-comment">// `fmt::Display`を実装するための構造体を定義します。</span>
+<span class="hljs-comment">// これは`Structure`という名前に紐付けられた、`i32`を含むタプルです。</span>
 <span class="hljs-keyword">struct</span> Structure(<span class="hljs-keyword">i32</span>);
 
-<span class="hljs-comment">// In order to use the `{}` marker, the trait `fmt::Display` must be implemented</span>
-<span class="hljs-comment">// manually for the type.</span>
+<span class="hljs-comment">// `{}` というマーカーを使用するためには、</span>
+<span class="hljs-comment">// この型専用の`fmt::Display`というトレイトが実装されていなくてはなりません。</span>
 <span class="hljs-keyword">impl</span> fmt::Display <span class="hljs-keyword">for</span> Structure {
-    <span class="hljs-comment">// This trait requires `fmt` with this exact signature.</span>
+    <span class="hljs-comment">// このトレイトは`fmt`が想定通りのシグネチャであることを要求します。</span>
     <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">fmt</span></span>(&amp;<span class="hljs-keyword">self</span>, f: &amp;<span class="hljs-keyword">mut</span> fmt::Formatter) -&gt; fmt::Result {
-        <span class="hljs-comment">// Write strictly the first element into the supplied output</span>
-        <span class="hljs-comment">// stream: `f`. Returns `fmt::Result` which indicates whether the</span>
-        <span class="hljs-comment">// operation succeeded or failed. Note that `write!` uses syntax which</span>
-        <span class="hljs-comment">// is very similar to `println!`.</span>
+        <span class="hljs-comment">// 必ず、第一の要素が出力されるようにしています。</span>
+        <span class="hljs-comment">// `f`は`fmt::Result`を返します。これはオペレーションが成功したか否か</span>
+        <span class="hljs-comment">// を表します。</span>
+        <span class="hljs-comment">// `write!`は`println!`に非常によく似た文法を使用していることに注目。</span>
         <span class="hljs-built_in">write!</span>(f, <span class="hljs-string">"{}"</span>, <span class="hljs-keyword">self</span>.<span class="hljs-number">0</span>)
     }
 }
 </code></pre>
-<p><code>fmt::Display</code> may be cleaner than <code>fmt::Debug</code> but this presents
-a problem for the <code>std</code> library. How should ambiguous types be displayed?
-For example, if the <code>std</code> library implemented a single style for all
-<code>Vec&lt;T&gt;</code>, what style should it be? Either of these two?</p>
+<!--- `fmt::Display` may be cleaner than `fmt::Debug` but this presents --->
+<!--- a problem for the `std` library. How should ambiguous types be displayed? --->
+<!--- For example, if the `std` library implemented a single style for all --->
+<!--- `Vec<T>`, what style should it be? Either of these two? --->
+<p><code>fmt::Display</code>は<code>fmt::Debug</code>より綺麗かもしれませんが、<code>std</code>ライブラリの場合は問題が生じます。曖昧な(ambiguous)タイプはどのように表示すれば良いでしょう？
+例えば、<code>std</code>ライブラリがあらゆる<code>Vec&lt;T&gt;</code>に対して単一のスタイルを提供していた場合、どのようなスタイルに整形すればよいでしょう？以下の２つのどちらかを選ぶべきでしょうか？</p>
 <ul>
-<li><code>Vec&lt;path&gt;</code>: <code>/:/etc:/home/username:/bin</code> (split on <code>:</code>)</li>
-<li><code>Vec&lt;number&gt;</code>: <code>1,2,3</code> (split on <code>,</code>)</li>
+<li><code>Vec&lt;path&gt;</code>: <code>/:/etc:/home/username:/bin</code> (<code>:</code>で分割)</li>
+<li><code>Vec&lt;number&gt;</code>: <code>1,2,3</code> (<code>,</code>で分割)</li>
 </ul>
-<p>No, because there is no ideal style for all types and the <code>std</code> library
-doesn&#39;t presume to dictate one. <code>fmt::Display</code> is not implemented for <code>Vec&lt;T&gt;</code>
-or for any other generic containers. <code>fmt::Debug</code> must then be used for these
-generic cases.</p>
-<p>This is not a problem though because for any new <em>container</em> type which is
-<em>not</em> generic,<code>fmt::Display</code> can be implemented.</p>
+<!--- No, because there is no ideal style  for all types and the `std` library --->
+<!--- doesn't presume to dictate one. `fmt::Display` is not implemented for `Vec<T>` --->
+<!--- or for any other generic containers. `fmt::Debug` must then be used for these --->
+<!--- generic cases. --->
+<p>答えはNOです。あらゆる型に対して理想的なスタイルなどというものはありませんし、<code>std</code>ライブラリによってそれが提供されているわけでもありません。<code>fmt::Display</code>は<code>Vec&lt;T&gt;</code>のようなジェネリックなコンテナ用に定義されているわけではありませんので、このような場合は<code>fmt::Debug</code>を使用するべきです。</p>
+<!--- This is not a problem though because for any new *container* type which is --->
+<!--- *not* generic,`fmt::Display` can be implemented. --->
+<p>ジェネリック<em>でない</em>コンテナ型の場合は、このような問題は生じませんので問題なく<code>fmt::Display</code>を実装することができます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">use std::fmt; // Import &#96;fmt&#96;
 
-// A structure holding two numbers. &#96;Debug&#96; will be derived so the results can
-// be contrasted with &#96;Display&#96;.
+// 2つの数字を扱うための構造体です。出力を&#96;Display&#96;と比較するため&#96;Debug&#96;
+// をDeriveしています
 #[derive(Debug)]
 struct MinMax(i64, i64);
 
-// Implement &#96;Display&#96; for &#96;MinMax&#96;.
+// &#96;MinMax&#96;用の&#96;Display&#96;を実装しています。
 impl fmt::Display for MinMax {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
         // Use &#96;self.number&#96; to refer to each positional data point.
@@ -2915,17 +2921,17 @@ impl fmt::Display for MinMax {
     }
 }
 
-// Define a structure where the fields are nameable for comparison.
+// 比較のため、フィールドに名前をつけれる様な構造体を定義しましょう
 #[derive(Debug)]
 struct Point2 {
     x: f64,
     y: f64,
 }
 
-// Similarly, implement for Point2
+// 先程と同様にして、Point2用の&#96;Display&#96;を実装しています。
 impl fmt::Display for Point2 {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
-        // Customize so only &#96;x&#96; and &#96;y&#96; are denoted.
+        // &#96;x&#96;と&#96;y&#96;のみが明示的になるようにカスタマイズ
         write!(f, &quot;x: {}, y: {}&quot;, self.x, self.y)
     }
 }
@@ -2950,25 +2956,28 @@ fn main() {
     println!(&quot;Display: {}&quot;, point);
     println!(&quot;Debug: {:?}&quot;, point);
 
-    // Error. Both &#96;Debug&#96; and &#96;Display&#96; were implemented but &#96;{:b}&#96;
-    // requires &#96;fmt::Binary&#96; to be implemented. This will not work.
+    // &#96;Debug&#96;と&#96;Display&#96;は実装されていますが、&#96;fmt::Binary&#96;はされていないため
+    // &#96;{:b}&#96;使用している以下の例はエラーになります、
     // println!(&quot;What does Point2D look like in binary: {:b}?&quot;, point);
 }</div>
 <div id="result"></div>
 </div>
 
-<p>So, <code>fmt::Display</code> has been implemented but <code>fmt::Binary</code> has not, and
-therefore cannot be used. <code>std::fmt</code> has many such <a href="/trait.html"><code>traits</code></a> and
-each requires its own implementation. This is detailed further in
-<a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>.</p>
-<h3 id="activity">Activity</h3>
-<p>After checking the output of the above example, use the <code>Point2</code> struct as
-guide to add a Complex struct to the example. When printed in the same
-way, the output should be:</p>
+<!--- So, `fmt::Display` has been implemented but `fmt::Binary` has not, and --->
+<!--- therefore cannot be used. `std::fmt` has many such [`traits`][traits] and --->
+<!--- each requires its own implementation. This is detailed further in --->
+<!--- [`std::fmt`][fmt]. --->
+<p><code>fmt::Display</code>は実装されていますが、<code>fmt::Binary</code>はされていないので使用できません。
+<code>std::fmt</code>はそのような<a href="/trait.html">トレイト</a>が数多くあり、それぞれに独自の実装が必要です。詳しくは<a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>を参照してください。</p>
+<h3 id="">実践</h3>
+<!--- After checking the output of the above example, use the `Point2` struct as --->
+<!--- guide to add a Complex struct to the example. When printed in the same --->
+<!--- way, the output should be: --->
+<p>上記の例のアウトプットを確認し、<code>Point2</code>構造体を使用して、複素数を格納するための構造体を定義しましょう。うまく行けば以下のように出力されるはずです。</p>
 <pre><code>Display: 3.3 + 7.2i
 Debug: Complex { real: 3.3, imag: 7.2 }
 </code></pre><h3 id="see-also">See also</h3>
-<p><a href="/trait/derive.html"><code>derive</code></a>, <a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>, <a href="/macros.html">macros</a>, <a href="/custom_types/structs.html"><code>struct</code></a>,
+<p><a href="/trait/derive.html"><code>derive</code></a>, <a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>, <a href="/macros.html">マクロ</a>, <a href="/custom_types/structs.html"><code>struct</code></a>,
 <a href="/trait.html"><code>trait</code></a>, and <a href="/mod/use.html">use</a></p>
 
                     
@@ -3009,6 +3018,10 @@ Debug: Complex { real: 3.3, imag: 7.2 }
 
     
     <script src="../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>
