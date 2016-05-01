@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="2.1" data-basepath=".." data-revision="1461918084256">
+    <div class="book" data-level="2.1" data-basepath=".." data-revision="1462078742716">
     
 
 <div class="book-summary">
@@ -2859,41 +2859,45 @@
                     <section class="normal" id="section-gitbook_99">
                     
                         <h2 id="21-literals-and-operators">2.1 Literals and operators</h2>
-<p>Integers <code>1</code>, floats <code>1.2</code>, characters <code>&#39;a&#39;</code>, strings <code>&quot;abc&quot;</code>, booleans <code>true</code>
-and the unit type <code>()</code> can be expressed using literals.</p>
-<p>Integers can, alternatively, be expressed using hexadecimal, octal or binary
-notation using either of these prefixes: <code>0x</code>, <code>0o</code> or <code>0b</code>.</p>
-<p>Underscores can be inserted in numeric literals to improve readability, e.g.
-<code>1_000</code> is the same as <code>1000</code>, and <code>0.000_001</code> is the same as <code>0.000001</code>.</p>
-<p>We need to tell the compiler the type of the literals we use. For now,
-we&#39;ll use the <code>u32</code> suffix to indicate that the literal is an unsigned 32-bit
-integer, and the <code>i32</code> suffix to indicate that it&#39;s a signed 32-bit integer.</p>
-<p>The operators available and their precedence <a href="http://doc.rust-lang.org/reference.html#operator-precedence" target="_blank">in Rust</a> are similar to other
-<a href="https://en.wikipedia.org/wiki/Operator_precedence#Programming_languages" target="_blank">C-like languages</a>.</p>
+<!--- Integers `1`, floats `1.2`, characters `'a'`, strings `"abc"`, booleans `true` --->
+<!--- and the unit type `()` can be expressed using literals. --->
+<p>整数<code>1</code>、浮動小数点<code>1.2</code>、文字(<code>char</code>)<code>&#39;a&#39;</code>、文字列<code>&quot;abc&quot;</code>、ブーリアン<code>true</code>、ユニット<code>()</code>は、リテラルを使用することで明示することが可能です。</p>
+<!--- Integers can, alternatively, be expressed using hexadecimal, octal or binary --->
+<!--- notation using either of these prefixes: `0x`, `0o` or `0b`. --->
+<p>また整数型の場合、リテラルの代わりにプレフィックスに<code>0x</code>、<code>0o</code>、<code>0b</code>を指定することでそれぞれ16進数、8進数、2進数を使うことができます。</p>
+<!--- Underscores can be inserted in numeric literals to improve readability, e.g. --->
+<!--- `1_000` is the same as `1000`, and `0.000_001` is the same as `0.000001`. --->
+<p>可読性のため、<code>_</code>（アンダースコア）を数値リテラルの間に挿入することができます。例えば<code>1_000</code>は<code>1000</code>と、<code>0.000_001</code>は<code>0.000001</code>とそれぞれ同一です。</p>
+<!--- We need to tell the compiler the type of the literals we use. For now, --->
+<!--- we'll use the `u32` suffix to indicate that the literal is an unsigned 32-bit --->
+<!--- integer, and the `i32` suffix to indicate that it's a signed 32-bit integer. --->
+<p>コンパイラに、どのリテラルを使用するのかを教えてあげなくてはなりません。現在の仕様では、リテラルが32ビット符号無し整数であることを伝える場合、<code>u32</code>サフィックスを、符号付き32ビット整数であれば<code>i32</code>を使用します。</p>
+<!--- The operators available and their precedence [in Rust][rust op-prec] are similar to other --->
+<p>Rustで使用可能な演算子と、[その実行順序][<a href="http://doc.rust-lang.org/reference.html#operator-precedence]は、[Cなどの言語のもの][op-prec]とほぼ同じです。" target="_blank">http://doc.rust-lang.org/reference.html#operator-precedence]は、[Cなどの言語のもの][op-prec]とほぼ同じです。</a></p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // Integer addition
+    // 整数の足し算
     println!(&quot;1 + 2 = {}&quot;, 1u32 + 2);
 
-    // Integer subtraction
+    // 整数の引き算
     println!(&quot;1 - 2 = {}&quot;, 1i32 - 2);
-    // TODO ^ Try changing &#96;1i32&#96; to &#96;1u32&#96; to see why the type is important
+    // TODO ^ 型が重要であることを実感するため&#96;1i32&#96;を&#96;1u32&#96;に変更してみましょう。
 
-    // Short-circuiting boolean logic
+    // 単純な論理演算子
     println!(&quot;true AND false is {}&quot;, true &amp;&amp; false);
     println!(&quot;true OR false is {}&quot;, true || false);
     println!(&quot;NOT true is {}&quot;, !true);
 
-    // Bitwise operations
+    // ビットワイズ演算
     println!(&quot;0011 AND 0101 is {:04b}&quot;, 0b0011u32 &amp; 0b0101);
     println!(&quot;0011 OR 0101 is {:04b}&quot;, 0b0011u32 | 0b0101);
     println!(&quot;0011 XOR 0101 is {:04b}&quot;, 0b0011u32 ^ 0b0101);
     println!(&quot;1 &lt;&lt; 5 is {}&quot;, 1u32 &lt;&lt; 5);
     println!(&quot;0x80 &gt;&gt; 2 is 0x{:x}&quot;, 0x80u32 &gt;&gt; 2);
 
-    // Use underscores to improve readability!
+    // 可読性のための&#96;&#95;&#96;（アンダースコア）の使用
     println!(&quot;One million is written as {}&quot;, 1&#95;000&#95;000u32);
 }</div>
 <div id="result"></div>

@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="2" data-basepath="." data-revision="1461918084256">
+    <div class="book" data-level="2" data-basepath="." data-revision="1462078742716">
     
 
 <div class="book-summary">
@@ -2859,44 +2859,47 @@
                     <section class="normal" id="section-gitbook_101">
                     
                         <h1 id="2-primitives">2 Primitives</h1>
-<p>Rust provides access to a wide variety of <code>primitives</code>. A sample includes:</p>
+<!--- Rust provides access to a wide variety of `primitives`. A sample includes: --->
+<p>Rustは様々な基本データ型(<code>primitives</code>)の使用をサポートしています。以下がその例です。</p>
+<!--- * signed integers: `i8`, `i16`, `i32`, `i64` and `isize` (pointer size) --->
 <ul>
-<li>signed integers: <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code> and <code>isize</code> (pointer size)</li>
-<li>unsigned integers: <code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code> and <code>usize</code> (pointer size)</li>
-<li>floating point: <code>f32</code>, <code>f64</code></li>
-<li><code>char</code> Unicode scalar values like <code>&#39;a&#39;</code>, <code>&#39;α&#39;</code> and <code>&#39;∞&#39;</code> (4 bytes each)</li>
-<li><code>bool</code> either <code>true</code> or <code>false</code></li>
-<li>and the unit type <code>()</code>, whose only value is also <code>()</code></li>
-<li>arrays like <code>[1, 2, 3]</code></li>
-<li>tuples like <code>(1, true)</code></li>
+<li>符号付き整数: <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>isize</code>（ポインタのサイズ）<!--- * unsigned integers: `u8`, `u16`, `u32`, `u64` and `usize` (pointer size) ---></li>
+<li>符号無し整数: <code>u8</code>, <code>i16</code>, <code>u32</code>, <code>u64</code>, <code>usize</code>（ポインタのサイズ）<!--- * floatoing point: `f32`, `f64` ---></li>
+<li>浮動小数点: <code>f32</code>, <code>f64</code><!--- * `char` Unicode scalar values like `'a'`, `'α'` and `'∞'` (4 bytes each) ---></li>
+<li><code>char</code>: <code>&#39;a&#39;</code>, <code>&#39;α&#39;</code>, <code>&#39;∞&#39;</code>などのUnicodeのスカラー<!--- * `bool` either `true` or `false` ---></li>
+<li><code>bool</code>: <code>true</code>または<code>false</code><!--- * and the unit type `()`, whose only value is also `()` ---></li>
+<li>unit型: <code>()</code>が唯一の値<!--- * arrays like `[1, 2, 3]` ---></li>
+<li>配列: e.g. <code>[1, 2, 3]</code>など<!--- * tuples like `(1, true)` ---></li>
+<li>タプル: e.g. (1, true)</li>
 </ul>
-<p>Variables can always be <em>type annotated</em>. Numbers may additionally be
-annotated via a <em>suffix</em> or <em>by default</em>. Integers default to <code>i32</code> and
-floats to <code>f64</code>.</p>
+<!--- Variables can always be *type annotated*. Numbers may additionally be --->
+<!--- annotated via a *suffix* or *by default*. Integers default to `i32` and --->
+<!--- floats to `f64`. --->
+<p>変数は常に<em>型指定(<code>type annotate</code>)可能</em>です。数値型の場合はさらにサフィックスでの指定が可能です。指定しない場合デフォルトになります。例えば整数は<code>i32</code>が、浮動小数点は<code>f64</code>がデフォルトです。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // Variables can be type annotated.
+    // 変数に型を指定
     let logical: bool = true;
 
-    let a&#95;float: f64 = 1.0;  // Regular annotation
-    let an&#95;integer   = 5i32; // Suffix annotation
+    let a&#95;float: f64 = 1.0;  // 通常の型指定
+    let an&#95;integer   = 5i32; // サフィックスによる型指定
 
-    // Or a default will be used.
+    // サフィックスを指定しない場合、デフォルトを選択
     let default&#95;float   = 3.0; // &#96;f64&#96;
     let default&#95;integer = 7;   // &#96;i32&#96;
 
-    let mut mutable = 12; // Mutable &#96;i32&#96;.
+    let mut mutable = 12; // ミュータブルな &#96;i32&#96;.
 
-    // Error! The type of a variable can&#39;t be changed
+    // エラー！ ミュータブルな変数でも型は不変
     mutable = true;
 }</div>
 <div id="result"></div>
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="http://doc.rust-lang.org/std/" target="_blank">the <code>std</code> library</a></p>
+<p><a href="http://doc.rust-lang.org/std/" target="_blank"><code>std</code> ライブラリ</a></p>
 
                     
                     </section>

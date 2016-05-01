@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="2.3" data-basepath=".." data-revision="1461918084256">
+    <div class="book" data-level="2.3" data-basepath=".." data-revision="1462078742716">
     
 
 <div class="book-summary">
@@ -2859,50 +2859,52 @@
                     <section class="normal" id="section-gitbook_98">
                     
                         <h2 id="23-arrays-and-slices">2.3 Arrays and Slices</h2>
-<p>An array is a collection of objects of the same type <code>T</code>, stored in contiguous
-memory. Arrays are created using brackets <code>[]</code>, and their size, which is known
-at compile time, is part of their type signature <code>[T; size]</code>.</p>
-<p>Slices are similar to arrays, but their size is not known at compile time.
-Instead, a slice is a two-word object, the first word is a pointer to the data,
-and the second word is the length of the slice. Slices can be used to borrow a
-section of an array, and have the type signature <code>&amp;[T]</code>.</p>
+<!--- An array is a collection of objects of the same type `T`, stored in contiguous --->
+<!--- memory. Arrays are created using brackets `[]`, and their size, which is known --->
+<!--- at compile time, is part of their type signature `[T; size]`. --->
+<p>配列は<code>T</code>という単一の型(訳注: <a href="https://rust-lang-ja.github.io/the-rust-programming-language-ja/1.6/book/generics.html" target="_blank">ジェネリック型</a>でも可)のオブジェクトの集合です。それらのオブジェクトはメモリ上の連続した領域に保存されます。配列は<code>[]</code>を用いて生成されます。サイズはコンパイル時には決定されていて、<code>[T: size]</code>という形で指定できます。</p>
+<!--- Slices are similar to arrays, but their size is not known at compile time. --->
+<!--- Instead, a slice is a two-word object, the first word is a pointer to the data, --->
+<!--- and the second word is the length of the slice. Slices can be used to borrow a --->
+<!--- section of an array, and have the type signature `&[T]`. --->
+<p>スライスは配列に似ていますが、コンパイル時にサイズが決定されていません。2つの部分からなり、1つは別のデータへのポインタ、もう1つはスライスの長さです。配列の一部を借用するのに使用され<code>&amp;[T]</code>という型シグネチャを持ちます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">use std::mem;
 
-// This function borrows a slice
+// この関数はスライスを借用する
 fn analyze&#95;slice(slice: &amp;[i32]) {
     println!(&quot;first element of the slice: {}&quot;, slice[0]);
     println!(&quot;the slice has {} elements&quot;, slice.len());
 }
 
 fn main() {
-    // Fixed-size array (type signature is superfluous)
+    // 固定長の配列（型シグネチャは冗長なので、なくても可）
     let xs: [i32; 5] = [1, 2, 3, 4, 5];
 
-    // All elements can be initialized to the same value
+    // すべての要素を0にする場合
     let ys: [i32; 500] = [0; 500];
 
-    // Indexing starts at 0
+    // インデックスは０から
     println!(&quot;first element of the array: {}&quot;, xs[0]);
     println!(&quot;second element of the array: {}&quot;, xs[1]);
 
-    // &#96;len&#96; returns the size of the array
+    // &#96;len&#96;は配列のサイズを返す。
     println!(&quot;array size: {}&quot;, xs.len());
 
-    // Arrays are stack allocated
+    // 配列はスタック上に置かれる
     println!(&quot;array occupies {} bytes&quot;, mem::size&#95;of&#95;val(&amp;xs));
 
-    // Arrays can be automatically borrowed as slices
+    // 配列は自動的にスライスとして借用される。
     println!(&quot;borrow the whole array as a slice&quot;);
     analyze&#95;slice(&amp;xs);
 
-    // Slices can point to a section of an array
+    // 配列の一部分だけのスライスを渡す
     println!(&quot;borrow a section of the array as a slice&quot;);
     analyze&#95;slice(&amp;ys[1 .. 4]);
 
-    // Out of bound indexing yields a panic
+    // インデックスの範囲が配列のサイズを超えた場合パニックする
     println!(&quot;{}&quot;, xs[5]);
 }</div>
 <div id="result"></div>
