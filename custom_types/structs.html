@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="3.1" data-basepath=".." data-revision="1462248858502">
+    <div class="book" data-level="3.1" data-basepath=".." data-revision="1462765039635">
     
 
 <div class="book-summary">
@@ -2859,29 +2859,33 @@
                     <section class="normal" id="section-gitbook_25">
                     
                         <h2 id="31-structures">3.1 Structures</h2>
-<p>There are three types of structures (&quot;structs&quot;) that can be created using the
-<code>struct</code> keyword:</p>
+<!--- There are three types of structures ("structs") that can be created using the --->
+<!--- `struct` keyword: --->
+<p><code>struct</code>というキーワードを用いて作成できる構造体(「structre」)には3種類あります。</p>
+<!--- * Tuple structs, which are, basically, named tuples. --->
+<!--- * The classic [C structs][c_struct] --->
+<!--- * Unit structs, which are field-less, are useful for generics. --->
 <ul>
-<li>Tuple structs, which are, basically, named tuples.</li>
-<li>The classic <a href="http://en.wikipedia.org/wiki/Struct_(C_programming_language)" target="_blank">C structs</a></li>
-<li>Unit structs, which are field-less, are useful for generics.</li>
+<li>タプル。（ほとんどの場合は名前付きタプル）</li>
+<li>クラシックな<a href="http://en.wikipedia.org/wiki/Struct_(C_programming_language)" target="_blank">C言語スタイルの構造体。</a></li>
+<li>ユニット。これはフィールドを持たず、ジェネリック型を扱う際に有効です。</li>
 </ul>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// A unit struct
+<div id="editor">// ユニット
 struct Nil;
 
-// A tuple struct
+// タプル
 struct Pair(i32, f64);
 
-// A struct with two fields
+// 2つのフィールドを持つ（クラシックな）構造体
 struct Point {
     x: f64,
     y: f64,
 }
 
-// Structs can be reused as fields of another struct
+// 構造体は他の構造体のフィールドになることができる
 #[allow(dead&#95;code)]
 struct Rectangle {
     p1: Point,
@@ -2889,28 +2893,28 @@ struct Rectangle {
 }
 
 fn main() {
-    // Instantiate a &#96;Point&#96;
+    // &#96;Point&#96;型のインスタンスを作成
     let point: Point = Point { x: 0.3, y: 0.4 };
 
-    // Access the fields of the point
+    // pointのフィールドにアクセスする。
     println!(&quot;point coordinates: ({}, {})&quot;, point.x, point.y);
 
-    // Destructure the point using a &#96;let&#96; binding
+    // &#96;let&#96;を使用してpointをデストラクトする。
     let Point { x: my&#95;x, y: my&#95;y } = point;
 
     let &#95;rectangle = Rectangle {
-        // struct instantiation is an expression too
+        // 構造体の定義とインスタンスの作成を同時に行う
         p1: Point { x: my&#95;y, y: my&#95;x },
         p2: point,
     };
 
-    // Instantiate a unit struct
+    // ユニットをインスタンス化
     let &#95;nil = Nil;
 
-    // Instantiate a tuple struct
+    // タプルをインスタンス化
     let pair = Pair(1, 0.1);
 
-    // Destructure a tuple struct
+    // タプルをデストラクト
     let Pair(integer, decimal) = pair;
 
     println!(&quot;pair contains {:?} and {:?}&quot;, integer, decimal);
@@ -2919,7 +2923,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="/attribute.html"><code>attributes</code></a> and <a href="/flow_control/match/destructuring.html">destructuring</a></p>
+<p><a href="/attribute.html">アトリビュート(<code>attributes</code>)</a> and <a href="/flow_control/match/destructuring.html">デストラクト</a></p>
 
                     
                     </section>
@@ -2959,10 +2963,6 @@ fn main() {
 
     
     <script src="../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>

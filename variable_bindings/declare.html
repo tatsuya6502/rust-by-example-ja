@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="4.3" data-basepath=".." data-revision="1462248858502">
+    <div class="book" data-level="4.3" data-basepath=".." data-revision="1462765039635">
     
 
 <div class="book-summary">
@@ -2859,20 +2859,22 @@
                     <section class="normal" id="section-gitbook_152">
                     
                         <h2 id="43-declare-first">4.3 Declare first</h2>
-<p>It&#39;s possible to declare variable bindings first, and initialize them later.
+<!-- It's possible to declare variable bindings first, and initialize them later.
 However, this form is seldom used, as it may lead to the use of uninitialized
-variables.</p>
+variables. -->
+<p>変数の宣言だけを行っておき、初期化（定義）をのちに行うことも可能です。</p>
+<p>しかし、最後まで初期化されない変数が生じる可能性があるため、ふつうは同時に行われます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // Declare a variable binding
+    // 変数を宣言
     let a&#95;binding;
 
     {
         let x = 2;
 
-        // Initialize the binding
+        // 変数を初期化
         a&#95;binding = x &#42; x;
     }
 
@@ -2881,8 +2883,9 @@ variables.</p>
     let another&#95;binding;
 
     // Error! Use of uninitialized binding
+    // エラー！ 初期化していない変数の使用
     println!(&quot;another binding: {}&quot;, another&#95;binding);
-    // FIXME ^ Comment out this line
+    // FIXME ^ この行をコメントアウトしましょう。
 
     another&#95;binding = 1;
 
@@ -2891,8 +2894,11 @@ variables.</p>
 <div id="result"></div>
 </div>
 
-<p>The compiler forbids use of uninitialized variables, as this would lead to
-undefined behavior.</p>
+<!--
+The compiler forbids use of uninitialized variables, as this would lead to
+undefined behavior.
+-->
+<p>未初期化の変数があると予期せぬ動作をする場合があるため、コンパイラは変数を初期化してから使用するよう強制します。</p>
 
                     
                     </section>
@@ -2932,10 +2938,6 @@ undefined behavior.</p>
 
     
     <script src="../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
-    
-
-    
-    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>
