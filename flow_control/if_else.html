@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="7.1" data-basepath=".." data-revision="1462248858502">
+    <div class="book" data-level="7.1" data-basepath=".." data-revision="1463579712325">
     
 
 <div class="book-summary">
@@ -2859,10 +2859,11 @@
                     <section class="normal" id="section-gitbook_43">
                     
                         <h2 id="71-ifelse">7.1 if/else</h2>
-<p>Branching with <code>if</code>-<code>else</code> is similar to other languages. Unlike many of them,
-the boolean condition doesn&#39;t need to be surrounded by parentheses, and each
-condition is followed by a block. <code>if</code>-<code>else</code> conditionals are expressions,
-and, all branches must return the same type.</p>
+<!--- Branching with `if`-`else` is similar to other languages. Unlike many of them, --->
+<!--- the boolean condition doesn't need to be surrounded by parentheses, and each --->
+<!--- condition is followed by a block. `if`-`else` conditionals are expressions, --->
+<!--- and, all branches must return the same type. --->
+<p><code>if-else</code>を用いた条件分岐は他の言語に似ています。多くの言語では条件式の中を括弧でくくり必要がありますが、Rustではその必要はありません。条件式の直後にはブロックが続きます。<code>if-else</code>は式文の一種で、いずれの分岐先でも返り値の型は同一でなくてはなりません。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2881,16 +2882,17 @@ and, all branches must return the same type.</p>
         if n &lt; 10 &amp;&amp; n &gt; -10 {
             println!(&quot;, and is a small number, increase ten-fold&quot;);
 
-            // This expression returns an &#96;i32&#96;.
+            // この式は&#96;i32&#96;を返す。
             10 &#42; n
         } else {
             println!(&quot;, and is a big number, reduce by two&quot;);
 
-            // This expression must return an &#96;i32&#96; as well.
+            // ここでも返り値の型は&#96;i32&#96;でなくてはならない。
             n / 2
-            // TODO ^ Try suppressing this expression with a semicolon.
+            // TODO ^ セミコロン(&#96;;&#96;)をつけて、返り値を返さないようにしてみましょう
         };
-    //   ^ Don&#39;t forget to put a semicolon here! All &#96;let&#96; bindings need it.
+    //   ここにセミコロンを付けるのを忘れないように!
+    //   &#96;let&#96;による変数束縛の際には必ず必要です!
 
     println!(&quot;{} -&gt; {}&quot;, n, big&#95;n);
 }</div>

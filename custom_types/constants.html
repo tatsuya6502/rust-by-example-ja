@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="3.3" data-basepath=".." data-revision="1462248858502">
+    <div class="book" data-level="3.3" data-basepath=".." data-revision="1463579712325">
     
 
 <div class="book-summary">
@@ -2859,48 +2859,52 @@
                     <section class="normal" id="section-gitbook_20">
                     
                         <h2 id="33-constants">3.3 constants</h2>
-<p>Rust has two different types of constants which can be declared in any scope
-including global. Both require explicit type annotation:</p>
+<!--- Rust has two different types of constants which can be declared in any scope --->
+<!--- including global. Both require explicit type annotation: --->
+<p>Rustには2種類の定数があり、いずれもグローバルスコープを含む任意のスコープで宣言することができます。また、いずれも型を明示しなくてはなりません。</p>
+<!--- * `const`: An unchangeable value (the common case). --->
 <ul>
-<li><code>const</code>: An unchangeable value (the common case).</li>
-<li><code>static</code>: A possibly <code>mut</code>able variable with <a href="/scope/lifetime/static_lifetime.html"><code>&#39;static</code></a> lifetime.</li>
+<li><code>const</code>: 不変の値（通常はこちらを使用する）<!--- * `static`: A possibly `mut`able variable with [`'static`][static] lifetime. ---></li>
+<li><code>static</code>: <a href="/scope/lifetime/static_lifetime.html">スタティックな</a>ライフタイムを持つミュータブル(<code>mut</code>)な値</li>
 </ul>
-<p>One special case is the <code>&quot;string&quot;</code> literal. It can be assigned directly to a
-<code>static</code> variable without modification because its type signature:
-<code>&amp;&#39;static str</code> has the required lifetime of <code>&#39;static</code>. All other reference
-types must be specifically annotated so that they fulfill the <code>&#39;static</code>
-lifetime. This may seem minor though because the required explicit annotation
-hides the distinction.</p>
+<!--- One special case is the `"string"` literal. It can be assigned directly to a --->
+<!--- `static` variable without modification because its type signature: --->
+<!--- `&'static str` has the required lifetime of `'static`. All other reference --->
+<!--- types must be specifically annotated so that they fulfill the `'static` --->
+<!--- lifetime. This may seem minor though because the required explicit annotation --->
+<!--- hides the distinction. --->
+<p>特別な例として、文字列(<code>&quot;string&quot;</code>)リテラルの場合があります。<code>&amp;&#39;static str</code>は<code>&#39;static</code>のライフタイムを持つため、文字列は特に注意を払わなくても<code>static</code>になります。他の型の場合は必ず<code>&#39;static</code>ライフタイムを満たすことを明示しなくてはなりません。いずれにしろ<code>static</code>を宣言するときはすべて明示しなくてはならないので、この違いは些細なものと感じられるでしょう。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// Globals are declared outside all other scopes.
+<div id="editor">// グローバル変数はあらゆるスコープの外で宣言します
 static LANGUAGE: &amp;&#39;static str = &quot;Rust&quot;;
 const  THRESHOLD: i32 = 10;
 
 fn is&#95;big(n: i32) -&gt; bool {
-    // Access constant in some function
+    // 関数内から定数を参照
     n &gt; THRESHOLD
 }
 
 fn main() {
     let n = 16;
 
-    // Access constant in the main thread
+    // main 関数の中から定数を参照
     println!(&quot;This is {}&quot;, LANGUAGE);
     println!(&quot;The threshold is {}&quot;, THRESHOLD);
     println!(&quot;{} is {}&quot;, n, if is&#95;big(n) { &quot;big&quot; } else { &quot;small&quot; });
 
-    // Error! Cannot modify a &#96;const&#96;.
+    // エラー!&#96;const&#96;は変更できません。
     THRESHOLD = 5;
-    // FIXME ^ Comment out this line
+    // FIXME ^ この行をコメントアウトしましょう
 }</div>
 <div id="result"></div>
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="https://github.com/rust-lang/rfcs/blob/master/text/0246-const-vs-static.md" target="_blank">The <code>const</code>/<code>static</code> RFC</a>,
-<a href="/scope/lifetime/static_lifetime.html"><code>&#39;static</code> lifetime</a></p>
+<p>[<code>const</code> 及び <code>static</code> の RFC][
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/0246-const-vs-static.md" target="_blank">https://github.com/rust-lang/rfcs/blob/master/text/0246-const-vs-static.md</a>),
+<a href="/scope/lifetime/static_lifetime.html"><code>&#39;static</code> ライフタイム</a></p>
 
                     
                     </section>

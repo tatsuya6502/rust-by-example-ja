@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="3.2.1" data-basepath="../.." data-revision="1462248858502">
+    <div class="book" data-level="3.2.1" data-basepath="../.." data-revision="1463579712325">
     
 
 <div class="book-summary">
@@ -2859,11 +2859,12 @@
                     <section class="normal" id="section-gitbook_22">
                     
                         <h3 id="321-use">3.2.1 use</h3>
-<p>The <code>use</code> declaration can be used so manual scoping isn&#39;t needed:</p>
+<!--- The `use` declaration can be used so manual scoping isn't needed: --->
+<p><code>use</code>を使用すれば変数のスコープを絶対名で指定する必要がなくなる。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// An attribute to hide warnings for unused code.
+<div id="editor">// 使用されていないコードよる警告を隠すアトリビュート
 #![allow(dead&#95;code)]
 
 enum Status {
@@ -2877,25 +2878,24 @@ enum Work {
 }
 
 fn main() {
-    // Explicitly &#96;use&#96; each name so they are available without
-    // manual scoping.
+    // &#96;use&#96;することで絶対名でなくとも使用可能になる。
     use Status::{Poor, Rich};
-    // Automatically &#96;use&#96; each name inside &#96;Work&#96;.
+    // &#96;Work&#96;の中の名前をすべて&#96;use&#96;する
     use Work::&#42;;
 
-    // Equivalent to &#96;Status::Poor&#96;.
+    // &#96;use&#96;しているため、&#96;Status::Poor&#96;と書いていることに等しい
     let status = Poor;
-    // Equivalent to &#96;Work::Civilian&#96;.
+    // &#96;Work::Civilian&#96;に等しい
     let work = Civilian;
 
     match status {
-        // Note the lack of scoping because of the explicit &#96;use&#96; above.
+        // &#96;use&#96;しているのでスコープを明示していない
         Rich =&gt; println!(&quot;The rich have lots of money!&quot;),
         Poor =&gt; println!(&quot;The poor have no money...&quot;),
     }
 
     match work {
-        // Note again the lack of scoping.
+        // こちらも同じ
         Civilian =&gt; println!(&quot;Civilians work!&quot;),
         Soldier  =&gt; println!(&quot;Soldiers fight!&quot;),
     }
@@ -2904,7 +2904,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="/flow_control/match.html"><code>match</code></a> and <a href="/mod/use.html"><code>use</code></a> </p>
+<p><a href="/flow_control/match.html">マッチ(<code>match</code>)</a> and <a href="/mod/use.html"><code>use</code></a></p>
 
                     
                     </section>

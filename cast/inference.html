@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="5.2" data-basepath=".." data-revision="1462248858502">
+    <div class="book" data-level="5.2" data-basepath=".." data-revision="1463579712325">
     
 
 <div class="book-summary">
@@ -2859,35 +2859,37 @@
                     <section class="normal" id="section-gitbook_14">
                     
                         <h2 id="52-inference">5.2 Inference</h2>
-<p>The type inference engine is pretty smart. It does more than looking at the
+<!-- The type inference engine is pretty smart. It does more than looking at the
 type of the
-<a href="https://en.wikipedia.org/wiki/Value_%28computer_science%29#lrvalue" target="_blank">r-value</a>
-during an initialization. It also looks at how the variable is used afterwards 
-to infer its type. Here&#39;s an advanced example of type inference:</p>
+[r-value][rvalue]
+during an initialization. It also looks at how the variable is used afterwards
+to infer its type. Here's an advanced example of type inference: -->
+<p>Rustの型推論エンジンはなかなか賢くできています。初期化の際に右辺値(<a href="https://en.wikipedia.org/wiki/Value_%28computer_science%29#lrvalue" target="_blank"><code>r-value</code></a>)の型をチェックするだけでなく、その後にどのような使われ方をしているかを見て推論します。以下がその例です。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // Because of the annotation, the compiler knows that &#96;elem&#96; has type u8.
+    // アノテーションのおかげで、コンパイラは&#96;elem&#96;がu8型であることがわかる。
     let elem = 5u8;
 
-    // Create an empty vector (a growable array).
+    // 空のベクトル(可変長の配列)を生成
     let mut vec = Vec::new();
-    // At this point the compiler doesn&#39;t know the exact type of &#96;vec&#96;, it
-    // just knows that it&#39;s a vector of something (&#96;Vec&lt;&#95;&gt;&#96;).
+    // この時点でコンパイラは&#96;vec&#96;の型を知らず、
+    // 単に何らかの値のベクトル(&#96;Vec&lt;&#95;&gt;&#96;)であるということだけを把握している。
 
-    // Insert &#96;elem&#96; in the vector.
+    // &#96;elem&#96;をベクトルに挿入
     vec.push(elem);
-    // Aha! Now the compiler knows that &#96;vec&#96; is a vector of &#96;u8&#96;s (&#96;Vec&lt;u8&gt;&#96;)
-    // TODO ^ Try commenting out the &#96;vec.push(elem)&#96; line
+    // よし！ これでコンパイラは&#96;vec&#96;が&#96;u8&#96;のベクトル(&#96;Vec&lt;u8&gt;&#96;)であることを把握する。
+    // TODO ^ 上の &#96;vec.push(elem)&#96; をコメントアウトしてみましょう。
 
     println!(&quot;{:?}&quot;, vec);
 }</div>
 <div id="result"></div>
 </div>
 
-<p>No type annotation of variables was needed, the compiler is happy and so is the
-programmer!</p>
+<!-- No type annotation of variables was needed, the compiler is happy and so is the
+programmer! -->
+<p>このように、変数の型アノテーションは必要ありません。これでコンパイラもプログラマもハッピーですね！</p>
 
                     
                     </section>

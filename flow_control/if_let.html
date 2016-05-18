@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="7.6" data-basepath=".." data-revision="1462248858502">
+    <div class="book" data-level="7.6" data-basepath=".." data-revision="1463579712325">
     
 
 <div class="book-summary">
@@ -2859,57 +2859,61 @@
                     <section class="normal" id="section-gitbook_44">
                     
                         <h2 id="76-if-let">7.6 if let</h2>
-<p>For some use cases, <code>match</code> is awkward. For example:</p>
-<pre><code class="lang-rust"><span class="hljs-comment">// Make `optional` of type `Option&lt;i32&gt;`</span>
+<!--- For some use cases, `match` is awkward. For example: --->
+<p>場合によっては<code>match</code>を使用すると不自然な書き方になってしまう場合があります。例えば...</p>
+<pre><code class="lang-rust"><span class="hljs-comment">// `optional`という変数の型を`Option&lt;i32&gt;`に指定</span>
 <span class="hljs-keyword">let</span> optional = Some(<span class="hljs-number">7</span>);
 
 <span class="hljs-keyword">match</span> optional {
     Some(i) =&gt; {
         <span class="hljs-built_in">println!</span>(<span class="hljs-string">"This is a really long string and `{:?}`"</span>, i);
-        <span class="hljs-comment">// ^ Needed 2 indentations just so we could destructure</span>
-        <span class="hljs-comment">// `i` from the option.</span>
+        <span class="hljs-comment">// ^ `i`をoption型からデストラクトするためだけに</span>
+        <span class="hljs-comment">// インデントが一つ増えてしまっている。</span>
     },
     <span class="hljs-number">_</span> =&gt; {},
-    <span class="hljs-comment">// ^ Required because `match` is exhaustive. Doesn't it seem</span>
-    <span class="hljs-comment">// like wasted space?</span>
+    <span class="hljs-comment">// ^ `match`は全ての型に対して網羅的でなくてはならないので必要。</span>
+    <span class="hljs-comment">// 冗長に見えませんか？</span>
 };
 </code></pre>
-<p><code>if let</code> is cleaner for this use case and in addition allows various
-failure options to be specified:</p>
+<!--- `if let` is cleaner for this use case and in addition allows various --->
+<!--- failure options to be specified: --->
+<p>この場合は<code>if let</code>を用いたほうが美しく、失敗時の処理も柔軟に行うことができます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // All have type &#96;Option&lt;i32&gt;&#96;
+    // 全て&#96;Option&lt;i32&gt;&#96;型
     let number = Some(7);
     let letter: Option&lt;i32&gt; = None;
     let emoticon: Option&lt;i32&gt; = None;
 
-    // The &#96;if let&#96; construct reads: &quot;if &#96;let&#96; destructures &#96;number&#96; into
-    // &#96;Some(i)&#96;, evaluate the block (&#96;{}&#96;).
+    // &#96;if let&#96;文は以下と同じ意味.
+    //
+    // もしletがnumberをデストラクトした結果が&#96;Some(i)&#96;になるならば
+    // ブロック内(&#96;{}&#96;)を実行する。
     if let Some(i) = number {
         println!(&quot;Matched {:?}!&quot;, i);
     }
 
-    // If you need to specify a failure, use an else:
+    // デストラクトした結果が&#96;Some()&#96;にならない場合の処理を明示したい場合、
+    // &#96;else&#96;を使用する。
     if let Some(i) = letter {
         println!(&quot;Matched {:?}!&quot;, i);
     } else {
-        // Destructure failed. Change to the failure case.
+        // デストラクト失敗の場合。このブロック内を実行
         println!(&quot;Didn&#39;t match a number. Let&#39;s go with a letter!&quot;);
     };
 
-    // Provide an altered failing condition.
+    // デストラクト失敗時の処理を更に分岐させることもできる
     let i&#95;like&#95;letters = false;
 
     if let Some(i) = emoticon {
         println!(&quot;Matched {:?}!&quot;, i);
-    // Destructure failed. Evaluate an &#96;else if&#96; condition to see if the
-    // alternate failure branch should be taken:
+    // デストラクト失敗。&#96;else if&#96;を評価し、処理をさらに分岐させる。
     } else if i&#95;like&#95;letters {
         println!(&quot;Didn&#39;t match a number. Let&#39;s go with a letter!&quot;);
     } else {
-        // The condition evaluated false. This branch is the default:
+        // 今回は&#96;else if&#96;の評価がfalseなので、このブロック内がデフォルト
         println!(&quot;I don&#39;t like letters. Let&#39;s go with an emoticon :)!&quot;);
     };
 }</div>
@@ -2917,7 +2921,7 @@ failure options to be specified:</p>
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="/custom_types/enum.html"><code>enum</code></a>, <a href="/std/option.html"><code>Option</code></a>, and the <a href="https://github.com/rust-lang/rfcs/pull/160" target="_blank">RFC</a></p>
+<p><a href="/custom_types/enum.html">列挙型</a>, <a href="/std/option.html">オプション</a>, <a href="https://github.com/rust-lang/rfcs/pull/160" target="_blank">RFC</a></p>
 
                     
                     </section>

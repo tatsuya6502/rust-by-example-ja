@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="5.1" data-basepath=".." data-revision="1462248858502">
+    <div class="book" data-level="5.1" data-basepath=".." data-revision="1463579712325">
     
 
 <div class="book-summary">
@@ -2859,26 +2859,28 @@
                     <section class="normal" id="section-gitbook_15">
                     
                         <h2 id="51-literals">5.1 Literals</h2>
-<p>Numeric literals can be type annotated by adding the type as a suffix, with the
-exception of <code>usize</code> that uses the <code>usize</code> suffix and <code>isize</code> that uses the
-<code>isize</code> suffix.</p>
-<p>The type of unsuffixed numeric literals will depend on how they are used. If no
-constraint exists, the compiler will use <code>i32</code> for integers, and <code>f64</code> for
-floating-point numbers.</p>
+<!-- Numeric literals can be type annotated by adding the type as a suffix, with the
+exception of `usize` that uses the `usize` suffix and `isize` that uses the
+`isize` suffix. -->
+<p>数値型リテラルはサフィックスを指定することで型を指定することが可能です。例外は<code>usize</code>、<code>isize</code>で、これらはそれぞれ同名のサフィックスを使用します。</p>
+<!-- The type of unsuffixed numeric literals will depend on how they are used. If no
+constraint exists, the compiler will use `i32` for integers, and `f64` for
+floating-point numbers. -->
+<p>サフィックスを指定しない数値型リテラルの場合、その型はどのように使用されるかに依存して決められます。デフォルトでは整数型の場合<code>i32</code>が、浮動小数点型は<code>f64</code>を使用します。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // Suffixed literals, their types are known at initialization
+    // サフィックスを指定したリテラル。型は初期化とともに確定する。
     let x = 1u8;
     let y = 2u32;
     let z = 3f32;
 
-    // Unsuffixed literal, their types depend on how they are used
+    // サフィックスを指定しないリテラル。型は使用方法に依存する。
     let i = 1;
     let f = 1.0;
 
-    // &#96;size&#95;of&#95;val&#96; returns the size of a variable in bytes
+    // &#96;size&#95;of&#95;val&#96; 関数は変数のサイズをバイトで返す。
     println!(&quot;size of &#96;x&#96; in bytes: {}&quot;, std::mem::size&#95;of&#95;val(&amp;x));
     println!(&quot;size of &#96;y&#96; in bytes: {}&quot;, std::mem::size&#95;of&#95;val(&amp;y));
     println!(&quot;size of &#96;z&#96; in bytes: {}&quot;, std::mem::size&#95;of&#95;val(&amp;z));
@@ -2888,16 +2890,22 @@ floating-point numbers.</p>
 <div id="result"></div>
 </div>
 
-<p>There are some concepts used in the previous code that haven&#39;t been explained
-yet, here&#39;s a brief explanation for the impatient readers:</p>
+<!--
+There are some concepts used in the previous code that haven't been explained
+yet, here's a brief explanation for the impatient readers:
+
+* `fun(&foo)` is used to pass an argument to a function *by reference*, rather
+  than by value (`fun(foo)`). For more details see [borrowing][borrow].
+* `std::mem::size_of_val` is a function, but called with its *full path*. Code
+  can be split in logical units called *modules*. In this case, the
+  `size_of_val` function is defined in the `mem` module, and the `mem` module
+  is defined in the `std` *crate*. For more details, see
+  [modules][mod] and [crates][crate].
+-->
+<p>上のコードには現時点では解説していない考えがいくつか使用されています。気になる方のために簡単に説明をしておきましょう。</p>
 <ul>
-<li><code>fun(&amp;foo)</code> is used to pass an argument to a function <em>by reference</em>, rather
-than by value (<code>fun(foo)</code>). For more details see <a href="/scope/borrow.html">borrowing</a>.</li>
-<li><code>std::mem::size_of_val</code> is a function, but called with its <em>full path</em>. Code
-can be split in logical units called <em>modules</em>. In this case, the
-<code>size_of_val</code> function is defined in the <code>mem</code> module, and the <code>mem</code> module
-is defined in the <code>std</code> <em>crate</em>. For more details, see
-<a href="/mod.html">modules</a> and <a href="/crates.html">crates</a>.</li>
+<li><code>fun(&amp;foo)</code>は値そのものではなく、その参照を関数に渡す時の書き方です。詳しくは<a href="/scope/borrow.html">借用(<code>borrowing</code>)</a>を見てください。</li>
+<li><code>std::mem::size_of_val</code>は関数ですが、<em>絶対パス(<code>full path</code>)</em>で呼び出されています。ソースコードは論理的に区切られた<em>モジュール</em>と呼ばれるものにわけられることができます。今回の場合は<code>size_of_val</code>関数は<code>mem</code>モジュール内で定義されており、<code>mem</code>モジュールは<code>std</code><em>クレイト</em>内で定義されています。より詳しくは<a href="/crates.html">クレイト(<code>crates</code>)</a>を参照してください。</li>
 </ul>
 
                     

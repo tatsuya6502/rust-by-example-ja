@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="3.2" data-basepath=".." data-revision="1462248858502">
+    <div class="book" data-level="3.2" data-basepath=".." data-revision="1463579712325">
     
 
 <div class="book-summary">
@@ -2859,42 +2859,43 @@
                     <section class="normal" id="section-gitbook_24">
                     
                         <h2 id="32-enums">3.2 Enums</h2>
-<p>The <code>enum</code> keyword allows the creation of a type which may be one of a few
-different variants. Any variant which is valid as a <code>struct</code> is also valid as
-an <code>enum</code>.</p>
+<!--- The `enum` keyword allows the creation of a type which may be one of a few --->
+<!--- different variants. Any variant which is valid as a `struct` is also valid as --->
+<!--- an `enum`. --->
+<p>列挙型(<code>enum</code>)はいくつかの異なる型の中から1つを選ぶような場合に使用する。構造体（<code>struct</code>）の定義を満たすものならば何でも<code>enum</code> 内の型として使用できる</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// An attribute to hide warnings for unused code.
+<div id="editor">// 使用されていないコードによる警告を隠すアトリビュート
 #![allow(dead&#95;code)]
 
-// Create an &#96;enum&#96; to classify someone. Note how both names
-// and type information together specify the variant:
-// &#96;Skinny != Fat&#96; and &#96;Height(i32) != Weight(i32)&#96;. Each
-// is different and independent.
+// 人間を分類するための&#96;enum&#96;を作成。要素の名前と型の情報の両方が
+// 変数の内容を同定するために、使用されていることに注目、つまり
+// &#96;Skinny != Fat&#96;であり、&#96;Height(i32) != Weight(i32)&#96;である。
 enum Person {
-    // An &#96;enum&#96; may either be &#96;unit-like&#96;,
+    // &#96;enum&#96;の要素は以下の用に様々な型を取れる
+    // ユニットライクな型
     Skinny,
     Fat,
-    // like tuple structs,
+    // タプル
     Height(i32),
     Weight(i32),
-    // or like structures.
+    // 構造体
     Info { name: String, height: i32 }
 }
 
-// A function which takes a &#96;Person&#96; enum as an argument and
-// returns nothing.
+// &#96;Person&#96;型のEnumを引数にとり、返り値のない関数。
 fn inspect(p: Person) {
-    // Usage of an &#96;enum&#96; must cover all cases (irrefutable)
-    // so a &#96;match&#96; is used to branch over it.
+    // &#96;match&#96;が&#96;enum&#96;型を精査する場合、その型について網羅的
+    // でなくてはならない。
+    // （訳注: &#96;enum&#96;の内容が定かでない場合は&#96;&#95;&#96;を使用する）
     match p {
         Person::Skinny    =&gt; println!(&quot;Is skinny!&quot;),
         Person::Fat       =&gt; println!(&quot;Is fat!&quot;),
-        // Destructure &#96;i&#96; from inside the &#96;enum&#96;.
+        // &#96;Person&#96;の中から&#96;i&#96;をデストラクトする。
         Person::Height(i) =&gt; println!(&quot;Has a height of {}.&quot;, i),
         Person::Weight(i) =&gt; println!(&quot;Has a weight of {}.&quot;, i),
-        // Destructure &#96;Info&#96; into &#96;name&#96; and &#96;height&#96;.
+        // &#96;info&#96;を&#96;height&#96;と&#96;name&#96;にデストラクトする。
         Person::Info { name, height } =&gt; {
             println!(&quot;{} is {} tall!&quot;, name, height);
         },
@@ -2904,7 +2905,7 @@ fn inspect(p: Person) {
 fn main() {
     let person = Person::Height(18);
     let danny  = Person::Weight(10);
-    // &#96;to&#95;owned()&#96; creates an owned &#96;String&#96; from a string slice.
+    // &#96;to&#95;owned()&#96;は文字列のスライスから、新しい所有権の&#96;String&#96;を作成する。
     let dave   = Person::Info { name: &quot;Dave&quot;.to&#95;owned(), height: 72 };
     let john   = Person::Fat;
     let larry  = Person::Skinny;
@@ -2919,7 +2920,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="/attribute.html"><code>attributes</code></a>, <a href="/flow_control/match.html"><code>match</code></a>, <a href="/fn.html"><code>fn</code></a>, and <a href="/std/str.html"><code>String</code></a></p>
+<p><a href="/attribute.html">アトリビュート(<code>attributes</code>)</a>, <a href="/flow_control/match.html">マッチ(<code>match</code>)</a>, <a href="/fn.html">関数(<code>fn</code>)</a>, and <a href="/std/str.html">文字列(<code>String</code>)</a></p>
 
                     
                     </section>

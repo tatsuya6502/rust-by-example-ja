@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="4.1" data-basepath=".." data-revision="1462248858502">
+    <div class="book" data-level="4.1" data-basepath=".." data-revision="1463579712325">
     
 
 <div class="book-summary">
@@ -2859,8 +2859,9 @@
                     <section class="normal" id="section-gitbook_153">
                     
                         <h2 id="41-mutability">4.1 Mutability</h2>
-<p>Variable bindings are immutable by default, but this can be overridden using
-the <code>mut</code> modifier.</p>
+<!-- Variable bindings are immutable by default, but this can be overridden using
+the `mut` modifier. -->
+<p>変数はデフォルトでイミュータブル（変更不可能）ですが<code>mut</code>構文を使用することでミュータブルになります。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2877,12 +2878,13 @@ the <code>mut</code> modifier.</p>
 
     // Error!
     &#95;immutable&#95;binding += 1;
-    // FIXME ^ Comment out this line
+    // FIXME ^ この行をコメントアウトしましょう
 }</div>
 <div id="result"></div>
 </div>
 
-<p>The compiler will throw a detailed diagnostic about mutability errors.</p>
+<!-- The compiler will throw a detailed diagnostic about mutability errors. -->
+<p>コンパイラはミュータビリティに関するエラーの詳細を出してくれます。</p>
 
                     
                     </section>

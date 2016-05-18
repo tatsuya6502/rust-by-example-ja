@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="6" data-basepath="." data-revision="1462248858502">
+    <div class="book" data-level="6" data-basepath="." data-revision="1463579712325">
     
 
 <div class="book-summary">
@@ -2859,27 +2859,30 @@
                     <section class="normal" id="section-gitbook_41">
                     
                         <h1 id="6-expressions">6 Expressions</h1>
-<p>A Rust program is (mostly) made up of a series of statements:</p>
+<!-- A Rust program is (mostly) made up of a series of statements: -->
+<p>Rustのプログラムは（ほとんどの場合）文(<code>statement</code>)の連続でできています</p>
 <pre><code>fn main() {
     // statement
     // statement
     // statement
 }
-</code></pre><p>There are a few kinds of statements in Rust. The most common two are declaring
-a variable binding, and using a <code>;</code> with an expression:</p>
+</code></pre><!-- There are a few kinds of statements in Rust. The most common two are declaring
+a variable binding, and using a `;` with an expression: -->
+<p>宣言文にはいくつかの種類があります。最も一般的なのは変数の束縛(<code>variable binding</code>)と式文(<code>expression</code>)で、いずれも行末に<code>;</code>が付きます</p>
 <pre><code>fn main() {
-    // variable binding
+    // 変数束縛
     let x = 5;
 
-    // expression;
+    // 式文
     x;
     x + 1;
     15;
 }
-</code></pre><p>Blocks are expressions too, so they can be used as <a href="https://en.wikipedia.org/wiki/Value_%28computer_science%29#lrvalue" target="_blank">r-values</a> in
+</code></pre><!-- Blocks are expressions too, so they can be used as [r-values][rvalue] in
 assignments. The last expression in the block will be assigned to the
-<a href="https://en.wikipedia.org/wiki/Value_%28computer_science%29#lrvalue" target="_blank">l-value</a>. However, if the last expression of the block ends with a
-semicolon, the return value will be <code>()</code>.</p>
+[l-value][lvalue]. However, if the last expression of the block ends with a
+semicolon, the return value will be `()`. -->
+<p>コードブロックも文の一種です。よってブロックを丸ごと<a href="https://en.wikipedia.org/wiki/Value_%28computer_science%29#lrvalue" target="_blank">右辺値</a>として扱うことができます。その場合ブロック内の最後の式文が左辺値に代入されます。ただし、ブロック内の最後の式文が<code>;</code>で終わる場合は返り値は<code>()</code>になります。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2890,12 +2893,12 @@ semicolon, the return value will be <code>()</code>.</p>
         let x&#95;squared = x &#42; x;
         let x&#95;cube = x&#95;squared &#42; x;
 
-        // This expression will be assigned to &#96;y&#96;
+        // この式文は&#96;y&#96;に代入されます。
         x&#95;cube + x&#95;squared + x
     };
 
     let z = {
-        // The semicolon suppresses this expression and &#96;()&#96; is assigned to &#96;z&#96;
+        // セミコロンがあるので&#96;z&#96;には&#96;()&#96;が入ります。
         2 &#42; x;
     };
 

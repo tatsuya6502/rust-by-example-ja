@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="4.2" data-basepath=".." data-revision="1462248858502">
+    <div class="book" data-level="4.2" data-basepath=".." data-revision="1463579712325">
     
 
 <div class="book-summary">
@@ -2859,37 +2859,38 @@
                     <section class="normal" id="section-gitbook_154">
                     
                         <h2 id="42-scope-and-shadowing">4.2 Scope and shadowing</h2>
-<p>Variable bindings have a scope, and are constrained to live in a <em>block</em>. A
-block is a collection of statements enclosed by braces <code>{}</code>. Also, <a href="https://en.wikipedia.org/wiki/Variable_shadowing" target="_blank">variable
-shadowing</a> is allowed.</p>
+<!-- Variable bindings have a scope, and are constrained to live in a *block*. A
+block is a collection of statements enclosed by braces `{}`. Also, [variable
+shadowing][variable-shadow] is allowed. -->
+<p>変数はスコープを持つため、<strong>ブロック</strong>の中に閉じ込められています。ブロックとは<code>{}</code>で囲まれた領域のことです。また、<a href="https://en.wikipedia.org/wiki/Variable_shadowing" target="_blank">変数のシャドーイング</a>も可能です。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // This binding lives in the main function
+    // この変数はmain関数内が生息域です。
     let long&#95;lived&#95;binding = 1;
 
-    // This is a block, and has a smaller scope than the main function
+    // ここから下が&#96;main&#96;より小さいスコープを持つブロックとなります。
     {
-        // This binding only exists in this block
+        // この変数はこのブロック内のみに存在します。
         let short&#95;lived&#95;binding = 2;
 
         println!(&quot;inner short: {}&quot;, short&#95;lived&#95;binding);
 
-        // This binding &#42;shadows&#42; the outer one
+        // この変数はスコープ外の同名の変数を&#42;シャドーイング&#42;します。
         let long&#95;lived&#95;binding = 5&#95;f32;
 
         println!(&quot;inner long: {}&quot;, long&#95;lived&#95;binding);
     }
-    // End of the block
+    // ブロックの終わり
 
-    // Error! &#96;short&#95;lived&#95;binding&#96; doesn&#39;t exist in this scope
+    // &#96;short&#95;lived&#95;binding&#96;はこのスコープ内には存在しませんのでエラーとなります。
     println!(&quot;outer short: {}&quot;, short&#95;lived&#95;binding);
-    // FIXME ^ Comment out this line
+    // FIXME ^ コメントアウトしましょう
 
     println!(&quot;outer long: {}&quot;, long&#95;lived&#95;binding);
 
-    // This binding also &#42;shadows&#42; the previous binding
+    // この変数バインディングも以前に定義した変数を&#42;シャドーイング&#42;します
     let long&#95;lived&#95;binding = &#39;a&#39;;
 
     println!(&quot;outer long: {}&quot;, long&#95;lived&#95;binding);

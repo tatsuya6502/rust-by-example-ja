@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="4" data-basepath="." data-revision="1462248858502">
+    <div class="book" data-level="4" data-basepath="." data-revision="1463579712325">
     
 
 <div class="book-summary">
@@ -2859,11 +2859,14 @@
                     <section class="normal" id="section-gitbook_155">
                     
                         <h1 id="4-variable-bindings">4 Variable Bindings</h1>
-<p>Rust provides type safety via static typing. Variable bindings can be type
+<!-- Rust provides type safety via static typing. Variable bindings can be type
 annotated when declared. However, in most cases, the compiler will be able
 to infer the type of the variable from the context, heavily reducing the
-annotation burden.</p>
-<p>Values (like literals) can be bound to variables, using the <code>let</code> binding.</p>
+annotation burden. -->
+<p>Rustは静的(<code>static</code>)な型付けゆえに型安全です。変数は宣言時に型を明示できます。とはいえたいていの場合は、コンパイラは変数の型をコンテキストから推測することができますので、常に苦労して明示する必要があるわけではありません。</p>
+<!-- Values (like literals) can be bound to variables, using the `let` binding.
+-->
+<p>値は（リテラルに似て）<code>let</code>を用いて変数に束縛されることができる。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2872,19 +2875,19 @@ annotation burden.</p>
     let a&#95;boolean = true;
     let unit = ();
 
-    // copy &#96;an&#95;integer&#96; into &#96;copied&#95;integer&#96;
+    // &#96;an&#95;integer&#96;を&#96;copied&#95;integer&#96;へとコピー
     let copied&#95;integer = an&#95;integer;
 
     println!(&quot;An integer: {:?}&quot;, copied&#95;integer);
     println!(&quot;A boolean: {:?}&quot;, a&#95;boolean);
     println!(&quot;Meet the unit value: {:?}&quot;, unit);
 
-    // The compiler warns about unused variable bindings; these warnings can
-    // be silenced by prefixing the variable name with an underscore
+    // 使用されていない変数があると、コンパイラは警告を出します。
+    // 変数名の頭に&#96;&#95;&#96;(アンダーバー)を付けると警告を消すことができます。
     let &#95;unused&#95;variable = 3u32;
 
     let noisy&#95;unused&#95;variable = 2u32;
-    // FIXME ^ Prefix with an underscore to suppress the warning
+    // FIXME ^ 頭にアンダーバーを付けて、警告を抑えましょう。
 }</div>
 <div id="result"></div>
 </div>

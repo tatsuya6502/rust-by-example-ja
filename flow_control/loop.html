@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="7.2" data-basepath=".." data-revision="1462248858502">
+    <div class="book" data-level="7.2" data-basepath=".." data-revision="1463579712325">
     
 
 <div class="book-summary">
@@ -2859,10 +2859,15 @@
                     <section class="normal" id="section-gitbook_46">
                     
                         <h2 id="72-loop">7.2 loop</h2>
-<p>Rust provides a <code>loop</code> keyword to indicate an infinite loop.</p>
-<p>The <code>break</code> statement can be used to exit a loop at anytime, whereas the
-<code>continue</code> statement can be used to skip the rest of the iteration and start a
-new one.</p>
+<!--- Rust provides a `loop` keyword to indicate an infinite loop. --->
+<p>Rustには<code>loop</code>というキーワードが存在します。これは無限ループを作成するのに使用します。</p>
+<blockquote>
+<p>訳注: <code>while True</code>と同じですが、ループのたびに条件を確認しないため、若干高速になります。</p>
+</blockquote>
+<!--- The `break` statement can be used to exit a loop at anytime, whereas the --->
+<!--- `continue` statement can be used to skip the rest of the iteration and start a --->
+<!--- new one. --->
+<p>ループから抜けだす時は<code>break</code>, 即座に次のループに映るときは<code>continue</code>が使用できます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2871,14 +2876,14 @@ new one.</p>
 
     println!(&quot;Let&#39;s count until infinity!&quot;);
 
-    // Infinite loop
+    // 無限ループ
     loop {
         count += 1;
 
         if count == 3 {
             println!(&quot;three&quot;);
 
-            // Skip the rest of this iteration
+            // 残りの処理をスキップ
             continue;
         }
 
@@ -2888,6 +2893,7 @@ new one.</p>
             println!(&quot;OK, that&#39;s enough&quot;);
 
             // Exit this loop
+            // ループを抜ける。
             break;
         }
     }
