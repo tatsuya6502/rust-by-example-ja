@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="3.2.3" data-basepath="../.." data-revision="1462248858502">
+    <div class="book" data-level="3.2.3" data-basepath="../.." data-revision="1462765039635">
     
 
 <div class="book-summary">
@@ -2859,54 +2859,55 @@
                     <section class="normal" id="section-gitbook_23">
                     
                         <h3 id="323-testcase-linked-list">3.2.3 Testcase: linked-list</h3>
-<p>A common use for <code>enums</code> is to create a linked-list:</p>
+<!--- A common use for `enums` is to create a linked-list: --->
+<p><code>enum</code>を使用が適切なパターンのひとつに、連結リスト(<code>linked-list</code>)を作成する場合があります。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">use List::&#42;;
 
 enum List {
-    // Cons: Tuple struct that wraps an element and a pointer to the next node
+    // Cons: これは、要素をラップし、次の要素へのポインタを保持するタプル。
     Cons(u32, Box&lt;List&gt;),
-    // Nil: A node that signifies the end of the linked list
+    // Nil: 連結リストの終端であることを示すノード
     Nil,
 }
 
-// Methods can be attached to an enum
+// 列挙型にはメソッドを付与することができる。
 impl List {
-    // Create an empty list
+    // 空リストの作成。
     fn new() -&gt; List {
-        // &#96;Nil&#96; has type &#96;List&#96;
+        // &#96;Nil&#96; は &#96;List&#96;型を持つ。
         Nil
     }
 
-    // Consume a list, and return the same list with a new element at its front
+    // リストを受け取り、その始端に新しい要素を付加したものを返す関数。
     fn prepend(self, elem: u32) -&gt; List {
-        // &#96;Cons&#96; also has type List
+        // この&#96;Cons&#96; 自体も、その第2要素もどちらもlist型である。
         Cons(elem, Box::new(self))
     }
 
-    // Return the length of the list
+    // list の長さを返すメソッド
     fn len(&amp;self) -&gt; u32 {
-        // &#96;self&#96; has to be matched, because the behavior of this method
-        // depends on the variant of &#96;self&#96;
-        // &#96;self&#96; has type &#96;&amp;List&#96;, and &#96;&#42;self&#96; has type &#96;List&#96;, matching on a
-        // concrete type &#96;T&#96; is preferred over a match on a reference &#96;&amp;T&#96;
+        // このメソッドは、&#96;self&#96;の状態によって振る舞いが
+        // 変化するため、matchをする必要がある。
+        // &#96;self&#96;の型は&#96;&amp;List&#96;であるので、&#96;&#42;self&#96;は&#96;List&#96;になる。マッチングは
+        // リファレンス（&#96;&amp;T&#96;）ではなく実体（&#96;T&#96;）に対して行うのが好ましい。
         match &#42;self {
-            // Can&#39;t take ownership of the tail, because &#96;self&#96; is borrowed;
-            // instead take a reference to the tail
+            // &#96;self&#96;をすでに借用しているので、tailの所有権を取ることができない。
+            // 代わりに参照を使用する。
             Cons(&#95;, ref tail) =&gt; 1 + tail.len(),
-            // Base Case: An empty list has zero length
+            // 空リストならば長さは0
             Nil =&gt; 0
         }
     }
 
-    // Return representation of the list as a (heap allocated) string
+    // Listをheap上の文字列として表したものを返すメソッド。
     fn stringify(&amp;self) -&gt; String {
         match &#42;self {
             Cons(head, ref tail) =&gt; {
-                // &#96;format!&#96; is similar to &#96;print!&#96;, but returns a heap
-                // allocated string instead of printing to the console
+                // &#96;format!&#96;は&#96;print!&#96;に似ているが、コンソール上に出力
+                // する代わりに、heap上の文字列を返す。
                 format!(&quot;{}, {}&quot;, head, tail.stringify())
             },
             Nil =&gt; {
@@ -2917,15 +2918,15 @@ impl List {
 }
 
 fn main() {
-    // Create an empty linked list
+    // 空の連結リストを作成
     let mut list = List::new();
 
-    // Append some elements
+    // 要素を追加
     list = list.prepend(1);
     list = list.prepend(2);
     list = list.prepend(3);
 
-    // Show the final state of the list
+    // 追加後の状態を表示
     println!(&quot;linked list has length: {}&quot;, list.len());
     println!(&quot;{}&quot;, list.stringify());
 }</div>
@@ -2933,7 +2934,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="/std/box.html"><code>Box</code></a> and <a href="/fn/methods.html">methods</a></p>
+<p><a href="/std/box.html">ボックス(<code>Box</code>)</a> and <a href="/fn/methods.html">メソッド</a></p>
 
                     
                     </section>
@@ -2973,10 +2974,6 @@ fn main() {
 
     
     <script src="../../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
-    
-
-    
-    <script src="../../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>
