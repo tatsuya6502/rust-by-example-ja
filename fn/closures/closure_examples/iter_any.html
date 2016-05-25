@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.2.6.1" data-basepath="../../.." data-revision="1463579712325">
+    <div class="book" data-level="8.2.6.1" data-basepath="../../.." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,19 +2859,20 @@
                     <section class="normal" id="section-gitbook_60">
                     
                         <h4 id="8261-iteratorany">8.2.6.1 Iterator::any</h4>
-<p><code>Iterator::any</code> is a function which when passed an iterator, will return
-<code>true</code> if any element satisfies the predicate. Otherwise <code>false</code>. Its
-signature:</p>
+<!-- `Iterator::any` is a function which when passed an iterator, will return
+`true` if any element satisfies the predicate. Otherwise `false`. Its
+signature: -->
+<p>Iiterator::any<code>は、イテレータ内に一つでも条件を満たす要素があれば、</code>true<code>を返し、さもなくば</code>false`を返すイテレータです。以下がそのシグネチャです</p>
 <pre><code class="lang-rust">pub trait Iterator {
-    // The type being iterated over.
+    // イテレートされる値の型
     type Item;
 
-    // `any` takes `&amp;mut self` meaning the caller may be borrowed
-    // and modified, but not consumed.
+    // `any`は`&amp;mut self`を取るため、イテレータを呼び出した値を借用し
+    // 変更しますが、消費し尽くすことはありません。
     fn any&lt;F&gt;(&amp;mut self, f: F) -&gt; bool where
-        // `FnMut` meaning any captured variable may at most be
-        // modified, not consumed. `Self::Item` states it takes
-        // arguments to the closure by value.
+        // `FnMut`はクロージャによって補足される変数が変更される
+        // 事はあっても消費されることはないということを示します。
+        // `&amp;Self::Item`はクロージャが変数を参照として取ることを示します。
         F: FnMut(Self::Item) -&gt; bool {}
 }
 </code></pre>
@@ -2882,17 +2883,17 @@ signature:</p>
     let vec1 = vec![1, 2, 3];
     let vec2 = vec![4, 5, 6];
 
-    // &#96;iter()&#96; for vecs yields &#96;&amp;i32&#96;. Destructure to &#96;i32&#96;.
+    // ベクトル型に対する&#96;iter&#96;は&#96;&amp;i32&#96;を&#96;yield&#96;するので、&#96;i32&#96;へとデストラクト
     println!(&quot;2 in vec1: {}&quot;, vec1.iter()     .any(|&amp;x| x == 2));
-    // &#96;into&#95;iter()&#96; for vecs yields &#96;i32&#96;. No destructuring required.
+    // &#96;inter&#95;iter()&#96;の場合は&#96;i32&#96;を&#96;yield&#96;するので、デストラクトする必要はない。
     println!(&quot;2 in vec2: {}&quot;, vec2.into&#95;iter().any(| x| x == 2));
 
     let array1 = [1, 2, 3];
     let array2 = [4, 5, 6];
 
-    // &#96;iter()&#96; for arrays yields &#96;&amp;i32&#96;.
+    // 配列に対する&#96;iter()&#96;は&#96;&amp;i32&#96;をyieldする。
     println!(&quot;2 in array1: {}&quot;, array1.iter()     .any(|&amp;x| x == 2));
-    // &#96;into&#95;iter()&#96; for arrays unusually yields &#96;&amp;i32&#96;.
+    // 配列に&#96;into&#95;iter()&#96;を使うと例外的に&#96;&amp;i32&#96;を&#96;yield&#96;する。
     println!(&quot;2 in array2: {}&quot;, array2.into&#95;iter().any(|&amp;x| x == 2));
 }</div>
 <div id="result"></div>

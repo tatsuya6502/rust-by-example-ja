@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8" data-basepath="." data-revision="1463579712325">
+    <div class="book" data-level="8" data-basepath="." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,34 +2859,37 @@
                     <section class="normal" id="section-gitbook_69">
                     
                         <h1 id="8-functions">8 Functions</h1>
-<p>Functions are declared using the <code>fn</code> keyword. Its arguments are type
+<!-- Functions are declared using the `fn` keyword. Its arguments are type
 annotated, just like variables, and, if the function returns a value, the
-return type must be specified after an arrow <code>-&gt;</code>.</p>
-<p>The final expression in the function will be used as return value.
-Alternatively, the <code>return</code> statement can be used to return a value earlier
-from within the function, even from inside loops or <code>if</code>s.</p>
-<p>Let&#39;s rewrite FizzBuzz using functions!</p>
+return type must be specified after an arrow `->`. -->
+<p>関数は<code>fn</code>キーワードを用いて定義することができます。引数は変数と同様に型を指定する必要があり、もし関数がに値を返すならば<code>-&gt;</code>の後にその型も指定する必要があります。</p>
+<!-- The final expression in the function will be used as return value.
+Alternatively, the `return` statement can be used to return a value earlier
+from within the function, even from inside loops or `if`s. -->
+<p>関数内の最後の式文が返り値となります。関数の途中で値を返したい場合は<code>return</code>文を使用します。<code>loop</code>の最中や<code>if</code>文の中からも値を返すことができます。</p>
+<!-- Let's rewrite FizzBuzz using functions! -->
+<p>では、もう一度FizzBuzz問題を解く関数を書いてみましょう！</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// Unlike C/C++, there&#39;s no restriction on the order of function definitions
+<div id="editor">// C/C++とは違い、関数の定義を行う順番に制限はない。
 fn main() {
-    // We can use this function here, and define it somewhere later
+    // ここで関数を使用し、後ほど定義してもかまわない。
     fizzbuzz&#95;to(100);
 }
 
-// Function that returns a boolean value
+// ブーリアン型を返す関数
 fn is&#95;divisible&#95;by(lhs: u32, rhs: u32) -&gt; bool {
-    // Corner case, early return
+    // 例外的な引数を受けた場合、早めに返す。
     if rhs == 0 {
         return false;
     }
 
-    // This is an expression, the &#96;return&#96; keyword is not necessary here
+    // これは式文であり、&#96;return&#96;キーワードは必要ではない。
     lhs % rhs == 0
 }
 
-// Functions that &quot;don&#39;t&quot; return a value, actually return the unit type &#96;()&#96;
+// 値を「返さない」関数、実際にはユニット型(&#96;()&#96;)を返している。
 fn fizzbuzz(n: u32) -&gt; () {
     if is&#95;divisible&#95;by(n, 15) {
         println!(&quot;fizzbuzz&quot;);
@@ -2899,8 +2902,7 @@ fn fizzbuzz(n: u32) -&gt; () {
     }
 }
 
-// When a function returns &#96;()&#96;, the return type can be omitted from the
-// signature
+// 関数が&#96;()&#96;を返すとき、返り値の方を書く必要はない。
 fn fizzbuzz&#95;to(n: u32) {
     for n in 1..n + 1 {
         fizzbuzz(n);

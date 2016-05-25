@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="9.1" data-basepath=".." data-revision="1463579712325">
+    <div class="book" data-level="9.1" data-basepath=".." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,34 +2859,35 @@
                     <section class="normal" id="section-gitbook_84">
                     
                         <h2 id="91-designators">9.1 Designators</h2>
-<p>The arguments of a macro are prefixed by a dollar sign <code>$</code> and type annotated
-with a <em>designator</em>:</p>
+<!-- The arguments of a macro are prefixed by a dollar sign `$` and type annotated
+with a *designator*: -->
+<p>macroの引数は<code>$</code>が頭につきます。型は<em>識別子</em>(<code>designator</code>)でアノテーションされます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">macro&#95;rules! create&#95;function {
-    // This macro takes an argument of designator &#96;ident&#96; and
-    // creates a function named &#96;&#36;func&#95;name&#96;.
-    // The &#96;ident&#96; designator is used for variable/function names.
+    // このマクロは&#96;ident&#96;識別子に対応する値を引数として取り
+    // &#96;&#36;func&#95;name&#96;という名の関数を作成する。
+    // &#96;ident&#96;識別子は関数・変数の名前用の識別子である。
     (&#36;func&#95;name:ident) =&gt; (
         fn &#36;func&#95;name() {
-            // The &#96;stringify!&#96; macro converts an &#96;ident&#96; into a string.
+            // &#96;stringify!&#96;というマクロは&#96;ident&#96;を文字列に変える。
             println!(&quot;You called {:?}()&quot;,
                      stringify!(&#36;func&#95;name))
         }
     )
 }
 
-// Create functions named &#96;foo&#96; and &#96;bar&#96; with the above macro.
+// 上のマクロを利用して&#96;foo&#96;、&#96;bar&#96;という名の関数を作成する。
 create&#95;function!(foo);
 create&#95;function!(bar);
 
 macro&#95;rules! print&#95;result {
-    // This macro takes an expression of type &#96;expr&#96; and prints
-    // it as a string along with its result.
-    // The &#96;expr&#96; designator is used for expressions.
+    // このマクロは&#96;expr&#96;識別子に対応する値を引数として取り、
+    // その結果を文字列としてプリントする。
+    // &#96;expr&#96;識別子は式文に対応する。
     (&#36;expression:expr) =&gt; (
-        // &#96;stringify!&#96; will convert the expression &#42;as it is&#42; into a string.
+        // &#96;stringify!&#96;は式文を&#42;そのままの形で&#42;文字列に変換する
         println!(&quot;{:?} = {:?}&quot;,
                  stringify!(&#36;expression),
                  &#36;expression)
@@ -2899,7 +2900,7 @@ fn main() {
 
     print&#95;result!(1u32 + 1);
 
-    // Recall that blocks are expressions too!
+    // ブロックも式文の一種であることを思い出しましょう!
     print&#95;result!({
         let x = 1u32;
 
@@ -2909,11 +2910,12 @@ fn main() {
 <div id="result"></div>
 </div>
 
-<p>This is a list of all the designators:</p>
+<!-- This is a list of all the designators: -->
+<p>以下が全識別子のリストです。</p>
 <ul>
 <li><code>block</code></li>
-<li><code>expr</code> is used for expressions</li>
-<li><code>ident</code> is used for variable/function names</li>
+<li><code>expr</code> 式文に使用</li>
+<li><code>ident</code> 関数、変数の名前に使用</li>
 <li><code>item</code></li>
 <li><code>pat</code> (<em>pattern</em>)</li>
 <li><code>path</code></li>

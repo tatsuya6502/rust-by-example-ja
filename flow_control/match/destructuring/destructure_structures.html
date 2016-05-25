@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="7.5.1.4" data-basepath="../../.." data-revision="1463579712325">
+    <div class="book" data-level="7.5.1.4" data-basepath="../../.." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,37 +2859,38 @@
                     <section class="normal" id="section-gitbook_50">
                     
                         <h4 id="7514-structs">7.5.1.4 structs</h4>
-<p>Similarly, a <code>struct</code> can be destructured as shown:</p>
+<!-- Similarly, a `struct` can be destructured as shown: -->
+<p>以下のようにして、構造体(<code>struct</code>)も同様にデストラクトすることができる。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
     struct Foo { x: (u32, u32), y: u32 }
 
-    // destructure members of the struct
+    // 構造体のメンバをデストラクト
     let foo = Foo { x: (1, 2), y: 3 };
     let Foo { x: (a, b), y } = foo;
 
     println!(&quot;a = {}, b = {},  y = {} &quot;, a, b, y);
 
-    // you can destructure structs and rename the variables,
-    // the order is not important
+    // 構造体をデストラクトして変数をリネーム
+    // 順番は重要ではない。
 
     let Foo { y: i, x: j } = foo;
     println!(&quot;i = {:?}, j = {:?}&quot;, i, j);
 
-    // and you can also ignore some variables:
+    // 一部の変数を無視することもできる。
     let Foo { y, .. } = foo;
     println!(&quot;y = {}&quot;, y);
 
-    // this will give an error: pattern does not mention field &#96;x&#96;
+    // &#96;x&#96;に言及していないため、以下はエラーになる。
     // let Foo { y } = foo;
 }</div>
 <div id="result"></div>
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="/custom_types/structs.html">Structs</a>, <a href="/scope/borrow/ref.html">The ref pattern</a></p>
+<p><a href="/custom_types/structs.html">構造体</a>, <a href="/scope/borrow/ref.html">refによるパターンマッチ</a></p>
 
                     
                     </section>

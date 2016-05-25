@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="7.5.3" data-basepath="../.." data-revision="1463579712325">
+    <div class="book" data-level="7.5.3" data-basepath="../.." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,13 +2859,14 @@
                     <section class="normal" id="section-gitbook_47">
                     
                         <h3 id="753-binding">7.5.3 Binding</h3>
-<p>Indirectly accessing a variable makes it impossible to branch and use that
-variable without re-binding. <code>match</code> provides the <code>@</code> sigil for binding values to
-names:</p>
+<!-- Indirectly accessing a variable makes it impossible to branch and use that
+variable without re-binding. `match` provides the `@` sigil for binding values to
+names: -->
+<p>いくつかの変数をまとめてマッチ対象とした場合、そのうちの一つを分岐先で使用することはそのままでは不可能です。<code>match</code>内では<code>@</code>マークを使用して変数をバインディングすることができます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// A function &#96;age&#96; which returns a &#96;u32&#96;.
+<div id="editor">// &#96;age&#96;関数は&#96;u32&#96;の値を返します。
 fn age() -&gt; u32 {
     15
 }
@@ -2875,12 +2876,13 @@ fn main() {
 
     match age() {
         0             =&gt; println!(&quot;I&#39;m not born yet I guess&quot;),
-        // Could &#96;match&#96; 1 ... 12 directly but then what age
-        // would the child be? Instead, bind to &#96;n&#96; for the
-        // sequence of 1 .. 12. Now the age can be reported.
+
+        // &#96;1 ... 12&#96;の値を一挙に&#96;match&#96;させることができます。
+        // しかしその場合、子供は正確には何歳なのでしょう?
+        // マッチした値を&#96;n&#96;にバインディングすることで値を使用できます。
         n @ 1  ... 12 =&gt; println!(&quot;I&#39;m a child of age {:?}&quot;, n),
         n @ 13 ... 19 =&gt; println!(&quot;I&#39;m a teen of age {:?}&quot;, n),
-        // Nothing bound. Return the result.
+        // マッチしなかった場合の処理
         n             =&gt; println!(&quot;I&#39;m an old person of age {:?}&quot;, n),
     }
 }</div>
@@ -2888,7 +2890,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="/fn.html">functions</a></p>
+<p><a href="/fn.html">関a(<code>functions</code>)数</a></p>
 
                     
                     </section>

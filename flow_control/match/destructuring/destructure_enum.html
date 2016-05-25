@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="7.5.1.2" data-basepath="../../.." data-revision="1463579712325">
+    <div class="book" data-level="7.5.1.2" data-basepath="../../.." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,21 +2859,22 @@
                     <section class="normal" id="section-gitbook_48">
                     
                         <h4 id="7512-enums">7.5.1.2 enums</h4>
-<p>An <code>enum</code> is destructured similarly:</p>
+<!-- An `enum` is destructured similarly: -->
+<p>列挙型(<code>enum</code>)も似たやり方でデストラクトすることができます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// Must derive &#96;Debug&#96; so &#96;println!&#96; can be used.
-// &#96;allow&#96; required to silence warnings because only
-// one variant is used.
+<div id="editor">// &#96;Debug&#96;を継承して&#96;println!&#96;が使用できるようにする。
+// &#96;allow&#96;の方は値を一つだけ使用したことによる警告を抑えるために存在する。
 #[allow(dead&#95;code)]
 #[derive(Debug)]
 enum Color {
-    // These 3 are specified solely by their name.
+    // これら3つの値は名前のみで扱うことができる
     Red,
     Blue,
     Green,
-    // These likewise tie &#96;u32&#96; tuples to different names: color models.
+    // 以下の値は名前と&#96;u32&#96;のタプルをペアにしている。
+    // カラーモデルと呼ばれる。
     RGB(u32, u32, u32),
     HSV(u32, u32, u32),
     HSL(u32, u32, u32),
@@ -2883,10 +2884,10 @@ enum Color {
 
 fn main() {
     let color = Color::RGB(122, 17, 40);
-    // TODO ^ Try different variants for &#96;color&#96;
+    // TODO ^ &#96;Color&#96;に別の変数を入れてみましょう
 
     println!(&quot;What color is it?&quot;);
-    // An &#96;enum&#96; can be destructured using a &#96;match&#96;.
+    // &#96;enum&#96;は&#96;match&#96;を利用してデストラクトすることができる。
     match color {
         Color::Red   =&gt; println!(&quot;The color is Red!&quot;),
         Color::Blue  =&gt; println!(&quot;The color is Blue!&quot;),
@@ -2902,14 +2903,14 @@ fn main() {
         Color::CMYK(c, m, y, k) =&gt;
             println!(&quot;Cyan: {}, magenta: {}, yellow: {}, key (black): {}!&quot;,
                 c, m, y, k),
-        // Don&#39;t need another arm because all variants have been examined
+        // 全ての値を列挙したのでその他の場合の処理は必要ない。
     }
 }</div>
 <div id="result"></div>
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="/fn/unused.html"><code>#[allow(...)]</code></a>, <a href="http://en.wikipedia.org/wiki/Color_model" target="_blank">color models</a>, <a href="/custom_types/enum.html"><code>enum</code></a>,
+<p><a href="/fn/unused.html"><code>#[allow(...)]</code></a>, <a href="http://en.wikipedia.org/wiki/Color_model" target="_blank">カラーモデル</a>, <a href="/custom_types/enum.html">列挙型</a>,
 and <a href="/trait/derive.html"><code>#[derive(...)]</code></a></p>
 
                     

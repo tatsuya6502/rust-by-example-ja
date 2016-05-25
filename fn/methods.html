@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.1" data-basepath=".." data-revision="1463579712325">
+    <div class="book" data-level="8.1" data-basepath=".." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,9 +2859,10 @@
                     <section class="normal" id="section-gitbook_68">
                     
                         <h2 id="81-methods">8.1 Methods</h2>
-<p>Methods are functions attached to objects. These methods have access to the
-data of the object and its other methods via the <code>self</code> keyword. Methods are
-defined under an <code>impl</code> block.</p>
+<!-- Methods are functions attached to objects. These methods have access to the
+data of the object and its other methods via the `self` keyword. Methods are
+defined under an `impl` block. -->
+<p>メソッドとはオブジェクトに付属した関数のことです。オブジェクトの持つデータや他のメソッドへは<code>self</code>という語を介してアクセスすることができます。<code>impl</code>キーワードによって定義します。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2870,16 +2871,15 @@ defined under an <code>impl</code> block.</p>
     y: f64,
 }
 
-// Implementation block, all &#96;Point&#96; methods go in here
+// メソッドの実装のためのブロック。&#96;Point&#96;の持つメソッドを全て定義する。
 impl Point {
-    // This is a static method
-    // Static methods don&#39;t need to be called by an instance
-    // These methods are generally used as constructors
+    // スタティックメソッド。つまり、インスタンスからでなくても
+    // 呼び出せるメソッド。以下のようにコンストラクタとして使用されることが多い。
     fn origin() -&gt; Point {
         Point { x: 0.0, y: 0.0 }
     }
 
-    // Another static method, taking two arguments:
+    // もう一つスタティックメソッド。引数を2つ取る。
     fn new(x: f64, y: f64) -&gt; Point {
         Point { x: x, y: y }
     }
@@ -2891,16 +2891,14 @@ struct Rectangle {
 }
 
 impl Rectangle {
-    // This is an instance method
-    // &#96;&amp;self&#96; is sugar for &#96;self: &amp;Self&#96;, where &#96;Self&#96; is the type of the
-    // caller object. In this case &#96;Self&#96; = &#96;Rectangle&#96;
+    // こちらはインスタンスメソッド。&#96;&amp;self&#96;は&#96;self: &amp;Self&#96;の糖衣構文。
+    // &#96;Self&#96;は呼び出し元オブジェクトの型。この場合は&#96;Rectangle&#96;。
     fn area(&amp;self) -&gt; f64 {
-        // &#96;self&#96; gives access to the struct fields via the dot operator
+        // &#96;self&#96;はドット演算子によって構造体のfieldを参照できる。
         let Point { x: x1, y: y1 } = self.p1;
         let Point { x: x2, y: y2 } = self.p2;
 
-        // &#96;abs&#96; is a &#96;f64&#96; method that returns the absolute value of the
-        // caller
+        // &#96;abs&#96;は&#96;f64&#96;のメソッドで、呼び出し元の値の絶対値を返す。
         ((x1 - x2) &#42; (y1 - y2)).abs()
     }
 
@@ -2911,8 +2909,8 @@ impl Rectangle {
         2.0 &#42; ((x1 - x2).abs() + (y1 - y2).abs())
     }
 
-    // This method requires the caller object to be mutable
-    // &#96;&amp;mut self&#96; desugars to &#96;self: &amp;mut Self&#96;
+    // このメソッドは呼び出し元オブジェクトがミュータブルであることを
+    // 必要とする。&#96;&amp;mut self&#96;は&#96;self: &amp;mut Self&#96;の糖衣構文である。
     fn translate(&amp;mut self, x: f64, y: f64) {
         self.p1.x += x;
         self.p2.x += x;
@@ -2922,31 +2920,31 @@ impl Rectangle {
     }
 }
 
-// &#96;Pair&#96; owns resources: two heap allocated integers
+// &#96;Pair&#96;はヒープ上の整数を2つ保持する。
 struct Pair(Box&lt;i32&gt;, Box&lt;i32&gt;);
 
 impl Pair {
-    // This method &quot;consumes&quot; the resources of the caller object
-    // &#96;self&#96; desugars to &#96;self: Self&#96;
+    // このメソッドは呼び出し元オブジェクトの持つ要素を「消費」する。
+    // &#96;self&#96;は&#96;self: Self&#96;の糖衣構文である。
     fn destroy(self) {
-        // Destructure &#96;self&#96;
+        // &#96;self&#96;をデストラクト
         let Pair(first, second) = self;
 
         println!(&quot;Destroying Pair({}, {})&quot;, first, second);
 
-        // &#96;first&#96; and &#96;second&#96; go out of scope and get freed
+        // &#96;first&#96;、&#96;second&#96;はスコープから抜け出すと同時に、解放される。
     }
 }
 
 fn main() {
     let rectangle = Rectangle {
-        // Static methods are called using double colons
+        // スタティックメソッドはコロンを2つ挟んで呼び出される。
         p1: Point::origin(),
         p2: Point::new(3.0, 4.0),
     };
 
-    // Instance methods are called using the dot operator
-    // Note that the first argument &#96;&amp;self&#96; is implicitly passed, i.e.
+    // インスタンスメソッドはドット演算子を用いて呼び出される。
+    // 最初の引数&#96;&amp;self&#96;は明示せずに受け渡されていることに注目。つまり
     // &#96;rectangle.perimeter()&#96; === &#96;perimeter(&amp;rectangle)&#96;
     println!(&quot;Rectangle perimeter: {}&quot;, rectangle.perimeter());
     println!(&quot;Rectangle area: {}&quot;, rectangle.area());
@@ -2956,21 +2954,22 @@ fn main() {
         p2: Point::new(1.0, 1.0),
     };
 
-    // Error! &#96;rectangle&#96; is immutable, but this method requires a mutable
-    // object
+    // エラー！&#96;rectangle&#96;はイミュータブルだがこのメソッドはミュータブルなオブジェクトを
+    // 必要とする。
     //rectangle.translate(1.0, 0.0);
-    // TODO ^ Try uncommenting this line
+    // TODO ^ この行をアンコメントしてみましょう。
 
     // Okay! Mutable objects can call mutable methods
+    // OK! ミュータブルなオブジェクトはミュータブルなメソッドを呼び出せる。
     square.translate(1.0, 1.0);
 
     let pair = Pair(Box::new(1), Box::new(2));
 
     pair.destroy();
 
-    // Error! Previous &#96;destroy&#96; call &quot;consumed&quot; &#96;pair&#96;
+    // エラー！先ほどの&#96;destroy&#96;で&#96;pair&#96;はすでに消費されてしまっている。
     //pair.destroy();
-    // TODO ^ Try uncommenting this line
+    // TODO ^ この行をアンコメントしてみましょう。
 }</div>
 <div id="result"></div>
 </div>

@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.2.1" data-basepath="../.." data-revision="1463579712325">
+    <div class="book" data-level="8.2.1" data-basepath="../.." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,17 +2859,23 @@
                     <section class="normal" id="section-gitbook_59">
                     
                         <h3 id="821-capturing">8.2.1 Capturing</h3>
-<p>Closures are inherently flexible and will do what the functionality requires
-to make the closure work without annotation. This allows capturing to
-flexibly adapt to the use case, sometimes moving and sometimes borrowing.
-Closures can capture variables:</p>
+<!--- Closures are inherently flexible and will do what the functionality requires --->
+<!--- to make the closure work without annotation. This allows capturing to --->
+<!--- flexibly adapt to the use case, sometimes moving and sometimes borrowing. --->
+<!--- Closures can capture variables: --->
+<p>クロージャはとてもフレキシブルに動作するように出来ています。クロージャにおいて型アノテーションをする必要が無いのは前述の仕組みのためですが、この仕組みのおかげでユースケースに応じて参照を取得したり値そのものを取得したりといった動作が可能になります。</p>
+<p>クロージャは外側の環境にある要素を、以下の形で取得することができます。</p>
+<!--- * by reference: `&T` --->
+<!--- * by mutable reference: `&mut T` --->
+<!--- * by value: `T` --->
 <ul>
-<li>by reference: <code>&amp;T</code></li>
-<li>by mutable reference: <code>&amp;mut T</code></li>
-<li>by value: <code>T</code></li>
+<li>リファレンス: <code>&amp;T</code></li>
+<li>ミュータブルなリファレンス: <code>&amp;mut T</code></li>
+<li>値そのもの: <code>T</code></li>
 </ul>
-<p>They preferentially capture variables by reference and only go lower when
-required.</p>
+<!--- They preferentially capture variables by reference and only go lower when --->
+<!--- required. --->
+<p>クロージャは出来る限りリファレンスを取得しようとし、その他2つは必要なときのみ取得します。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2878,54 +2884,56 @@ required.</p>
 
     let color = &quot;green&quot;;
 
-    // A closure to print &#96;color&#96; which immediately borrows (&#96;&amp;&#96;)
-    // &#96;color&#96; and stores the borrow and closure in the &#96;print&#96;
-    // variable. It will remain borrowed until &#96;print&#96; goes out of
-    // scope. &#96;println!&#96; only requires &#96;by reference&#96; so it doesn&#39;t
-    // impose anything more restrictive.
+    // &#96;color&#96;をプリントするためのクロージャ。
+    // これは&#96;color&#96;を借用(&#96;&amp;&#96;)し、その借用とクロージャを&#96;print&#96;
+    // という名の変数に保持する。
+    // 借用は&#96;print&#96;がスコープから出るまで続く。
+    // &#96;println!&#96;は参照を与えれば機能するので、これ以上なにかする必要はない。
     let print = || println!(&quot;&#96;color&#96;: {}&quot;, color);
 
-    // Call the closure using the borrow.
+    // 借用を行ったクロージャをコールする。
     print();
     print();
 
     let mut count = 0;
 
-    // A closure to increment &#96;count&#96; could take either &#96;&amp;mut count&#96;
-    // or &#96;count&#96; but &#96;&amp;mut count&#96; is less restrictive so it takes
-    // that. Immediately borrows &#96;count&#96;.
+    // &#96;count&#96;をインクリメントするためのクロージャ。&#96;count&#96;と&#96;&amp;mut count&#96;
+    // の両方を取ることができるが、後者のほうが制限が少ないため、
+    // (訳注: &#96;count&#96;だと&#96;&amp;mut count&#96;と違い、一度しか呼ぶことができない。)
+    // そちらを取る。直後に&#96;count&#96;を借用する。
     //
-    // A &#96;mut&#96; is required on &#96;inc&#96; because a &#96;&amp;mut&#96; is stored inside.
-    // Thus, calling the closure mutates the closure which requires
-    // a &#96;mut&#96;.
+    // &#96;int&#96;には&#96;mut&#96;をつける必要がある。なぜならミュータブルな型が
+    // 中で使用されているからである。ミュータブルなクロージャは呼ぶたびに
+    // 内部変数を変更する。
     let mut inc = || {
         count += 1;
         println!(&quot;&#96;count&#96;: {}&quot;, count);
     };
 
-    // Call the closure.
+    // クロージャを実行
     inc();
     inc();
 
     //let reborrow = &amp;mut count;
-    // ^ TODO: try uncommenting this line.
+    // ^ TODO: この行のコメントアウトを解除しましょう。
 
-    // A non-copy type.
+    // 代入によりコピーではなくムーブが起きる型
+    // (訳注: ヒープ上の値へのポインタであるため、コピーすると
+    // 所有者が2つできてしまう。)
     let movable = Box::new(3);
 
-    // &#96;mem::drop&#96; requires &#96;T&#96; so this must take by value. A copy type
-    // would copy into the closure leaving the original untouched.
-    // A non-copy must move and so &#96;movable&#96; immediately moves into
-    // the closure.
+    // &#96;mem::drop&#96;は&#96;T&#96;(ジェネリック型)を取る必要があるため、このクロージャは
+    // 参照ではなく値を取る。その場合、もしもコピー可能な値ならば、
+    // 元の値はそのままでコピーのみを取る。不可能ならば値そのものを移動させる。
     let consume = || {
         println!(&quot;&#96;movable&#96;: {:?}&quot;, movable);
         mem::drop(movable);
     };
 
-    // &#96;consume&#96; consumes the variable so this can only be called once.
+    // &#96;consume&#96;は変数を消費(開放)するため、一度しか呼び出すことができない。
     consume();
     //consume();
-    // ^ TODO: Try uncommenting this line.
+    // ^ TODO: この行のコメントアウトを解除しましょう。
 }</div>
 <div id="result"></div>
 </div>

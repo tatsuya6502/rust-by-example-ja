@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="9" data-basepath="." data-revision="1463579712325">
+    <div class="book" data-level="9" data-basepath="." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,25 +2859,27 @@
                     <section class="normal" id="section-gitbook_88">
                     
                         <h1 id="9-macro_rules">9 macro_rules!</h1>
-<p>Rust provides a powerful macro system that allows metaprogramming. As you&#39;ve
+<!-- Rust provides a powerful macro system that allows metaprogramming. As you've
 seen in previous chapters, macros look like functions, except that their name
-ends with a bang <code>!</code>, but instead of generating a function call, macros are
-expanded into source code that gets compiled with the rest of the program.</p>
-<p>Macros are created using the <code>macro_rules!</code> macro.</p>
+ends with a bang `!`, but instead of generating a function call, macros are
+expanded into source code that gets compiled with the rest of the program. -->
+<p>Rustはメタプログラミングを可能にする、パワフルなマクロシステムを備えています。これまで見てきたように、マクロは<code>!</code>で終わることを除けば関数のように見えます。関数と違うのは関数呼び出し(<code>function call</code>)を生成する代わりに、ソースコード中に展開され、周囲のプログラムとともにコンパイルされる点です。</p>
+<p>Macros are created using the <code>macro_rules!</code> macro.
+マクロを作成するには<code>macro_rules!</code>というマクロを使用します。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// This is a simple macro named &#96;say&#95;hello&#96;.
+<div id="editor">// &#96;say&#95;hello&#96;という名のシンプルなマクロ
 macro&#95;rules! say&#95;hello {
-    // &#96;()&#96; indicates that the macro takes no argument.
+    // &#96;()&#96;はマクロが引数をとらないことを示す。
     () =&gt; (
-        // The macro will expand into the contents of this block.
+        // マクロは(訳注: プリコンパイルの段階で)このブロック内の内容に展開されます。
         println!(&quot;Hello!&quot;);
     )
 }
 
 fn main() {
-    // This call will expand into &#96;println!(&quot;Hello&quot;);&#96;
+    // この呼び出しは&#96;println!(&quot;Hello&quot;);&#96;に置き換えられます。
     say&#95;hello!()
 }</div>
 <div id="result"></div>

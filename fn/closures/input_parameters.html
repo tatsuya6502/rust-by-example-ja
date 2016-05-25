@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.2.2" data-basepath="../.." data-revision="1463579712325">
+    <div class="book" data-level="8.2.2" data-basepath="../.." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,41 +2859,51 @@
                     <section class="normal" id="section-gitbook_64">
                     
                         <h3 id="822-as-input-parameters">8.2.2 As input parameters</h3>
-<p>It has been noted that Rust chooses how to capture variables on the fly
+<!-- It has been noted that Rust chooses how to capture variables on the fly
 without annotation. This is all very convenient in normal usage however when
-writing functions, this ambiguity is not allowed. The closure&#39;s complete
+writing functions, this ambiguity is not allowed. The closure's complete
 type, including which capturing type, must be annotated. The manner of capture
-a closure uses is annotated as one of the following <code>traits</code>:</p>
+a closure uses is annotated as one of the following `traits`: -->
+<p>ここまでで、アノテーションのない変数を、Rustが実行時に補足する例を何度か見てきました。通常はこれは大変便利なのですが、関数を書く際には、このように曖昧にしておくことは許されません。クロージャが補足する型を含むクロージャの完全型をはっきりさせておく必要があります。クロージャが外部変数を補足する方法は以下のトレイトで明示されています。</p>
+<!-- * `Fn`: takes captures by reference (`&T`)
+* `FnMut`: takes captures by mutable reference (`&mut T`)
+* `FnOnce`: takes captures by value (`T`) -->
 <ul>
-<li><code>Fn</code>: takes captures by reference (<code>&amp;T</code>)</li>
-<li><code>FnMut</code>: takes captures by mutable reference (<code>&amp;mut T</code>)</li>
-<li><code>FnOnce</code>: takes captures by value (<code>T</code>)</li>
+<li><code>Fn</code>: は変数をリファレンス(<code>&amp;T</code>)で捕捉する。</li>
+<li><code>FnMut</code>: は変数をミュータブルなリファレンス(<code>&amp;mut T</code>)で捕捉する。</li>
+<li><code>FnOnce</code>: は変数を値(<code>T</code>)で捕捉する。</li>
 </ul>
-<p>Even annotated, these are very flexible: a parameter of <code>FnOnce</code> specifies
-the closure <em>may</em> capture by <code>T</code> or <code>&amp;mut T</code> or <code>&amp;T</code> at will (if a move is
+<!-- Even annotated, these are very flexible: a parameter of `FnOnce` specifies
+the closure *may* capture by `T` or `&mut T` or `&T` at will (if a move is
 possible, any type of borrow should also be possible). The reverse is not
-true: if the parameter is <code>Fn</code>, then nothing lower is allowed. Therefore,
-the rule is:</p>
+true: if the parameter is `Fn`, then nothing lower is allowed. Therefore,
+the rule is: -->
+<p>このように明示されていても、クロージャの柔軟性は損なわれません。というのも<code>FnOnce</code>は、クロージャが<code>T</code>だけではなく、<code>&amp;mut T</code>、<code>&amp;T</code>のいずれかをとることが可能であるということを示しているにすぎないからです。(値の移動(<code>move</code>)が可能ならば、いかなるタイプの借用も可能です。)逆に<code>Fn</code>は<code>&amp;mut T</code>や<code>T</code>をとることはできません。ゆえに補足のルールを一言でいうと</p>
+<!-- * any annotated parameter restricts capture to itself and above -->
 <ul>
-<li>any annotated parameter restricts capture to itself and above</li>
+<li>それぞれのトレイトは自分、あるいは上位のトレイトの型に補足対象を限定する。</li>
 </ul>
-<p>In addition, Rust will preferentially capture variables in the least
-restrictive manner possible on a variable-by-variable basis:</p>
+<blockquote>
+<p>訳注: わかりにくいですが、要するに<code>Fn</code> =&lt; <code>FnMut</code> =&lt; <code>FnOnce</code>という包含関係が成り立つということを言っています。</p>
+</blockquote>
+<!-- In addition, Rust will preferentially capture variables in the least
+restrictive manner possible on a variable-by-variable basis: -->
+<p>付け加えると、Rustは変数を出来る限り制限の少ない方法(訳注: つまり<code>&amp;T</code>)で補足します。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// A function which takes a closure as an argument and calls it.
+<div id="editor">// クロージャを引数に取る関数
 fn apply&lt;F&gt;(f: F) where
-    // The closure takes no input and returns nothing.
+    // クロージャには引数も返り値もない。
     F: FnOnce() {
-    // ^ TODO: Try changing this to &#96;Fn&#96; or &#96;FnMut&#96;.
+    // ^ TODO: ここを&#96;Fn&#96;あるいは&#96;FnMut&#96;に変えてみましょう。
 
     f()
 }
 
-// A function which takes a closure and returns an &#96;i32&#96;.
+// クロージャを引数に取り、&#96;i32&#96;を返す関数
 fn apply&#95;to&#95;3&lt;F&gt;(f: F) -&gt; i32 where
-    // The closure takes an &#96;i32&#96; and returns an &#96;i32&#96;.
+    // このクロージャは引数、返り値ともに&#96;i32&#96;
     F: Fn(i32) -&gt; i32 {
 
     f(3)
@@ -2903,27 +2913,27 @@ fn main() {
     use std::mem;
 
     let greeting = &quot;hello&quot;;
-    // A non-copy type.
+    // コピーではなくmoveが起きる型
     let mut farewell = &quot;goodbye&quot;.to&#95;owned();
 
-    // Capture 2 variables: &#96;greeting&#96; by reference and
-    // &#96;farewell&#96; by value.
+    // 変数を2つ補足。&#96;greeting&#96;は参照を、
+    // &#96;farewell&#96;は値をそれぞれ捕捉する。
     let diary = || {
-        // &#96;greeting&#96; is by reference: requires &#96;Fn&#96;.
+        // &#96;greeting&#96;は参照なので、&#96;Fn&#96;が必要。
         println!(&quot;I said {}.&quot;, greeting);
 
-        // Mutation forces &#96;farewell&#96; to be captured by
-        // mutable reference. Now requires &#96;FnMut&#96;.
+        // &#96;farewell&#96;の値を変更するので、この時点で&#96;FnMut&#96;
+        // が必要になる。
         farewell.push&#95;str(&quot;!!!&quot;);
         println!(&quot;Then I screamed {}.&quot;, farewell);
         println!(&quot;Now I can sleep. zzzzz&quot;);
 
-        // Manually calling drop forces &#96;farewell&#96; to
-        // be captured by value. Now requires &#96;FnOnce&#96;.
+        // &#96;mem::drop&#96;を明示的に呼ぶと&#96;farewell&#96;が値で
+        // 捕捉される必要性が発生する。よって&#96;FnOnce&#96;が必要になる。
         mem::drop(farewell);
     };
 
-    // Call the function which applies the closure.
+    // クロージャを適用する関数を実行。
     apply(diary);
 
     let double = |x| 2 &#42; x;

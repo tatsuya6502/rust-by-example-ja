@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="7.5.2" data-basepath="../.." data-revision="1463579712325">
+    <div class="book" data-level="7.5.2" data-basepath="../.." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,18 +2859,19 @@
                     <section class="normal" id="section-gitbook_53">
                     
                         <h3 id="752-guards">7.5.2 Guards</h3>
-<p>A <code>match</code> <em>guard</em> can be added to filter the arm.</p>
+<!-- A `match` *guard* can be added to filter the arm. -->
+<p><code>match</code>内の条件文をフィルタリングするために、<em>ガード(<code>guard</code>)</em>を使用することができます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
     let pair = (2, -2);
-    // TODO ^ Try different values for &#96;pair&#96;
+    // TODO ^ &#96;pair&#96;の値を変更してみましょう。
 
     println!(&quot;Tell me about {:?}&quot;, pair);
     match pair {
         (x, y) if x == y =&gt; println!(&quot;These are twins&quot;),
-        // The ^ &#96;if condition&#96; part is a guard
+        //     ^ &#96;if&#96;とそれに続く条件式がガードです。
         (x, y) if x + y == 0 =&gt; println!(&quot;Antimatter, kaboom!&quot;),
         (x, &#95;) if x % 2 == 1 =&gt; println!(&quot;The first one is odd&quot;),
         &#95; =&gt; println!(&quot;No correlation...&quot;),
@@ -2880,7 +2881,7 @@
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="/primitives/tuples.html">Tuples</a></p>
+<p><a href="/primitives/tuples.html">タプル</a></p>
 
                     
                     </section>

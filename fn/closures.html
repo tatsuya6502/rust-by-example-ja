@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.2" data-basepath=".." data-revision="1463579712325">
+    <div class="book" data-level="8.2" data-basepath=".." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,51 +2859,58 @@
                     <section class="normal" id="section-gitbook_66">
                     
                         <h2 id="82-closures">8.2 Closures</h2>
-<p>Closures in Rust, also called lambdas, are functions 
+<!-- Closures in Rust, also called lambdas, are functions
 that can capture the enclosing environment. Their syntax and capabilities make them
-very convenient for on the fly usage. Some characteristics include:</p>
+very convenient for on the fly usage. Some characteristics include: -->
+<p>Rustのクロージャはラムダ(<code>lambda</code>)とも呼ばれ、自身が定義された環境の外側の変数を参照できるような関数のことを指します。クロージャの文法と性質はサッと何かを仕上げたいときに非常に有用です。以下がクロージャの性質の一部です。</p>
+<!-- * uses `||` instead of `()` around input variables.
+* *both* input and return *types* can be inferred.
+* input variable *names* must be specified.
+* body delimination (`{}`) is optional for a single expression. Mandatory
+otherwise.
+* the outer environment variables *may* be captured.
+* calling a closure is exactly like a function: `call(var)`. -->
 <ul>
-<li>uses <code>||</code> instead of <code>()</code> around input variables.</li>
-<li><em>both</em> input and return <em>types</em> can be inferred.</li>
-<li>input variable <em>names</em> must be specified.</li>
-<li>body delimination (<code>{}</code>) is optional for a single expression. Mandatory
-otherwise.</li>
-<li>the outer environment variables <em>may</em> be captured.</li>
-<li>calling a closure is exactly like a function: <code>call(var)</code>.</li>
+<li>引数の周りを、<code>()</code>の代わりに<code>||</code>で囲む。</li>
+<li>引数と返り値の<em>型</em>の<em>両方</em>を推測してくれる。</li>
+<li>引数の<em>名前</em>は明示しなくてはならない。</li>
+<li>関数が１文で終わるときは<code>{}</code>で関数のbodyを囲む必要はない。複数文の場合は必須。</li>
+<li>外側の環境の変数を参照することができる。</li>
+<li>クロージャの呼び出しは関数と全く一緒である。例: <code>call(var)</code></li>
 </ul>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // Increment via closures and functions.
+    // 関数とクロージャのそれぞれで数値をインクリメントする
     fn  function            (i: i32) -&gt; i32 { i + 1 }
 
-    // Annotation is identical to function annotation but is optional
-    // as are the &#96;{}&#96; wrapping the body. These nameless functions
-    // are assigned to appropriately named variables.
+    // 型アノテーションは、通常の関数と同様の方法で行えるが、必須ではない。
+    // &#96;{}&#96;も必須ではない。
+    // クロージャは一種の無名関数なので、適切な変数にバインディングしてやるとよい
     let closure&#95;annotated = |i: i32| -&gt; i32 { i + 1 };
     let closure&#95;inferred  = |i     |          i + 1  ;
 
     let i = 1;
-    // Call the function and closures.
+
+    // 関数とクロージャを呼び出す。
     println!(&quot;function: {}&quot;, function(i));
     println!(&quot;annotated closure: {}&quot;, closure&#95;annotated(i));
     println!(&quot;inferred closure: {}&quot;, closure&#95;inferred(i));
 
-    // A closure taking no arguments which returns an &#96;i32&#96;.
-    // The return type is inferred.
+    // 返り値の型を推測した結果、&#96;i32&#96;型を返すクロージャ。
+    // 引数はとらない。
     let one = || 1;
     println!(&quot;closure returning one: {}&quot;, one());
 
-    // It is possible to capture variables from the enclosing
-    // environment; something which is impossible with functions.
+    // クロージャは自身の周囲にある環境の変数を参照することができる。
+    // 通常の関数では不可能
     let professor&#95;x = &quot;Charles Xavier&quot;;
 
-    // A closure which takes no argument, returning nothing, prints
-    // a variable from the enclosing scope.
+    // 引数をとらず、返り値もないクロージャ。周りの環境にある変数を用いている。
     let print = || println!(&quot;Professor X&#39;s name is: {}&quot;, professor&#95;x);
 
-    // Call the closure.
+    // クロージャを実行
     print();
 }</div>
 <div id="result"></div>

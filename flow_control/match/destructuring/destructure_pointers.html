@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="7.5.1.3" data-basepath="../../.." data-revision="1463579712325">
+    <div class="book" data-level="7.5.1.3" data-basepath="../../.." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,61 +2859,61 @@
                     <section class="normal" id="section-gitbook_49">
                     
                         <h4 id="7513-pointersref">7.5.1.3 pointers/ref</h4>
-<p>For pointers, a distinction needs to be made between destructuring
+<!-- For pointers, a distinction needs to be made between destructuring
 and dereferencing as they are different concepts which are used
-differently from a language like <code>C</code>.</p>
+differently from a language like `C`. -->
+<p>Rustのポインタは、<code>C</code>のポインタとは異なる概念なので、デストラクトとデリファレンスを同じようなやり方で扱うことはできない</p>
+<!-- * Dereferencing uses `*`
+ * Destructuring uses `&`, `ref`, and `ref mut` -->
 <ul>
-<li>Dereferencing uses <code>*</code></li>
-<li>Destructuring uses <code>&amp;</code>, <code>ref</code>, and <code>ref mut</code></li>
+<li>デリファレンスには<code>*</code>を用いる。</li>
+<li>デストラクトには<code>&amp;</code>, <code>ref</code>, <code>ref mut</code>を用いる。</li>
 </ul>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // Assign a reference of type &#96;i32&#96;. The &#96;&amp;&#96; signifies there
-    // is a reference being assigned.
+    // &#96;i32&#96;型へのリファレンスをアサインする。
+    // &#96;&amp;&#96;によってリファレンスであることを明示している。
     let reference = &4;
 
     match reference {
-        // If &#96;reference&#96;s is pattern matched against &#96;&amp;val&#96;, it results
-        // in a comparison like:
+        // 上で定義した&#96;reference&#96;という変数が&#96;&amp;val&#96;とのパターンマッチ
+        // に用いられた場合、以下の2つの値が比較されていることになる。
         // &#96;&amp;i32&#96;
         // &#96;&amp;val&#96;
-        // ^ We see that if the matching &#96;&amp;&#96;s are dropped, then the &#96;i32&#96;
-        // should be assigned to &#96;val&#96;.
+        // ^ よって&#96;&amp;&#96;を落とせば、&#96;i32&#96;が&#96;val&#96;にアサインされることがわかる。
         &amp;val =&gt; println!(&quot;Got a value via destructuring: {:?}&quot;, val),
     }
 
-    // To avoid the &#96;&amp;&#96;, you dereference before matching.
+    // &#96;&amp;&#96;を使用したくない場合は、マッチングの前にデリファレンスする。
     match &#42;reference {
         val =&gt; println!(&quot;Got a value via dereferencing: {:?}&quot;, val),
     }
 
-    // What if you don&#39;t start with a reference? &#96;reference&#96; was a &#96;&amp;&#96;
-    // because the right side was already a reference. This is not
-    // a reference because the right side is not one.
+    // いきなりリファレンスを変数に代入するのではない場合はどうでしょう。
+    // 先ほどは右辺値が&#96;&amp;&#96;で始まっていたのでリファレンスでしたが、
+    // これは違います。
     let &#95;not&#95;a&#95;reference = 3;
 
-    // Rust provides &#96;ref&#96; for exactly this purpose. It modifies the
-    // assignment so that a reference is created for the element; this
-    // reference is assigned.
+    // このような場合、Rustでは変数束縛時に&#96;ref&#96;を宣言します。
+    // 要素のリファレンスが作られて、それが束縛対象になります。
     let ref &#95;is&#95;a&#95;reference = 3;
 
-    // Accordingly, by defining 2 values without references, references
-    // can be retrieved via &#96;ref&#96; and &#96;ref mut&#96;.
+    // 同様にミュータブルな値の場合&#96;ref mut&#96;を使用することでリファレンスを
+    // 取得できます。イミュータブルの場合と合わせてみていきましょう。
     let value = 5;
     let mut mut&#95;value = 6;
 
-    // Use &#96;ref&#96; keyword to create a reference.
+    // &#96;ref&#96;を使用してリファレンスを作成。
     match value {
         ref r =&gt; println!(&quot;Got a reference to a value: {:?}&quot;, r),
     }
 
-    // Use &#96;ref mut&#96; similarly.
+    // 同様に&#96;ref mut&#96;を使用。
     match mut&#95;value {
         ref mut m =&gt; {
-            // Got a reference. Gotta dereference it before we can
-            // add anything to it.
+            // リファレンスを取得、値を変更するためにはデリファレンスする必要がある。
             &#42;m += 10;
             println!(&quot;We added 10. &#96;mut&#95;value&#96;: {:?}&quot;, m);
         },

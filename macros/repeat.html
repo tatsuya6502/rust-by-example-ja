@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="9.3" data-basepath=".." data-revision="1463579712325">
+    <div class="book" data-level="9.3" data-basepath=".." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,22 +2859,24 @@
                     <section class="normal" id="section-gitbook_87">
                     
                         <h2 id="93-repeat">9.3 Repeat</h2>
-<p>Macros can use <code>+</code> in the argument list to indicate that an argument may
-repeat at least once, or <code>*</code>, to indicate that the argument may repeat zero or
-more times.</p>
-<p>In the following example, surrounding the matcher with <code>$(...),+</code> will
+<!-- Macros can use `+` in the argument list to indicate that an argument may
+repeat at least once, or `*`, to indicate that the argument may repeat zero or
+more times. -->
+<p>マクロは引数のリストの中で<code>+</code>を使うことができ、そうすることによって、引数が少なくとも1回以上繰り返されるということを示すことができます。同様に<code>*</code>の場合は、0以上を示します。</p>
+<!-- In the following example, surrounding the matcher with `$(...),+` will
 match one or more expression, separated by commas.
-Also note that the semicolon is optional on the last case.</p>
+Also note that the semicolon is optional on the last case. -->
+<p>以下の例では、マッチ対象を <code>$(...),+</code>で囲むことにより、カンマで区切られた1つ以上の式文とマッチします。最後のセミコロンは必須ではないことに注目しましょう。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// &#96;min!&#96; will calculate the minimum of any number of arguments.
+<div id="editor">// &#96;min!&#96;は引数として与えられた数字の中の最低の値を計算する。
 macro&#95;rules! find&#95;min {
-    // Base case:
+    // 基本となるケース
     (&#36;x:expr) =&gt; (&#36;x);
-    // &#96;&#36;x&#96; followed by at least one &#96;&#36;y,&#96;
+    // &#96;&#36;x&#96;に少なくとも1つの&#96;&#36;y&#96;が続く場合
     (&#36;x:expr, &#36;(&#36;y:expr),+) =&gt; (
-        // Call &#96;find&#95;min!&#96; on the tail &#96;&#36;y&#96;
+        // &#96;find&#95;min!&#96;を残りの&#96;&#36;y&#96;に対して再帰的に適用
         std::cmp::min(&#36;x, find&#95;min!(&#36;(&#36;y),+))
     )
 }

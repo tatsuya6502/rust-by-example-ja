@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.2.4" data-basepath="../.." data-revision="1463579712325">
+    <div class="book" data-level="8.2.4" data-basepath="../.." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,25 +2859,28 @@
                     <section class="normal" id="section-gitbook_63">
                     
                         <h3 id="824-input-functions">8.2.4 Input functions</h3>
-<p>Since closures may be used as arguments, you might wonder if the same can be said 
-about functions. And indeed they can! However, because a function can 
-<em>never</em> capture variables, closures are strictly more flexible. Therefore, any 
-function which can take a closure as an argument can also take a function.</p>
+<!-- Since closures may be used as arguments, you might wonder if the same can be said
+about functions. And indeed they can! However, because a function can
+*never* capture variables, closures are strictly more flexible. Therefore, any
+function which can take a closure as an argument can also take a function. -->
+<p>これまで、クロージャを引数として渡せることを見てきました。すると次の疑問が浮かんできます</p>
+<p>「クロージャではない普通の関数を引数として渡すことは可能なのだろうか?」</p>
+<p>可能です!とはいえ、通常の関数は<em>絶対に</em>周辺の変数を補足することができないので、クロージャの方がより柔軟な使い方ができます。ここから、クローじゃを引数としてとる関数は、必ず通常の関数を引数としてとることができます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// Define a function which takes a function as an argument and calls it.
+<div id="editor">// 関数を引数として取り、即座に実行する関数を定義
 fn call&#95;function&lt;F: Fn()&gt;(f: F) {
     f()
 }
 
-// Define a simple function to be used as an input.
+// 引数として渡すための簡単な関数を定義
 fn print() {
     println!(&quot;I&#39;m a function!&quot;)
 }
 
 fn main() {
-    // Define a closure similar to the &#96;print()&#96; function above.
+    // 上で定義した&#96;print()&#96;に似たクロージャを定義
     let closure = || println!(&quot;I&#39;m a closure!&quot;);
 
     call&#95;function(closure);
@@ -2886,8 +2889,9 @@ fn main() {
 <div id="result"></div>
 </div>
 
-<p>As an additional note, the <code>Fn</code>, <code>FnMut</code>, and <code>FnOnce</code> <code>traits</code> dictate how
-a closure captures variables from the enclosing scope. </p>
+<!-- As an additional note, the `Fn`, `FnMut`, and `FnOnce` `traits` dictate how
+a closure captures variables from the enclosing scope.  -->
+<p>クロージャによる変数の補足がどのように行われているかを詳しく見たいときは<code>Fn</code>、<code>FnMut</code>、<code>FnOnce</code>を参照してください。</p>
 <h3 id="see-also">See also:</h3>
 <p><a href="http://doc.rust-lang.org/std/ops/trait.Fn.html" target="_blank"><code>Fn</code></a>, <a href="http://doc.rust-lang.org/std/ops/trait.FnMut.html" target="_blank"><code>FnMut</code></a>, and <a href="http://doc.rust-lang.org/std/ops/trait.FnOnce.html" target="_blank"><code>FnOnce</code></a></p>
 

@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.2.6.2" data-basepath="../../.." data-revision="1463579712325">
+    <div class="book" data-level="8.2.6.2" data-basepath="../../.." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,19 +2859,20 @@
                     <section class="normal" id="section-gitbook_61">
                     
                         <h4 id="8262-iteratorfind">8.2.6.2 Iterator::find</h4>
-<p><code>Iterator::find</code> is a function which when passed an iterator, will return
-the first element which satisfies the predicate as an <code>Option</code>. Its
-signature:</p>
+<!-- `Iterator::find` is a function which when passed an iterator, will return
+the first element which satisfies the predicate as an `Option`. Its
+signature: -->
+<p><code>Iterator::find</code>はイテレータに渡される関数で、条件を満たす最初の値を<code>Option</code>として返します。型シグネチャは以下のようになります。</p>
 <pre><code class="lang-rust">pub trait Iterator {
-    // The type being iterated over.
+    // イテレートされる値の型
     type Item;
 
-    // `find` takes `&amp;mut self` meaning the caller may be borrowed
-    // and modified, but not consumed.
+    // `find`は`&amp;mut self`を取るため、イテレータを呼び出した値を借用し
+    // 変更しますが、消費し尽くすことはありません。
     fn find&lt;P&gt;(&amp;mut self, predicate: P) -&gt; Option&lt;Self::Item&gt; where
-        // `FnMut` meaning any captured variable may at most be
-        // modified, not consumed. `&amp;Self::Item` states it takes
-        // arguments to the closure by reference.
+        // `FnMut`はクロージャによって補足される変数が変更される
+        // 事はあっても消費されることはないということを示します。
+        // `&amp;Self::Item`はクロージャが変数を参照として取ることを示します。
         P: FnMut(&amp;Self::Item) -&gt; bool {}
 }
 </code></pre>
@@ -2882,22 +2883,22 @@ signature:</p>
     let vec1 = vec![1, 2, 3];
     let vec2 = vec![4, 5, 6];
 
-    // &#96;iter()&#96; for vecs yields &#96;&amp;i32&#96;.
+    // ベクトル型に対する&#96;iter&#96;は&#96;&amp;i32&#96;を&#96;yield&#96;する。
     let mut iter = vec1.iter();
-    // &#96;into&#95;iter()&#96; for vecs yields &#96;i32&#96;.
+    // &#96;inter&#95;iter()&#96;の場合は&#96;i32&#96;を&#96;yield&#96;する。
     let mut into&#95;iter = vec2.into&#95;iter();
 
-    // A reference to what is yielded is &#96;&amp;&amp;i32&#96;. Destructure to &#96;i32&#96;.
+    // &#96;yield&#96;された要素へのリファレンスは&#96;&amp;&amp;i32&#96;となる。&#96;i32&#96;へとデストラクトする。
     println!(&quot;Find 2 in vec1: {:?}&quot;, iter     .find(|&amp;&amp;x| x == 2));
-    // A reference to what is yielded is &#96;&amp;i32&#96;. Destructure to &#96;i32&#96;.
+    // &#96;into&#95;iter&#96;の場合は&#96;&amp;i32&#96;が要素のリファレンス。
     println!(&quot;Find 2 in vec2: {:?}&quot;, into&#95;iter.find(| &amp;x| x == 2));
 
     let array1 = [1, 2, 3];
     let array2 = [4, 5, 6];
 
-    // &#96;iter()&#96; for arrays yields &#96;&amp;i32&#96;
+    // 配列に対する&#96;iter&#96;も&#96;&amp;i32&#96;を&#96;yield&#96;する。
     println!(&quot;Find 2 in array1: {:?}&quot;, array1.iter()     .find(|&amp;&amp;x| x == 2));
-    // &#96;into&#95;iter()&#96; for arrays unusually yields &#96;&amp;i32&#96;
+    // 配列に&#96;into&#95;iter()&#96;を使うと例外的に&#96;&amp;i32&#96;を&#96;yield&#96;する。
     println!(&quot;Find 2 in array2: {:?}&quot;, array2.into&#95;iter().find(|&amp;&amp;x| x == 2));
 }</div>
 <div id="result"></div>

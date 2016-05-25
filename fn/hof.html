@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.3" data-basepath=".." data-revision="1463579712325">
+    <div class="book" data-level="8.3" data-basepath=".." data-revision="1464186691798">
     
 
 <div class="book-summary">
@@ -2859,9 +2859,10 @@
                     <section class="normal" id="section-gitbook_67">
                     
                         <h2 id="83-higher-order-functions">8.3 Higher Order Functions</h2>
-<p>Rust provides Higher Order Functions (HOF). These are functions that
+<!-- Rust provides Higher Order Functions (HOF). These are functions that
 take one or more functions and/or produce a more useful function. HOFs
-and lazy iterators give Rust its functional flavor.</p>
+and lazy iterators give Rust its functional flavor. -->
+<p>Rustには高階関数(<code>Higher Order Functions, HOF</code>)を扱う機能が備わっています。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2870,42 +2871,43 @@ and lazy iterators give Rust its functional flavor.</p>
 }
 
 fn main() {
+    // 1000以下の奇数を2乗した値の合計を求める。
     println!(&quot;Find the sum of all the squared odd numbers under 1000&quot;);
     let upper = 1000;
 
-    // Imperative approach
-    // Declare accumulator variable
+    // 宣言型プログラミングによるアプローチ
+    // 値を蓄積する変数を宣言
     let mut acc = 0;
-    // Iterate: 0, 1, 2, ... to infinity
+    // 0から無限までイテレートする
     for n in 0.. {
-        // Square the number
+        // 値を2乗
         let n&#95;squared = n &#42; n;
 
         if n&#95;squared &gt;= upper {
-            // Break loop if exceeded the upper limit
+            // 上限に達した場合、ループを終了
             break;
         } else if is&#95;odd(n&#95;squared) {
-            // Accumulate value, if it&#39;s odd
+            // 奇数ならば値を値を足しあわせていく。
             acc += n&#95;squared;
         }
     }
     println!(&quot;imperative style: {}&quot;, acc);
 
-    // Functional approach
+    // 関数型プログラミングによるアプローチ
     let sum&#95;of&#95;squared&#95;odd&#95;numbers: u32 =
-        (0..).map(|n| n &#42; n)             // All natural numbers squared
-             .take&#95;while(|&amp;n| n &lt; upper) // Below upper limit
-             .filter(|n| is&#95;odd(&#42;n))     // That are odd
-             .fold(0, |sum, i| sum + i); // Sum them
+        (0..).map(|n| n &#42; n)             // 全自然数を2乗し
+             .take&#95;while(|&amp;n| n &lt; upper) // そのうち上限より小さい値で
+             .filter(|n| is&#95;odd(&#42;n))     // かつ奇数のものを
+             .fold(0, |sum, i| sum + i); // 足し合わせる。
     println!(&quot;functional style: {}&quot;, sum&#95;of&#95;squared&#95;odd&#95;numbers);
 }</div>
 <div id="result"></div>
 </div>
 
-<p><a href="http://doc.rust-lang.org/core/option/enum.Option.html" target="_blank">Option</a>
-and
-<a href="http://doc.rust-lang.org/core/iter/trait.Iterator.html" target="_blank">Iterator</a>
-implement their fair share of HOFs.</p>
+<p><a href="http://doc.rust-lang.org/core/option/enum.Option.html" target="_blank">オプション型</a>
+と
+<a href="http://doc.rust-lang.org/core/iter/trait.Iterator.html" target="_blank">イテレータ</a>には高階関数が使用されています。
+<!-- implement their fair share of HOFs. --></p>
 
                     
                     </section>
