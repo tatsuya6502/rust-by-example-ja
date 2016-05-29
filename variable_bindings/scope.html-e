@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="4.2" data-basepath=".." data-revision="1464537602901">
+    <div class="book" data-level="4.2" data-basepath=".." data-revision="1464538019093">
     
 
 <div class="book-summary">
@@ -2856,7 +2856,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_155">
+                    <section class="normal" id="section-gitbook_154">
                     
                         <h2 id="42-scope-and-shadowing">4.2 Scope and shadowing</h2>
 <!-- Variable bindings have a scope, and are constrained to live in a *block*. A
