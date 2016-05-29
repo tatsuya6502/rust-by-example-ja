@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="2.1" data-basepath=".." data-revision="1464537442688">
+    <div class="book" data-level="2.1" data-basepath=".." data-revision="1464537602901">
     
 
 <div class="book-summary">
@@ -2856,7 +2856,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_99">
+                    <section class="normal" id="section-gitbook_102">
                     
                         <h2 id="21-literals-and-operators">2.1 Literals and operators</h2>
 <!--- Integers `1`, floats `1.2`, characters `'a'`, strings `"abc"`, booleans `true` --->

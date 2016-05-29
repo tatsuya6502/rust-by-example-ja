@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.1" data-basepath=".." data-revision="1464537442688">
+    <div class="book" data-level="8.1" data-basepath=".." data-revision="1464537602901">
     
 
 <div class="book-summary">
@@ -2856,7 +2856,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_68">
+                    <section class="normal" id="section-gitbook_66">
                     
                         <h2 id="81-methods">8.1 Methods</h2>
 <!-- Methods are functions attached to objects. These methods have access to the

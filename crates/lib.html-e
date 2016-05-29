@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="11.1" data-basepath=".." data-revision="1464537442688">
+    <div class="book" data-level="11.1" data-basepath=".." data-revision="1464537602901">
     
 
 <div class="book-summary">
@@ -2856,7 +2856,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_17">
+                    <section class="normal" id="section-gitbook_16">
                     
                         <h2 id="111-library">11.1 Library</h2>
 <!-- Let's create a library, and then see how to link it to another crate. -->
