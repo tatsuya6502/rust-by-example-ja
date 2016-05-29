@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="1.2.2" data-basepath="../.." data-revision="1464538019093">
+    <div class="book" data-level="1.2.2" data-basepath="../.." data-revision="1464538618250">
     
 
 <div class="book-summary">
@@ -2968,7 +2968,7 @@ fn main() {
 <!--- each requires its own implementation. This is detailed further in --->
 <!--- [`std::fmt`][fmt]. --->
 <p><code>fmt::Display</code>は実装されていますが、<code>fmt::Binary</code>はされていないので使用できません。
-<code>std::fmt</code>はそのような<a href="../../../trait.html">トレイト</a>が数多くあり、それぞれに独自の実装が必要です。詳しくは<a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>を参照してください。</p>
+<code>std::fmt</code>はそのような<a href="../../trait.html">トレイト</a>が数多くあり、それぞれに独自の実装が必要です。詳しくは<a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>を参照してください。</p>
 <h3 id="">演習</h3>
 <!--- After checking the output of the above example, use the `Point2` struct as --->
 <!--- guide to add a Complex struct to the example. When printed in the same --->
@@ -2977,8 +2977,8 @@ fn main() {
 <pre><code>Display: 3.3 + 7.2i
 Debug: Complex { real: 3.3, imag: 7.2 }
 </code></pre><h3 id="see-also">See also</h3>
-<p><a href="../../../trait/derive.html"><code>derive</code></a>, <a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>, <a href="../../../macros.html">マクロ</a>, <a href="../../../custom_types/structs.html"><code>struct</code></a>,
-<a href="../../../trait.html"><code>trait</code></a>, and <a href="../../../mod/use.html">use</a></p>
+<p><a href="../../trait/derive.html"><code>derive</code></a>, <a href="http://doc.rust-lang.org/std/fmt/" target="_blank"><code>std::fmt</code></a>, <a href="../../macros.html">マクロ</a>, <a href="../../custom_types/structs.html"><code>struct</code></a>,
+<a href="../../trait.html"><code>trait</code></a>, and <a href="../../mod/use.html">use</a></p>
 
                     
                     </section>

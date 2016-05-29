@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="1" data-basepath="." data-revision="1464538019093">
+    <div class="book" data-level="1" data-basepath="." data-revision="1464538618250">
     
 
 <div class="book-summary">
@@ -2883,7 +2883,7 @@ fn main() {
 
 
 <!--- `println!` is a [*macro*][macros] that prints text to the console --->
-<p><code>println!</code> は文字列をコンソールにプリントするための <a href="../macros.html"><em>マクロ</em></a>です。</p>
+<p><code>println!</code> は文字列をコンソールにプリントするための <a href="./macros.html"><em>マクロ</em></a>です。</p>
 <!--- A binary can be generated using the Rust compiler: `rustc`. --->
 <p>バイナリファイルは<code>rustc</code>と呼ばれるRustのコンパイラを用いて生成することができます。</p>
 <pre><code>$ rustc hello.rs

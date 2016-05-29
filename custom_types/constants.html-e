@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="3.3" data-basepath=".." data-revision="1464538019093">
+    <div class="book" data-level="3.3" data-basepath=".." data-revision="1464538618250">
     
 
 <div class="book-summary">
@@ -2865,7 +2865,7 @@
 <!--- * `const`: An unchangeable value (the common case). --->
 <ul>
 <li><code>const</code>: 不変の値（通常はこちらを使用する）<!--- * `static`: A possibly `mut`able variable with [`'static`][static] lifetime. ---></li>
-<li><code>static</code>: <a href="../../scope/lifetime/static_lifetime.html">スタティックな</a>ライフタイムを持つミュータブル(<code>mut</code>)な値</li>
+<li><code>static</code>: <a href="../scope/lifetime/static_lifetime.html">スタティックな</a>ライフタイムを持つミュータブル(<code>mut</code>)な値</li>
 </ul>
 <!--- One special case is the `"string"` literal. It can be assigned directly to a --->
 <!--- `static` variable without modification because its type signature: --->
@@ -2903,7 +2903,7 @@ fn main() {
 
 <h3 id="see-also">See also:</h3>
 <p>[<code>const</code> 及び <code>static</code> の RFC][<a href="https://github.com/rust-lang/rfcs/blob/master/text/0246-const-vs-static.md" target="_blank">https://github.com/rust-lang/rfcs/blob/master/text/0246-const-vs-static.md</a>],
-<a href="../../scope/lifetime/static_lifetime.html"><code>&#39;static</code> ライフタイム</a></p>
+<a href="../scope/lifetime/static_lifetime.html"><code>&#39;static</code> ライフタイム</a></p>
 
                     
                     </section>

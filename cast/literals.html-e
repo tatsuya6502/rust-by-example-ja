@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="5.1" data-basepath=".." data-revision="1464538019093">
+    <div class="book" data-level="5.1" data-basepath=".." data-revision="1464538618250">
     
 
 <div class="book-summary">
@@ -2904,8 +2904,8 @@ yet, here's a brief explanation for the impatient readers:
 -->
 <p>上のコードには現時点では解説していない考えがいくつか使用されています。気になる方のために簡単に説明をしておきましょう。</p>
 <ul>
-<li><code>fun(&amp;foo)</code>は値そのものではなく、その参照を関数に渡す時の書き方です。詳しくは<a href="../../scope/borrow.html">借用(<code>borrowing</code>)</a>を見てください。</li>
-<li><code>std::mem::size_of_val</code>は関数ですが、<em>絶対パス(<code>full path</code>)</em>で呼び出されています。ソースコードは論理的に区切られた<em>モジュール</em>と呼ばれるものにわけられることができます。今回の場合は<code>size_of_val</code>関数は<code>mem</code>モジュール内で定義されており、<code>mem</code>モジュールは<code>std</code><em>クレイト</em>内で定義されています。より詳しくは<a href="../../crates.html">クレイト(<code>crates</code>)</a>を参照してください。</li>
+<li><code>fun(&amp;foo)</code>は値そのものではなく、その参照を関数に渡す時の書き方です。詳しくは<a href="../scope/borrow.html">借用(<code>borrowing</code>)</a>を見てください。</li>
+<li><code>std::mem::size_of_val</code>は関数ですが、<em>絶対パス(<code>full path</code>)</em>で呼び出されています。ソースコードは論理的に区切られた<em>モジュール</em>と呼ばれるものにわけられることができます。今回の場合は<code>size_of_val</code>関数は<code>mem</code>モジュール内で定義されており、<code>mem</code>モジュールは<code>std</code><em>クレイト</em>内で定義されています。より詳しくは<a href="../crates.html">クレイト(<code>crates</code>)</a>を参照してください。</li>
 </ul>
 
                     

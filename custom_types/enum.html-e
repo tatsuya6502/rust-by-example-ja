@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="3.2" data-basepath=".." data-revision="1464538019093">
+    <div class="book" data-level="3.2" data-basepath=".." data-revision="1464538618250">
     
 
 <div class="book-summary">
@@ -2920,7 +2920,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="../../attribute.html">アトリビュート(<code>attributes</code>)</a>, <a href="../../flow_control/match.html">マッチ(<code>match</code>)</a>, <a href="../../fn.html">関数(<code>fn</code>)</a>, and <a href="../../std/str.html">文字列(<code>String</code>)</a></p>
+<p><a href="../attribute.html">アトリビュート(<code>attributes</code>)</a>, <a href="../flow_control/match.html">マッチ(<code>match</code>)</a>, <a href="../fn.html">関数(<code>fn</code>)</a>, and <a href="../std/str.html">文字列(<code>String</code>)</a></p>
 
                     
                     </section>

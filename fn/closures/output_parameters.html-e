@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.2.5" data-basepath="../.." data-revision="1464538019093">
+    <div class="book" data-level="8.2.5" data-basepath="../.." data-revision="1464538618250">
     
 
 <div class="book-summary">
@@ -2909,7 +2909,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="../../../std/box.html">BOX化</a>, <a href="http://doc.rust-lang.org/std/ops/trait.Fn.html" target="_blank"><code>Fn</code></a>, <a href="http://doc.rust-lang.org/std/ops/trait.FnMut.html" target="_blank"><code>FnMut</code></a>, and <a href="../../../generics.html">ジェネリクス</a>.</p>
+<p><a href="../../std/box.html">BOX化</a>, <a href="http://doc.rust-lang.org/std/ops/trait.Fn.html" target="_blank"><code>Fn</code></a>, <a href="http://doc.rust-lang.org/std/ops/trait.FnMut.html" target="_blank"><code>FnMut</code></a>, and <a href="../../generics.html">ジェネリクス</a>.</p>
 
                     
                     </section>
