@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="7.7" data-basepath=".." data-revision="1464539304919">
+    <div class="book" data-level="7.7" data-basepath=".." data-revision="1464541491131">
     
 
 <div class="book-summary">
@@ -2859,15 +2859,16 @@
                     <section class="normal" id="section-gitbook_56">
                     
                         <h2 id="77-while-let">7.7 while let</h2>
-<p>Similar to <code>if let</code>, <code>while let</code> can make awkward <code>match</code> sequences
-more tolerable. Consider the following sequence that increments <code>i</code>:</p>
-<pre><code class="lang-rust"><span class="hljs-comment">// Make `optional` of type `Option&lt;i32&gt;`</span>
+<!-- Similar to `if let`, `while let` can make awkward `match` sequences
+more tolerable. Consider the following sequence that increments `i`: -->
+<p><code>if let</code>と同様に、<code>while let</code>も不格好な<code>match</code>処理を多少マシにしてくれます。例えば、以下の<code>i</code>をインクリメントする処理を見てください。</p>
+<pre><code class="lang-rust"><span class="hljs-comment">// `Option&lt;i32&gt;`の`optional`を作成</span>
 <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> optional = Some(<span class="hljs-number">0</span>);
 
-<span class="hljs-comment">// Repeatedly try this test.</span>
+<span class="hljs-comment">// 変数の照合を繰り返し行う。</span>
 <span class="hljs-keyword">loop</span> {
     <span class="hljs-keyword">match</span> optional {
-        <span class="hljs-comment">// If `optional` destructures, evaluate the block.</span>
+        <span class="hljs-comment">// もし`optional`のデストラクトに成功した場合、値に応じて処理を分岐</span>
         Some(i) =&gt; {
             <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">9</span> {
                 <span class="hljs-built_in">println!</span>(<span class="hljs-string">"Greater than 9, quit!"</span>);
@@ -2876,24 +2877,25 @@ more tolerable. Consider the following sequence that increments <code>i</code>:<
                 <span class="hljs-built_in">println!</span>(<span class="hljs-string">"`i` is `{:?}`. Try again."</span>, i);
                 optional = Some(i + <span class="hljs-number">1</span>);
             }
-            <span class="hljs-comment">// ^ Requires 3 indentations!</span>
+            <span class="hljs-comment">// ^ 3つものインデントが必要。</span>
         },
-        <span class="hljs-comment">// Quit the loop when the destructure fails:</span>
+        <span class="hljs-comment">// デストラクトに失敗した場合、ループを脱出</span>
         <span class="hljs-number">_</span> =&gt; { <span class="hljs-keyword">break</span>; }
-        <span class="hljs-comment">// ^ Why should this be required? There must be a better way!</span>
+        <span class="hljs-comment">// どうしてこんな行を書く必要が?もっと良い方法があるはずです!</span>
     }
 }
 </code></pre>
-<p>Using <code>while let</code> makes this sequence much nicer:</p>
+<!-- Using `while let` makes this sequence much nicer: -->
+<p><code>while let</code>の使用によってベターになります。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // Make &#96;optional&#96; of type &#96;Option&lt;i32&gt;&#96;
+    // &#96;Option&lt;i32&gt;&#96;の&#96;optional&#96;を作成
     let mut optional = Some(0);
 
-    // This reads: &quot;while &#96;let&#96; destructures &#96;optional&#96; into
-    // &#96;Some(i)&#96;, evaluate the block (&#96;{}&#96;). Else &#96;break&#96;.
+    // これは次のように読める。「&#96;let&#96;が&#96;optional&#96;を&#96;Some(i)&#96;にデストラクトしている間は
+    // ブロック内(&#96;{}&#96;)を評価せよ。さもなくば&#96;break&#96;せよ。」
     while let Some(i) = optional {
         if i &gt; 9 {
             println!(&quot;Greater than 9, quit!&quot;);
@@ -2902,17 +2904,16 @@ more tolerable. Consider the following sequence that increments <code>i</code>:<
             println!(&quot;&#96;i&#96; is &#96;{:?}&#96;. Try again.&quot;, i);
             optional = Some(i + 1);
         }
-        // ^ Less rightward drift and doesn&#39;t require
-        // explicitly handling the failing case.
+        // ^ インデントが少なく、デストラクト失敗時の処理を追加で書く必要がない。
     }
-    // ^ &#96;if let&#96; had additional optional &#96;else&#96;/&#96;else if&#96;
-    // clauses. &#96;while let&#96; does not have these.
+    // ^ &#96;if let&#96;の場合は&#96;else&#96;/&#96;else if&#96;句が一つ余分にあったが、
+    // &#96;while let&#96;では必要が無い。
 }</div>
 <div id="result"></div>
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="../custom_types/enum.html"><code>enum</code></a>, <a href="../std/option.html"><code>Option</code></a>, and the <a href="https://github.com/rust-lang/rfcs/pull/214" target="_blank">RFC</a></p>
+<p><a href="../custom_types/enum.html">列挙型(<code>enum</code>)</a>, <a href="../std/option.html"><code>Option</code></a>, <a href="https://github.com/rust-lang/rfcs/pull/214" target="_blank">RFC</a></p>
 
                     
                     </section>

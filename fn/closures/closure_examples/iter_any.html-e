@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.2.6.1" data-basepath="../../.." data-revision="1464539304919">
+    <div class="book" data-level="8.2.6.1" data-basepath="../../.." data-revision="1464541491131">
     
 
 <div class="book-summary">
@@ -2862,7 +2862,7 @@
 <!-- `Iterator::any` is a function which when passed an iterator, will return
 `true` if any element satisfies the predicate. Otherwise `false`. Its
 signature: -->
-<p>Iiterator::any<code>は、イテレータ内に一つでも条件を満たす要素があれば、</code>true<code>を返し、さもなくば</code>false`を返すイテレータです。以下がそのシグネチャです</p>
+<p><code>iterator::any</code>は、イテレータ内に一つでも条件を満たす要素があれば、<code>true</code>を返し、さもなくば<code>false</code>を返すイテレータです。以下がそのシグネチャです</p>
 <pre><code class="lang-rust">pub trait Iterator {
     // イテレートされる値の型
     type Item;

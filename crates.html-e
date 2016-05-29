@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="11" data-basepath="." data-revision="1464539304919">
+    <div class="book" data-level="11" data-basepath="." data-revision="1464541491131">
     
 
 <div class="book-summary">
@@ -2864,7 +2864,7 @@
 declarations in it, then the contents of the module files will get merged with
 the crate file *before* running the compiler over it. In other words, modules
 do *not* get compiled individually, only crates get compiled. -->
-<p>クレイトはラストにおけるコンパイルの単位です。<code>rustc some_file.rs</code>が呼ばれると、<code>some_file.rs</code>は必ず<em>クレイトファイル</em>として扱われます。もし<code>some_file.rs</code>が<code>mod</code>宣言を含んでいるのならば、コンパイルの<em>前に</em>モジュールファイルの中身は、クレイトファイルと結合されます。言い換えると、それぞれのモジュールが独立にコンパイルされるということはありませんが、それぞれのクレートは互いに独立にコンパイルされるということです。</p>
+<p>クレイトはRustにおけるコンパイルの単位です。<code>rustc some_file.rs</code>が呼ばれると、<code>some_file.rs</code>は必ず<em>クレイトファイル</em>として扱われます。もし<code>some_file.rs</code>が<code>mod</code>宣言を含んでいるのならば、コンパイルの<em>前に</em>モジュールファイルの中身は、クレイトファイルと結合されます。言い換えると、それぞれのモジュールが独立にコンパイルされるということはありませんが、それぞれのクレートは互いに独立にコンパイルされるということです。</p>
 <!-- A crate can be compiled into a binary or into a library. By default, `rustc`
 will produce a binary from a crate. This behavior can be overridden by passing
 the `--crate-type` flag to `rustc`. -->
