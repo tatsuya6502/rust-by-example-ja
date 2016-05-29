@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="13" data-basepath="." data-revision="1464520700085">
+    <div class="book" data-level="13" data-basepath="." data-revision="1464520780967">
     
 
 <div class="book-summary">
@@ -2859,15 +2859,15 @@
                     <section class="normal" id="section-gitbook_82">
                     
                         <h1 id="13-generics">13 Generics</h1>
-<!-- Generics is the topic of generalizing types and functionality to broader
+<p>Generics is the topic of generalizing types and functionality to broader
 cases. This is extremely useful in reducing code duplication in many ways,
-but requires a rather involving syntax. However, we will find that being
-generic involves taking great care to specify over what types a generic type
-is actually considered valid. -->
+but requires a rather involving syntax. However, we will find that being 
+generic involves taking great care to specify over what types a generic type 
+is actually considered valid.</p>
 <p>A type parameter is specified as generic by the use of angle brackets and
 <a href="https://en.wikipedia.org/wiki/CamelCase" target="_blank">camel case</a>: <code>&lt;A, B, ...&gt;</code>. &quot;Generic type parameters&quot; are
 typically represented as <code>&lt;T&gt;</code>. In Rust, &quot;generic&quot; also describes anything that
-accepts one or more generic type parameters <code>&lt;T&gt;</code>. Any type specified as a
+accepts one or more generic type parameters <code>&lt;T&gt;</code>. Any type specified as a 
 generic type parameter is generic, and everything else is concrete (non-generic).</p>
 <p>For example, defining a <em>generic function</em> named <code>foo</code> that takes an argument
 <code>T</code> of any type:</p>
