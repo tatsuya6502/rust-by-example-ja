@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="9" data-basepath="." data-revision="1464710932150">
+    <div class="book" data-level="9" data-basepath="." data-revision="1464711112312">
     
 
 <div class="book-summary">
@@ -2856,7 +2856,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_87">
+                    <section class="normal" id="section-gitbook_88">
                     
                         <h1 id="9-macro_rules">9 macro_rules!</h1>
 <!-- Rust provides a powerful macro system that allows metaprogramming. As you've
