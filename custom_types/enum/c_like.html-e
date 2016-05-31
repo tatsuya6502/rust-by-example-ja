@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="3.2.2" data-basepath="../.." data-revision="1464710602998">
+    <div class="book" data-level="3.2.2" data-basepath="../.." data-revision="1464710932150">
     
 
 <div class="book-summary">
@@ -2856,7 +2856,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_21">
+                    <section class="normal" id="section-gitbook_20">
                     
                         <h3 id="322-c">3.2.2 C言語ライクな構造体</h3>
 <!--- `enum` can also be used as C-like enums. --->

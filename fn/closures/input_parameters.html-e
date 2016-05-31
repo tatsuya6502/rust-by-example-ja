@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.2.2" data-basepath="../.." data-revision="1464710602998">
+    <div class="book" data-level="8.2.2" data-basepath="../.." data-revision="1464710932150">
     
 
 <div class="book-summary">
@@ -2856,7 +2856,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_64">
+                    <section class="normal" id="section-gitbook_63">
                     
                         <h3 id="822-">8.2.2 捕捉時の型推論</h3>
 <!-- It has been noted that Rust chooses how to capture variables on the fly

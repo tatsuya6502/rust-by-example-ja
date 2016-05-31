@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="8.3" data-basepath=".." data-revision="1464710602998">
+    <div class="book" data-level="8.3" data-basepath=".." data-revision="1464710932150">
     
 
 <div class="book-summary">
@@ -2856,7 +2856,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_67">
+                    <section class="normal" id="section-gitbook_68">
                     
                         <h2 id="83-">8.3 高階関数</h2>
 <!-- Rust provides Higher Order Functions (HOF). These are functions that
