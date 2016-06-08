@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>関数 | Rust by Example</title>
+        <title>Functions | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="13.1" data-basepath=".." data-revision="1464712010867">
+    <div class="book" data-level="13.1" data-basepath=".." data-revision="1465394906476">
     
 
 <div class="book-summary">
@@ -1382,7 +1382,7 @@
                         
                             <b>13.</b>
                         
-                         ジェネリクス
+                         Generics
                     </a>
                 
             
@@ -1399,7 +1399,7 @@
                         
                             <b>13.1.</b>
                         
-                         関数
+                         Functions
                     </a>
                 
             
@@ -2858,39 +2858,31 @@
                 
                     <section class="normal" id="section-gitbook_75">
                     
-                        <h2 id="131-">13.1 関数</h2>
-<!-- The same set of rules can be applied to functions: a type `T` becomes
-generic when preceded by `<T>`. -->
-<p>「型<code>T</code>はその前に<code>&lt;T&gt;</code>があるとジェネリックになる」というルールは関数に対しても当てはまります。</p>
-<!-- Using generic functions sometimes requires explicitly specifying type
-parameters. This may be if the function is called where the return type
-is generic, or if the compiler doesn't have enough information to infer
-the necessary type parameters. -->
-<p>ジェネリック関数を使用する際、以下の様な場合には型パラメータを明示する必要があります。</p>
-<ul>
-<li>返り値がジェネリック型である場合。</li>
-<li>コンパイラが型を推論するのに十分な情報がない場合</li>
-</ul>
-<!-- A function call with explicitly specified type parameters looks like:
-`fun::<A, B, ...>()`. -->
-<p>型パラメータを明示したうえでの関数呼び出しの構文は<code>fun::&lt;A, B, ...&gt;()</code>のようになります。</p>
+                        <h2 id="131-functions">13.1 Functions</h2>
+<p>The same set of rules can be applied to functions: a type <code>T</code> becomes
+generic when preceded by <code>&lt;T&gt;</code>. </p>
+<p>Using generic functions sometimes requires explicitly specifying type 
+parameters. This may be if the function is called where the return type 
+is generic, or if the compiler doesn&#39;t have enough information to infer 
+the necessary type parameters.</p>
+<p>A function call with explicitly specified type parameters looks like:
+<code>fun::&lt;A, B, ...&gt;()</code>.</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">struct A;          // 具象型&#96;A&#96;.
-struct S(A);       // 具象型&#96;S&#96;.
-struct SGen&lt;T&gt;(T); // ジェネリック型&#96;SGen&#96;.
+<div id="editor">struct A;          // Concrete type &#96;A&#96;.
+struct S(A);       // Concrete type &#96;S&#96;.
+struct SGen&lt;T&gt;(T); // Generic type &#96;SGen&#96;.
 
 // These functions all take ownership of the variable passed into
 // them and immediately go out of scope freeing the variable.
-//
 
 // Define a function &#96;reg&#95;fn&#96; that takes an argument &#96;s&#96; of type &#96;S&#96;.
 // This has no &#96;&lt;T&gt;&#96; so this is not a generic function.
 fn reg&#95;fn(&#95;s: S) {}
 
 // Define a function &#96;gen&#95;spec&#95;t&#96; that takes an argument &#96;s&#96; of type &#96;SGen&lt;T&gt;&#96;
-// that has been explicitly given the type parameter &#96;A&#96;. Because A has not
+// that has been explicitly given the type parameter &#96;A&#96;. Because A has not 
 // been specified as a generic type parameter for gen&#95;spec&#95;t, it is not generic.
 fn gen&#95;spec&#95;t(&#95;s: SGen&lt;A&gt;) {}
 
@@ -2919,7 +2911,7 @@ fn main() {
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="/fn.html">関数</a> and <a href="/custom_types/structs.html">構造体</a></p>
+<p><a href="/fn.html">functions</a> and <a href="/custom_types/structs.html"><code>struct</code>s</a></p>
 
                     
                     </section>
@@ -2930,7 +2922,7 @@ fn main() {
         </div>
 
         
-        <a href="../generics.html" class="navigation navigation-prev " aria-label="Previous page: ジェネリクス"><i class="fa fa-angle-left"></i></a>
+        <a href="../generics.html" class="navigation navigation-prev " aria-label="Previous page: Generics"><i class="fa fa-angle-left"></i></a>
         
         
         <a href="../generics/impl.html" class="navigation navigation-next " aria-label="Next page: Implementation"><i class="fa fa-angle-right"></i></a>
@@ -2959,6 +2951,10 @@ fn main() {
 
     
     <script src="../gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>

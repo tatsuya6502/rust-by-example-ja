@@ -69,7 +69,7 @@ function initEditor() {
     runProgram(program, handleResult);
   };
 
-  ace.config.setModuleUrl('ace/mode/rust', '/gitbook/plugins/gitbook-plugin-rust-playpen/mode-rust.js');
+  ace.config.setModuleUrl('ace/mode/rust', 'rust-by-example/gitbook/plugins/gitbook-plugin-rust-playpen/mode-rust.js');
 
   editor.setTheme("ace/theme/tomorrow");
   editor.getSession().setMode("ace/mode/rust");
@@ -132,13 +132,13 @@ function updateEditorHeight() {
   editor.resize();
 };
 
-// 
+//
 // escapeHTML() borrowed from mustache.js:
 // https://github.com/janl/mustache.js/blob/master/mustache.js#L43
-// 
+//
 // via:
 // http://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery/12034334#12034334
-// 
+//
 var entityMap = {
   "&": "&amp;",
   "<": "&lt;",
@@ -194,15 +194,15 @@ function runProgram(program, callback) {
 
 // The callback to runProgram
 function handleResult(statusCode, message) {
-  
-  // Check the size of the message, shorten it if 
+
+  // Check the size of the message, shorten it if
   // it's too big to be appended to the DOM.
   if ( message.length > MAX_RESPONSE_LENGTH ) {
     message = message.slice(0, MAX_RESPONSE_LENGTH / 2)
             + '\n\n--- THIS RESULT HAS BEEN SHORTENED ---\n\n'
             + message.slice(-MAX_RESPONSE_LENGTH / 2);
   }
-  
+
   // Dispatch depending on result type
   if (result == null) {
     resultDiv.style.backgroundColor = errorColor;

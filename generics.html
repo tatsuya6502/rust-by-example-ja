@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>ジェネリクス | Rust by Example</title>
+        <title>Generics | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="13" data-basepath="." data-revision="1464712010867">
+    <div class="book" data-level="13" data-basepath="." data-revision="1465394906476">
     
 
 <div class="book-summary">
@@ -1382,7 +1382,7 @@
                         
                             <b>13.</b>
                         
-                         ジェネリクス
+                         Generics
                     </a>
                 
             
@@ -1399,7 +1399,7 @@
                         
                             <b>13.1.</b>
                         
-                         関数
+                         Functions
                     </a>
                 
             
@@ -2858,65 +2858,60 @@
                 
                     <section class="normal" id="section-gitbook_82">
                     
-                        <h1 id="13-">13 ジェネリクス</h1>
-<!-- Generics is the topic of generalizing types and functionality to broader
+                        <h1 id="13-generics">13 Generics</h1>
+<p>Generics is the topic of generalizing types and functionality to broader
 cases. This is extremely useful in reducing code duplication in many ways,
-but requires a rather involving syntax. However, we will find that being
-generic involves taking great care to specify over what types a generic type
-is actually considered valid. -->
-<p>ジェネリクスとは、型と関数の機能をより汎用的に使えるようにするための機能です。これはあらゆる局面でコードの重複を避けるために非常に役立ちますが、多少構文が複雑になります。すなわち、ジェネリック型を使いこなすには、どのようなジェネリック型がきちんと機能するかに細心の注意を払う必要があります。</p>
-<!-- A type parameter is specified as generic by the use of angle brackets and
-[camel case][camelcase]: `<A, B, ...>`. "Generic type parameters" are
-typically represented as `<T>`. In Rust, "generic" also describes anything that
-accepts one or more generic type parameters `<T>`. Any type specified as a
-generic type parameter is generic, and everything else is concrete (non-generic). -->
-<p>ジェネリック型の型パラメータにはかぎ括弧(<code>angle brackets</code>)と<a href="https://en.wikipedia.org/wiki/CamelCase" target="_blank">キャメルケース(<code>camel case</code>)</a>が使われます。: <code>&lt;Aaa, Bbb, ...&gt;</code>ジェネリックな型パラメータはたいていの場合<code>&lt;T&gt;</code>で示されます。Rustの場合、「ジェネリクス」には「１つ以上のジェネリック型を受け付けるもの」という意味もあります。ジェネリックな型パラメータを指定された場合、それは必ずジェネリック型になり、そうでなければ必ず非ジェネリック型、すなわち具象型(<code>concrete</code>)になります。</p>
-<!-- For example, defining a *generic function* named `foo` that takes an argument
-`T` of any type: -->
-<p>例として、あらゆる型の引数<code>T</code>をとる<em>ジェネリック関数</em><code>foo</code>を定義すると:</p>
+but requires a rather involving syntax. However, we will find that being 
+generic involves taking great care to specify over what types a generic type 
+is actually considered valid.</p>
+<p>A type parameter is specified as generic by the use of angle brackets and
+<a href="https://en.wikipedia.org/wiki/CamelCase" target="_blank">camel case</a>: <code>&lt;A, B, ...&gt;</code>. &quot;Generic type parameters&quot; are
+typically represented as <code>&lt;T&gt;</code>. In Rust, &quot;generic&quot; also describes anything that
+accepts one or more generic type parameters <code>&lt;T&gt;</code>. Any type specified as a 
+generic type parameter is generic, and everything else is concrete (non-generic).</p>
+<p>For example, defining a <em>generic function</em> named <code>foo</code> that takes an argument
+<code>T</code> of any type:</p>
 <pre><code class="lang-rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">foo</span></span>&lt;T&gt;(T) { ... }
 </code></pre>
-<!-- Because `T` has been specified as a generic type parameter, it is considered
-generic when used here as `(T)`. This is the case even if `T` has previously
-been defined as a `struct`. -->
-<p>となります。<code>T</code>はジェネリックな型パラメータを付与されているので、<code>T</code>として使用するとジェネリック型として扱われます。これは<code>T</code>という構造体がそれ以前に定義されていても同様です。</p>
-<!-- This example shows some of the syntax in action: -->
-<p> では、手を動かしながらジェネリック型の構文を体験していきましょう。</p>
+<p>Because <code>T</code> has been specified as a generic type parameter, it is considered
+generic when used here as <code>(T)</code>. This is the case even if <code>T</code> has previously
+been defined as a <code>struct</code>.</p>
+<p>This example shows some of the syntax in action:</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// &#96;A&#96;という具象型
+<div id="editor">// A concrete type &#96;A&#96;.
 struct A;
 
-// &#96;Single&#96;という型を定義する際に&#96;A&#96;を使用しているが、その最初の使用よりも
-// 先に&#96;&lt;A&gt;&#96;がないため、また、&#96;A&#96;自身も具象型であるため、&#96;Single&#96;は具象型となる。
+// In defining the type &#96;Single&#96;, the first use of &#96;A&#96; is not preceded by &#96;&lt;A&gt;&#96;.
+// Therefore, &#96;Single&#96; is a concrete type, and &#96;A&#96; is defined as above.
 struct Single(A);
-//            ^ Singleによる&#96;A&#96;の一番最初の使用はここ
+//            ^ Here is &#96;Single&#96;s first use of the type &#96;A&#96;.
 
-// ここでは&#96;&lt;T&gt;&#96;が一番初めの&#96;T&#96;の使用よりも先に来ている。よって&#96;SingleGen&#96;はジェネリック型
-// となる。なぜならば型パラメータ&#96;T&#96;がジェネリックだからである。&#96;T&#96;はどんな方にもなりえるため、
-// 上で定義した&#96;A&#96;を受け取ることもできる。
+// Here, &#96;&lt;T&gt;&#96; precedes the first use of &#96;T&#96;, so &#96;SingleGen&#96; is a generic type.
+// Because the type parameter &#96;T&#96; is generic, it could be anything, including
+// the concrete type &#96;A&#96; defined at the top.
 struct SingleGen&lt;T&gt;(T);
 
 fn main() {
-    // &#96;Single&#96;は具象型で、&#96;A&#96;のみを受け取る。
+    // &#96;Single&#96; is concrete and explicitly takes &#96;A&#96;.
     let &#95;s = Single(A);
 
-    // &#96;&#95;char&#96;という名の変数を生成する。これは&#96;SingleGen&lt;char&gt;&#96;
-    // という型で、値は&#96;SingleGen(&#39;a&#39;)&#96;となる。ここでは、&#96;SingleGen&#96;には明示的な型パラメータ
-    // が与えられている。
+    // Create a variable &#96;&#95;char&#96; of type &#96;SingleGen&lt;char&gt;&#96;
+    // and give it the value &#96;SingleGen(&#39;a&#39;)&#96;
+    // Here, &#96;SingleGen&#96; has a type parameter explicitly specified.
     let &#95;char: SingleGen&lt;char&gt; = SingleGen(&#39;a&#39;);
 
-    // &#96;SingleGen&#96;型の変数には明示的に型パラメータを与えなくてもよい。
-    let &#95;t    = SingleGen(A); // 上で定義した&#96;A&#96;を使用
-    let &#95;i32  = SingleGen(6); // &#96;i32&#96;を使用
-    let &#95;char = SingleGen(&#39;a&#39;); // &#96;char&#96;を使用
+    // &#96;SingleGen&#96; can also have a type parameter implicitly specified:
+    let &#95;t    = SingleGen(A); // Uses &#96;A&#96; defined at the top.
+    let &#95;i32  = SingleGen(6); // Uses &#96;i32&#96;.
+    let &#95;char = SingleGen(&#39;a&#39;); // Uses &#96;char&#96;.
 }</div>
 <div id="result"></div>
 </div>
 
 <h3 id="see-also">See also:</h3>
-<p><a href="./custom_types/structs.html">構造体</a></p>
+<p><a href="/custom_types/structs.html"><code>struct</code>s</a></p>
 
                     
                     </section>
@@ -2930,7 +2925,7 @@ fn main() {
         <a href="./attribute/cfg/custom.html" class="navigation navigation-prev " aria-label="Previous page: 条件の追加"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./generics/gen_fn.html" class="navigation navigation-next " aria-label="Next page: 関数"><i class="fa fa-angle-right"></i></a>
+        <a href="./generics/gen_fn.html" class="navigation navigation-next " aria-label="Next page: Functions"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
@@ -2956,6 +2951,10 @@ fn main() {
 
     
     <script src="gitbook/plugins/gitbook-plugin-mathjax/plugin.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-livereload/plugin.js"></script>
     
 
 <script>
