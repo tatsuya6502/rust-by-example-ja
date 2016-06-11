@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="7.3" data-basepath=".." data-revision="1465617716659">
+    <div class="book" data-level="7.3" data-basepath=".." data-revision="1465646329038">
     
 
 <div class="book-summary">
@@ -2859,16 +2859,18 @@
                     <section class="normal" id="section-gitbook_55">
                     
                         <h2 id="73-while">7.3 while</h2>
-<p>The <code>while</code> keyword can be used to loop until a condition is met.</p>
-<p>Let&#39;s write the infamous <a href="http://en.wikipedia.org/wiki/Fizz_buzz" target="_blank">FizzBuzz</a> using a <code>while</code> loop.</p>
+<!-- The `while` keyword can be used to loop until a condition is met. -->
+<p><code>while</code>キーワードは条件が満たされるまでのループのために使用します。</p>
+<!-- Let's write the infamous [FizzBuzz][fizzbuzz] using a `while` loop. -->
+<p>悪名高い<a href="http://en.wikipedia.org/wiki/Fizz_buzz" target="_blank">FizzBuzz問題</a>を<code>while</code>を用いて解いてみましょう。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
 <div id="editor">fn main() {
-    // A counter variable
+    // カウンタとなる変数
     let mut n = 1;
 
-    // Loop while &#96;n&#96; is less than 101
+    // &#96;n&#96;が101以下である場合のループ
     while n &lt; 101 {
         if n % 15 == 0 {
             println!(&quot;fizzbuzz&quot;);
@@ -2880,7 +2882,7 @@
             println!(&quot;{}&quot;, n);
         }
 
-        // Increment counter
+        // カウンタに1を追加
         n += 1;
     }
 }</div>
