@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Ownership and moves | Rust by Example</title>
+        <title>所有権とムーブ | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="14.2" data-basepath=".." data-revision="1465401513143">
+    <div class="book" data-level="14.2" data-basepath=".." data-revision="1465617716659">
     
 
 <div class="book-summary">
@@ -1614,7 +1614,7 @@
                         
                             <b>14.</b>
                         
-                         Scoping rules
+                         スコーピングの規則
                     </a>
                 
             
@@ -1647,7 +1647,7 @@
                         
                             <b>14.2.</b>
                         
-                         Ownership and moves
+                         所有権とムーブ
                     </a>
                 
             
@@ -1664,7 +1664,7 @@
                         
                             <b>14.2.1.</b>
                         
-                         Mutability
+                         ミュータビリティ
                     </a>
                 
             
@@ -1685,7 +1685,7 @@
                         
                             <b>14.3.</b>
                         
-                         Borrowing
+                         借用
                     </a>
                 
             
@@ -1702,7 +1702,7 @@
                         
                             <b>14.3.1.</b>
                         
-                         Mutability
+                         ミュータビリティ
                     </a>
                 
             
@@ -1718,7 +1718,7 @@
                         
                             <b>14.3.2.</b>
                         
-                         Freezing
+                         値のフリーズ
                     </a>
                 
             
@@ -1734,7 +1734,7 @@
                         
                             <b>14.3.3.</b>
                         
-                         Aliasing
+                         エイリアス
                     </a>
                 
             
@@ -1750,7 +1750,7 @@
                         
                             <b>14.3.4.</b>
                         
-                         The ref pattern
+                         refパターン
                     </a>
                 
             
@@ -1771,7 +1771,7 @@
                         
                             <b>14.4.</b>
                         
-                         Lifetimes
+                         ライフタイム
                     </a>
                 
             
@@ -1788,7 +1788,7 @@
                         
                             <b>14.4.1.</b>
                         
-                         Explicit annotation
+                         明示的アノテーション
                     </a>
                 
             
@@ -1804,7 +1804,7 @@
                         
                             <b>14.4.2.</b>
                         
-                         Functions
+                         関数
                     </a>
                 
             
@@ -1820,7 +1820,7 @@
                         
                             <b>14.4.3.</b>
                         
-                         Methods
+                         メソッド
                     </a>
                 
             
@@ -1836,7 +1836,7 @@
                         
                             <b>14.4.4.</b>
                         
-                         Structs
+                         構造体
                     </a>
                 
             
@@ -1852,7 +1852,7 @@
                         
                             <b>14.4.5.</b>
                         
-                         Bounds
+                         ライフタイム境界
                     </a>
                 
             
@@ -1868,7 +1868,7 @@
                         
                             <b>14.4.6.</b>
                         
-                         Coercion
+                         圧縮
                     </a>
                 
             
@@ -1884,7 +1884,7 @@
                         
                             <b>14.4.7.</b>
                         
-                         static
+                         スタティックライフタイム
                     </a>
                 
             
@@ -1900,7 +1900,7 @@
                         
                             <b>14.4.8.</b>
                         
-                         elision
+                         省略
                     </a>
                 
             
@@ -2858,60 +2858,61 @@
                 
                     <section class="normal" id="section-gitbook_117">
                     
-                        <h2 id="142-ownership-and-moves">14.2 Ownership and moves</h2>
-<p>Because variables are in charge of freeing their own resources, 
-<strong>resources can only have one owner</strong>. This also prevents resources 
-from being freed more than once. Note that not all variables own 
-resources (e.g. <a href="/flow_control/match/destructuring/destructure_pointers.html">references</a>).</p>
-<p>When doing assignments (<code>let x = y</code>) or passing function arguments by value
-(<code>foo(x)</code>), the <em>ownership</em> of the resources is transferred. In Rust-speak, 
-this is known as a <em>move</em>.</p>
-<p>After moving resources, the previous owner can no longer be used. This avoids
-creating dangling pointers.</p>
+                        <h2 id="142-">14.2 所有権とムーブ</h2>
+<!-- Because variables are in charge of freeing their own resources,
+**resources can only have one owner**. This also prevents resources
+from being freed more than once. Note that not all variables own
+resources (e.g. [references]). -->
+<p>変数には自身の保持する資源を開放する責任があるため、<strong>資源は一度に一つの所有者</strong>しか持つことができません。これはまた、資源を2度以上開放することができないということでもあります。ここで、全ての変数が資源を所有するわけではないということに注意しましょう。(e.g. <a href="/flow_control/match/destructuring/destructure_pointers.html">参照</a>)</p>
+<!-- When doing assignments (`let x = y`) or passing function arguments by value
+(`foo(x)`), the *ownership* of the resources is transferred. In Rust-speak,
+this is known as a *move*. -->
+<p>変数をアサインする(<code>let x = y</code>)際や、関数に引数を値渡しする(<code>foo(x)</code>)際は、資源の<em>所有権(<code>ownership</code>)</em>が移動します。Rustっぽく言うと、「<em>ムーブ</em>」です。</p>
+<!-- After moving resources, the previous owner can no longer be used. This avoids
+creating dangling pointers. -->
+<p>資源を移動すると、それまでの所有者を使用することはできなくなります。これによりダングリングポインタの発生を防げます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// This function takes ownership of the heap allocated memory
+<div id="editor">// この関数はヒープメモリ上の資源の所有権を取る。
 fn destroy&#95;box(c: Box&lt;i32&gt;) {
     println!(&quot;Destroying a box that contains {}&quot;, c);
 
-    // &#96;c&#96; is destroyed and the memory freed
+    // &#96;c&#96;は破棄されメモリは開放される。
 }
 
 fn main() {
-    // &#95;Stack&#95; allocated integer
+    // &#95;スタック&#95;上に置かれた整数
     let x = 5u32;
 
-    // &#42;Copy&#42; &#96;x&#96; into &#96;y&#96; - no resources are moved
+    // &#96;x&#96;を&#96;y&#96;に&#42;コピー&#42;する。元の値が移動するわけではない。
     let y = x;
 
-    // Both values can be independently used
+    // 両方の値はそれぞれ独立に使うことができる。
     println!(&quot;x is {}, and y is {}&quot;, x, y);
 
-    // &#96;a&#96; is a pointer to a &#95;heap&#95; allocated integer
+    // &#96;a&#96;は&#95;ヒープ&#95;上の整数へのポインタ
     let a = Box::new(5i32);
 
     println!(&quot;a contains: {}&quot;, a);
 
-    // &#42;Move&#42; &#96;a&#96; into &#96;b&#96;
+    // &#96;a&#96;を&#96;b&#96;に&#42;ムーブ&#42;する。
     let b = a;
-    // The pointer address of &#96;a&#96; is copied (not the data) into &#96;b&#96;.
-    // Both are now pointers to the same heap allocated data, but
-    // &#96;b&#96; now owns it.
+    // すなわち、&#96;a&#96;の指すメモリ上の番地が&#96;b&#96;にコピーされるため
+    // いずれもヒープ上の同じ値を指すポインタとなる。しかし所有権は&#96;b&#96;にある。
 
-    // Error! &#96;a&#96; can no longer access the data, because it no longer owns the
-    // heap memory
+    // エラー! &#96;a&#96;は所有権を持たないため、ヒープ上のデータにアクセスできない。
     //println!(&quot;a contains: {}&quot;, a);
-    // TODO ^ Try uncommenting this line
+    // TODO ^ 試しにここをアンコメントしてみましょう。
 
-    // This function takes ownership of the heap allocated memory from &#96;b&#96;
+    // この関数はヒープメモリ上の所有権を&#96;b&#96;から取る。
     destroy&#95;box(b);
 
-    // Since the heap memory has been freed at this point, this action would
-    // result in dereferencing freed memory, but it&#39;s forbidden by the compiler
-    // Error! Same reason as the previous Error
+    // この時点でヒープメモリ上の資源は開放されているので、次の操作は解放
+    // 解放済みメモリをデリファレンスすることになる。しかしそれはコンパイラが許さない。
+    // エラー! 上述の理由より
     //println!(&quot;b contains: {}&quot;, b);
-    // TODO ^ Try uncommenting this line
+    // TODO ^ 試しにここをアンコメントしてみましょう。
 }</div>
 <div id="result"></div>
 </div>
@@ -2929,7 +2930,7 @@ fn main() {
         <a href="../scope/raii.html" class="navigation navigation-prev " aria-label="Previous page: RAII"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../scope/move/mut.html" class="navigation navigation-next " aria-label="Next page: Mutability"><i class="fa fa-angle-right"></i></a>
+        <a href="../scope/move/mut.html" class="navigation navigation-next " aria-label="Next page: ミュータビリティ"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

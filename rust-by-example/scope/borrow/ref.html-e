@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>The ref pattern | Rust by Example</title>
+        <title>refパターン | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="14.3.4" data-basepath="../.." data-revision="1465401513143">
+    <div class="book" data-level="14.3.4" data-basepath="../.." data-revision="1465617716659">
     
 
 <div class="book-summary">
@@ -1614,7 +1614,7 @@
                         
                             <b>14.</b>
                         
-                         Scoping rules
+                         スコーピングの規則
                     </a>
                 
             
@@ -1647,7 +1647,7 @@
                         
                             <b>14.2.</b>
                         
-                         Ownership and moves
+                         所有権とムーブ
                     </a>
                 
             
@@ -1664,7 +1664,7 @@
                         
                             <b>14.2.1.</b>
                         
-                         Mutability
+                         ミュータビリティ
                     </a>
                 
             
@@ -1685,7 +1685,7 @@
                         
                             <b>14.3.</b>
                         
-                         Borrowing
+                         借用
                     </a>
                 
             
@@ -1702,7 +1702,7 @@
                         
                             <b>14.3.1.</b>
                         
-                         Mutability
+                         ミュータビリティ
                     </a>
                 
             
@@ -1718,7 +1718,7 @@
                         
                             <b>14.3.2.</b>
                         
-                         Freezing
+                         値のフリーズ
                     </a>
                 
             
@@ -1734,7 +1734,7 @@
                         
                             <b>14.3.3.</b>
                         
-                         Aliasing
+                         エイリアス
                     </a>
                 
             
@@ -1750,7 +1750,7 @@
                         
                             <b>14.3.4.</b>
                         
-                         The ref pattern
+                         refパターン
                     </a>
                 
             
@@ -1771,7 +1771,7 @@
                         
                             <b>14.4.</b>
                         
-                         Lifetimes
+                         ライフタイム
                     </a>
                 
             
@@ -1788,7 +1788,7 @@
                         
                             <b>14.4.1.</b>
                         
-                         Explicit annotation
+                         明示的アノテーション
                     </a>
                 
             
@@ -1804,7 +1804,7 @@
                         
                             <b>14.4.2.</b>
                         
-                         Functions
+                         関数
                     </a>
                 
             
@@ -1820,7 +1820,7 @@
                         
                             <b>14.4.3.</b>
                         
-                         Methods
+                         メソッド
                     </a>
                 
             
@@ -1836,7 +1836,7 @@
                         
                             <b>14.4.4.</b>
                         
-                         Structs
+                         構造体
                     </a>
                 
             
@@ -1852,7 +1852,7 @@
                         
                             <b>14.4.5.</b>
                         
-                         Bounds
+                         ライフタイム境界
                     </a>
                 
             
@@ -1868,7 +1868,7 @@
                         
                             <b>14.4.6.</b>
                         
-                         Coercion
+                         圧縮
                     </a>
                 
             
@@ -1884,7 +1884,7 @@
                         
                             <b>14.4.7.</b>
                         
-                         static
+                         スタティックライフタイム
                     </a>
                 
             
@@ -1900,7 +1900,7 @@
                         
                             <b>14.4.8.</b>
                         
-                         elision
+                         省略
                     </a>
                 
             
@@ -2858,10 +2858,11 @@
                 
                     <section class="normal" id="section-gitbook_105">
                     
-                        <h3 id="1434-the-ref-pattern">14.3.4 The ref pattern</h3>
-<p>When doing pattern matching or destructuring via the <code>let</code> binding, the <code>ref</code>
-keyword can be used to take references to the fields of a struct/tuple. The 
-example below shows a few instances where this can be useful:</p>
+                        <h3 id="1434-ref">14.3.4 refパターン</h3>
+<!-- When doing pattern matching or destructuring via the `let` binding, the `ref`
+keyword can be used to take references to the fields of a struct/tuple. The
+example below shows a few instances where this can be useful: -->
+<p><code>let</code>を介してデストラクトやパターンマッチングを行う場合、<code>ref</code>キーワードを用いて構造体・タプルのフィールドへのリファレンスを取得することができます。以下の例ではこれが有用になる例を幾つかお見せします。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2871,8 +2872,7 @@ struct Point { x: i32, y: i32 }
 fn main() {
     let c = &#39;Q&#39;;
 
-    // A &#96;ref&#96; borrow on the left side of an assignment is equivalent to
-    // an &#96;&amp;&#96; borrow on the right side.
+    // 左辺に&#96;ref&#96;をつけることによる借用と、右辺に&#96;&amp;&#96;をつけることによる借用は等価
     let ref ref&#95;c1 = c;
     let ref&#95;c2 = &c;
 
@@ -2880,34 +2880,34 @@ fn main() {
 
     let point = Point { x: 0, y: 0 };
 
-    // &#96;ref&#96; is also valid when destructuring a struct.
+    // &#96;ref&#96;は構造体をデストラクトする際にも有用
     let &#95;copy&#95;of&#95;x = {
-        // &#96;ref&#95;to&#95;x&#96; is a reference to the &#96;x&#96; field of &#96;point&#96;.
+        // &#96;ref&#95;to&#95;x&#96;は&#96;point&#96;の&#96;x&#96;フィールドへの参照
         let Point { x: ref ref&#95;to&#95;x, y: &#95; } = point;
 
-        // Return a copy of the &#96;x&#96; field of &#96;point&#96;.
+        // &#96;point&#96;の&#96;x&#96;フィールドへのコピーを返す。
         &#42;ref&#95;to&#95;x
     };
 
-    // A mutable copy of &#96;point&#96;
+    // &#96;point&#96;へのミュータブルなコピー
     let mut mutable&#95;point = point;
 
     {
-        // &#96;ref&#96; can be paired with &#96;mut&#96; to take mutable references.
+        // &#96;ref&#96;は&#96;mut&#96;とともに使い、ミュータブルな参照を取ることもできる。
         let Point { x: &#95;, y: ref mut mut&#95;ref&#95;to&#95;y } = mutable&#95;point;
 
-        // Mutate the &#96;y&#96; field of &#96;mutable&#95;point&#96; via a mutable reference.
+        // &#96;mutable&#95;point&#96;の&#96;y&#96;というミュータブルなフィールドの値を変更する。
         &#42;mut&#95;ref&#95;to&#95;y = 1;
     }
 
     println!(&quot;point is ({}, {})&quot;, point.x, point.y);
     println!(&quot;mutable&#95;point is ({}, {})&quot;, mutable&#95;point.x, mutable&#95;point.y);
 
-    // A mutable tuple that includes a pointer
+    // ポインタを含むミュータブルなタプル
     let mut mutable&#95;tuple = (Box::new(5u32), 3u32);
 
     {
-        // Destructure &#96;mutable&#95; tuple&#96; to change the value of &#96;last&#96;.
+        // &#96;mutable&#95; tuple&#96;をデストラクトして、&#96;last&#96;の値を変更
         let (&#95;, ref mut last) = mutable&#95;tuple;
         &#42;last = 2u32;
     }
@@ -2926,10 +2926,10 @@ fn main() {
         </div>
 
         
-        <a href="../../scope/borrow/alias.html" class="navigation navigation-prev " aria-label="Previous page: Aliasing"><i class="fa fa-angle-left"></i></a>
+        <a href="../../scope/borrow/alias.html" class="navigation navigation-prev " aria-label="Previous page: エイリアス"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../scope/lifetime.html" class="navigation navigation-next " aria-label="Next page: Lifetimes"><i class="fa fa-angle-right"></i></a>
+        <a href="../../scope/lifetime.html" class="navigation navigation-next " aria-label="Next page: ライフタイム"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

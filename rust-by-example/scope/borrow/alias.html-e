@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Aliasing | Rust by Example</title>
+        <title>エイリアス | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="14.3.3" data-basepath="../.." data-revision="1465401513143">
+    <div class="book" data-level="14.3.3" data-basepath="../.." data-revision="1465617716659">
     
 
 <div class="book-summary">
@@ -1614,7 +1614,7 @@
                         
                             <b>14.</b>
                         
-                         Scoping rules
+                         スコーピングの規則
                     </a>
                 
             
@@ -1647,7 +1647,7 @@
                         
                             <b>14.2.</b>
                         
-                         Ownership and moves
+                         所有権とムーブ
                     </a>
                 
             
@@ -1664,7 +1664,7 @@
                         
                             <b>14.2.1.</b>
                         
-                         Mutability
+                         ミュータビリティ
                     </a>
                 
             
@@ -1685,7 +1685,7 @@
                         
                             <b>14.3.</b>
                         
-                         Borrowing
+                         借用
                     </a>
                 
             
@@ -1702,7 +1702,7 @@
                         
                             <b>14.3.1.</b>
                         
-                         Mutability
+                         ミュータビリティ
                     </a>
                 
             
@@ -1718,7 +1718,7 @@
                         
                             <b>14.3.2.</b>
                         
-                         Freezing
+                         値のフリーズ
                     </a>
                 
             
@@ -1734,7 +1734,7 @@
                         
                             <b>14.3.3.</b>
                         
-                         Aliasing
+                         エイリアス
                     </a>
                 
             
@@ -1750,7 +1750,7 @@
                         
                             <b>14.3.4.</b>
                         
-                         The ref pattern
+                         refパターン
                     </a>
                 
             
@@ -1771,7 +1771,7 @@
                         
                             <b>14.4.</b>
                         
-                         Lifetimes
+                         ライフタイム
                     </a>
                 
             
@@ -1788,7 +1788,7 @@
                         
                             <b>14.4.1.</b>
                         
-                         Explicit annotation
+                         明示的アノテーション
                     </a>
                 
             
@@ -1804,7 +1804,7 @@
                         
                             <b>14.4.2.</b>
                         
-                         Functions
+                         関数
                     </a>
                 
             
@@ -1820,7 +1820,7 @@
                         
                             <b>14.4.3.</b>
                         
-                         Methods
+                         メソッド
                     </a>
                 
             
@@ -1836,7 +1836,7 @@
                         
                             <b>14.4.4.</b>
                         
-                         Structs
+                         構造体
                     </a>
                 
             
@@ -1852,7 +1852,7 @@
                         
                             <b>14.4.5.</b>
                         
-                         Bounds
+                         ライフタイム境界
                     </a>
                 
             
@@ -1868,7 +1868,7 @@
                         
                             <b>14.4.6.</b>
                         
-                         Coercion
+                         圧縮
                     </a>
                 
             
@@ -1884,7 +1884,7 @@
                         
                             <b>14.4.7.</b>
                         
-                         static
+                         スタティックライフタイム
                     </a>
                 
             
@@ -1900,7 +1900,7 @@
                         
                             <b>14.4.8.</b>
                         
-                         elision
+                         省略
                     </a>
                 
             
@@ -2858,11 +2858,12 @@
                 
                     <section class="normal" id="section-gitbook_102">
                     
-                        <h3 id="1433-aliasing">14.3.3 Aliasing</h3>
-<p>Data can be immutably borrowed any number of times, but while immutably
-borrowed, the original data can&#39;t be mutably borrowed. On the other hand,
-only <em>one</em> mutable borrow is allowed at a time. The original data can be
-borrowed again only <em>after</em> the mutable reference goes out of scope.</p>
+                        <h3 id="1433-">14.3.3 エイリアス</h3>
+<!-- Data can be immutably borrowed any number of times, but while immutably
+borrowed, the original data can't be mutably borrowed. On the other hand,
+only *one* mutable borrow is allowed at a time. The original data can be
+borrowed again only *after* the mutable reference goes out of scope. -->
+<p>データは一度にいくつでもイミュータブルに借用する音ができますが、その間オリジナルのデータをミュータブルに借用することはできません。一方でミュータブルな借用は一度に<em>一つ</em>しか借用することができず、オリジナルのデータをもう一度借用するためには、ミュータブルな参照がスコープを抜けた<em>あとで</em>ないといけません。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2875,39 +2876,39 @@ fn main() {
         let borrowed&#95;point = &point;
         let another&#95;borrow = &point;
 
-        // Data can be accessed via the references and the original owner
+        // データは元々の持ち主と参照の両方からアクセスすることができます。
         println!(&quot;Point has coordinates: ({}, {}, {})&quot;,
                  borrowed&#95;point.x, another&#95;borrow.y, point.z);
 
-        // Error! Can&#39;t borrow point as mutable because it&#39;s currently
-        // borrowed as immutable.
+        // エラー！pointはすでにイミュータブルに借用されているため、
+        // ミュータブルに借用することができない。
         //let mutable&#95;borrow = &amp;mut point;
-        // TODO ^ Try uncommenting this line
+        // TODO ^ この行をアンコメントしてみましょう。
 
-        // Immutable references go out of scope
+        // ここでイミュータブルな参照がスコープを抜ける。
     }
 
     {
         let mutable&#95;borrow = &amp;mut point;
 
-        // Change data via mutable reference
+        // ミュータブルなリファレンスを介してデータを変更する
         mutable&#95;borrow.x = 5;
         mutable&#95;borrow.y = 2;
         mutable&#95;borrow.z = 1;
 
-        // Error! Can&#39;t borrow &#96;point&#96; as immutable because it&#39;s currently
-        // borrowed as mutable.
+        // エラー！&#96;point&#96;はすでにミュータブルに借用されているため、
+        // イミュータブルに借用することはできない。
         //let y = &amp;point.y;
-        // TODO ^ Try uncommenting this line
+        // TODO ^ この行をアンコメントしてみましょう。
 
-        // Error! Can&#39;t print because &#96;println!&#96; takes an immutable reference.
+        // エラー！&#96;println!&#96;はイミュータブルなリファレンスを取るため、printできません。
         //println!(&quot;Point Z coordinate is {}&quot;, point.z);
-        // TODO ^ Try uncommenting this line
+        // TODO ^ この行をアンコメントしてみましょう。
 
-        // Mutable reference goes out of scope
+        // ここでミュータブルな参照がスコープを抜ける。
     }
 
-    // Immutable references to point are allowed again
+    // pointへのイミュータブルな参照を使うことが再び許される。
     println!(&quot;Point now has coordinates: ({}, {}, {})&quot;,
              point.x, point.y, point.z);
 }</div>
@@ -2923,10 +2924,10 @@ fn main() {
         </div>
 
         
-        <a href="../../scope/borrow/freeze.html" class="navigation navigation-prev " aria-label="Previous page: Freezing"><i class="fa fa-angle-left"></i></a>
+        <a href="../../scope/borrow/freeze.html" class="navigation navigation-prev " aria-label="Previous page: 値のフリーズ"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../scope/borrow/ref.html" class="navigation navigation-next " aria-label="Next page: The ref pattern"><i class="fa fa-angle-right"></i></a>
+        <a href="../../scope/borrow/ref.html" class="navigation navigation-next " aria-label="Next page: refパターン"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

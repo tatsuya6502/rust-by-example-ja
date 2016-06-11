@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Lifetimes | Rust by Example</title>
+        <title>ライフタイム | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="14.4" data-basepath=".." data-revision="1465401513143">
+    <div class="book" data-level="14.4" data-basepath=".." data-revision="1465617716659">
     
 
 <div class="book-summary">
@@ -1614,7 +1614,7 @@
                         
                             <b>14.</b>
                         
-                         Scoping rules
+                         スコーピングの規則
                     </a>
                 
             
@@ -1647,7 +1647,7 @@
                         
                             <b>14.2.</b>
                         
-                         Ownership and moves
+                         所有権とムーブ
                     </a>
                 
             
@@ -1664,7 +1664,7 @@
                         
                             <b>14.2.1.</b>
                         
-                         Mutability
+                         ミュータビリティ
                     </a>
                 
             
@@ -1685,7 +1685,7 @@
                         
                             <b>14.3.</b>
                         
-                         Borrowing
+                         借用
                     </a>
                 
             
@@ -1702,7 +1702,7 @@
                         
                             <b>14.3.1.</b>
                         
-                         Mutability
+                         ミュータビリティ
                     </a>
                 
             
@@ -1718,7 +1718,7 @@
                         
                             <b>14.3.2.</b>
                         
-                         Freezing
+                         値のフリーズ
                     </a>
                 
             
@@ -1734,7 +1734,7 @@
                         
                             <b>14.3.3.</b>
                         
-                         Aliasing
+                         エイリアス
                     </a>
                 
             
@@ -1750,7 +1750,7 @@
                         
                             <b>14.3.4.</b>
                         
-                         The ref pattern
+                         refパターン
                     </a>
                 
             
@@ -1771,7 +1771,7 @@
                         
                             <b>14.4.</b>
                         
-                         Lifetimes
+                         ライフタイム
                     </a>
                 
             
@@ -1788,7 +1788,7 @@
                         
                             <b>14.4.1.</b>
                         
-                         Explicit annotation
+                         明示的アノテーション
                     </a>
                 
             
@@ -1804,7 +1804,7 @@
                         
                             <b>14.4.2.</b>
                         
-                         Functions
+                         関数
                     </a>
                 
             
@@ -1820,7 +1820,7 @@
                         
                             <b>14.4.3.</b>
                         
-                         Methods
+                         メソッド
                     </a>
                 
             
@@ -1836,7 +1836,7 @@
                         
                             <b>14.4.4.</b>
                         
-                         Structs
+                         構造体
                     </a>
                 
             
@@ -1852,7 +1852,7 @@
                         
                             <b>14.4.5.</b>
                         
-                         Bounds
+                         ライフタイム境界
                     </a>
                 
             
@@ -1868,7 +1868,7 @@
                         
                             <b>14.4.6.</b>
                         
-                         Coercion
+                         圧縮
                     </a>
                 
             
@@ -1884,7 +1884,7 @@
                         
                             <b>14.4.7.</b>
                         
-                         static
+                         スタティックライフタイム
                     </a>
                 
             
@@ -1900,7 +1900,7 @@
                         
                             <b>14.4.8.</b>
                         
-                         elision
+                         省略
                     </a>
                 
             
@@ -2858,47 +2858,49 @@
                 
                     <section class="normal" id="section-gitbook_115">
                     
-                        <h2 id="144-lifetimes">14.4 Lifetimes</h2>
-<p>A <em>lifetime</em> is a construct the compiler (also called the borrow checker)
-uses to ensure all borrows are valid. Specifically, a variable&#39;s lifetime 
-begins when it is created and ends when it is destroyed. While lifetimes 
-and scopes are often referred to together, they are not the same. </p>
-<p>Take, for example, the case where we borrow a variable via <code>&amp;</code>. The 
-borrow has a lifetime that is determined by where it is declared. As a result, 
-the borrow is valid as long as it ends before the lender is destroyed. However, 
-the scope of the borrow is determined by where the reference is used.</p>
-<p>In the following example and in the rest of this section, we will see how 
-lifetimes relate to scopes, as well as how the two differ.</p>
+                        <h2 id="144-">14.4 ライフタイム</h2>
+<!-- A *lifetime* is a construct the compiler (also called the borrow checker)
+uses to ensure all borrows are valid. Specifically, a variable's lifetime
+begins when it is created and ends when it is destroyed. While lifetimes
+and scopes are often referred to together, they are not the same.  -->
+<p><em>ライフタイム</em>はコンパイラ(借用チェッカーと呼ばれる場合もあります)が、全ての借用に問題がないことを確認するために使用する仕組みです。正確いうと、変数のライフタイムは作成時に開始し、破棄された時に終了します。ライフタイムとスコープは同時に語られることが多いですが、同じものではありません。</p>
+<!-- Take, for example, the case where we borrow a variable via `&`. The
+borrow has a lifetime that is determined by where it is declared. As a result,
+the borrow is valid as long as it ends before the lender is destroyed. However,
+the scope of the borrow is determined by where the reference is used. -->
+<p>例として<code>&amp;</code>を用いて変数を借用する場合をあげましょう。借用のライフタイムは宣言時に決定し、そこから貸し手が破棄されるまで続きます。しかしながら、借用のスコープは参照が使われる際に決定します。</p>
+<!-- In the following example and in the rest of this section, we will see how
+lifetimes relate to scopes, as well as how the two differ. -->
+<p>以下の例からこのセクションの残りでは、ライフタイムとスコープの関係、そしてそれらがいかに異なるものであるかを見ていきます。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
-<div id="editor">// Lifetimes are annotated below with lines denoting the creation
-// and destruction of each variable.
-// &#96;i&#96; has the longest lifetime because its scope entirely encloses 
-// both &#96;borrow1&#96; and &#96;borrow2&#96;. The duration of &#96;borrow1&#96; compared 
-// to &#96;borrow2&#96; is irrelevant since they are disjoint.
+<div id="editor">// 以下では、変数の作成から破棄までのライフタイムを線で示しています。
+// &#96;i&#96;は最長のライフタイムを持ち、そのスコープは&#96;borrow1&#96;および&#96;borrow2&#96;
+// のスコープを完全に包含します。&#96;borrow1&#96;と&#96;borrow2&#96;の存続期間は一切重なりません。
 fn main() {
-    let i = 3; // Lifetime for &#96;i&#96; starts. ────────────────┐
-    //                                                     │
-    { //                                                   │
-        let borrow1 = &i; // &#96;borrow1&#96; lifetime starts. ──┐│
-        //                                                ││
-        println!(&quot;borrow1: {}&quot;, borrow1); //              ││
-    } // &#96;borrow1 ends. ──────────────────────────────────┘│
-    //                                                     │
-    //                                                     │
-    { //                                                   │
-        let borrow2 = &i; // &#96;borrow2&#96; lifetime starts. ──┐│
-        //                                                ││
-        println!(&quot;borrow2: {}&quot;, borrow2); //              ││
-    } // &#96;borrow2&#96; ends. ─────────────────────────────────┘│
-    //                                                     │
-}   // Lifetime ends. ─────────────────────────────────────┘</div>
+    let i = 3; // &#96;i&#96;のライフタイムが開始      ────────────────┐
+    //                                                         │
+    { //                                                       │
+        let borrow1 = &i; // &#96;borrow1&#96;のライフタイム開始    ──┐│
+        //                                                    ││
+        println!(&quot;borrow1: {}&quot;, borrow1); //                  ││
+    } // &#96;borrow1&#96;が終了    ──────────────────────────────────┘│
+    //                                                         │
+    //                                                         │
+    { //                                                       │
+        let borrow2 = &i; // &#96;borrow2&#96;のライフタイム開始    ──┐│
+        //                                                    ││
+        println!(&quot;borrow2: {}&quot;, borrow2); //                  ││
+    } // &#96;borrow2&#96;が終了     ─────────────────────────────────┘│
+    //                                                         │
+}   // ライフタイムの終了 ─────────────────────────────────────┘</div>
 <div id="result"></div>
 </div>
 
-<p>Note that no names or types are assigned to label lifetimes.
-This restricts how lifetimes will be able to be used as we will see.</p>
+<!-- Note that no names or types are assigned to label lifetimes.
+This restricts how lifetimes will be able to be used as we will see. -->
+<p>ここで、一切の名前や型がライフタイムにアサインされていないことに注意しましょう。これにより、ライフタイムの使われ方がこれから見ていくようなやり方に制限されます。</p>
 
                     
                     </section>
@@ -2909,10 +2911,10 @@ This restricts how lifetimes will be able to be used as we will see.</p>
         </div>
 
         
-        <a href="../scope/borrow/ref.html" class="navigation navigation-prev " aria-label="Previous page: The ref pattern"><i class="fa fa-angle-left"></i></a>
+        <a href="../scope/borrow/ref.html" class="navigation navigation-prev " aria-label="Previous page: refパターン"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../scope/lifetime/explicit.html" class="navigation navigation-next " aria-label="Next page: Explicit annotation"><i class="fa fa-angle-right"></i></a>
+        <a href="../scope/lifetime/explicit.html" class="navigation navigation-next " aria-label="Next page: 明示的アノテーション"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

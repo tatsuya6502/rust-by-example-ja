@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Freezing | Rust by Example</title>
+        <title>値のフリーズ | Rust by Example</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -38,7 +38,7 @@
 
 
         
-    <div class="book" data-level="14.3.2" data-basepath="../.." data-revision="1465401513143">
+    <div class="book" data-level="14.3.2" data-basepath="../.." data-revision="1465617716659">
     
 
 <div class="book-summary">
@@ -1614,7 +1614,7 @@
                         
                             <b>14.</b>
                         
-                         Scoping rules
+                         スコーピングの規則
                     </a>
                 
             
@@ -1647,7 +1647,7 @@
                         
                             <b>14.2.</b>
                         
-                         Ownership and moves
+                         所有権とムーブ
                     </a>
                 
             
@@ -1664,7 +1664,7 @@
                         
                             <b>14.2.1.</b>
                         
-                         Mutability
+                         ミュータビリティ
                     </a>
                 
             
@@ -1685,7 +1685,7 @@
                         
                             <b>14.3.</b>
                         
-                         Borrowing
+                         借用
                     </a>
                 
             
@@ -1702,7 +1702,7 @@
                         
                             <b>14.3.1.</b>
                         
-                         Mutability
+                         ミュータビリティ
                     </a>
                 
             
@@ -1718,7 +1718,7 @@
                         
                             <b>14.3.2.</b>
                         
-                         Freezing
+                         値のフリーズ
                     </a>
                 
             
@@ -1734,7 +1734,7 @@
                         
                             <b>14.3.3.</b>
                         
-                         Aliasing
+                         エイリアス
                     </a>
                 
             
@@ -1750,7 +1750,7 @@
                         
                             <b>14.3.4.</b>
                         
-                         The ref pattern
+                         refパターン
                     </a>
                 
             
@@ -1771,7 +1771,7 @@
                         
                             <b>14.4.</b>
                         
-                         Lifetimes
+                         ライフタイム
                     </a>
                 
             
@@ -1788,7 +1788,7 @@
                         
                             <b>14.4.1.</b>
                         
-                         Explicit annotation
+                         明示的アノテーション
                     </a>
                 
             
@@ -1804,7 +1804,7 @@
                         
                             <b>14.4.2.</b>
                         
-                         Functions
+                         関数
                     </a>
                 
             
@@ -1820,7 +1820,7 @@
                         
                             <b>14.4.3.</b>
                         
-                         Methods
+                         メソッド
                     </a>
                 
             
@@ -1836,7 +1836,7 @@
                         
                             <b>14.4.4.</b>
                         
-                         Structs
+                         構造体
                     </a>
                 
             
@@ -1852,7 +1852,7 @@
                         
                             <b>14.4.5.</b>
                         
-                         Bounds
+                         ライフタイム境界
                     </a>
                 
             
@@ -1868,7 +1868,7 @@
                         
                             <b>14.4.6.</b>
                         
-                         Coercion
+                         圧縮
                     </a>
                 
             
@@ -1884,7 +1884,7 @@
                         
                             <b>14.4.7.</b>
                         
-                         static
+                         スタティックライフタイム
                     </a>
                 
             
@@ -1900,7 +1900,7 @@
                         
                             <b>14.4.8.</b>
                         
-                         elision
+                         省略
                     </a>
                 
             
@@ -2858,9 +2858,10 @@
                 
                     <section class="normal" id="section-gitbook_103">
                     
-                        <h3 id="1432-freezing">14.3.2 Freezing</h3>
-<p>When data is immutably borrowed, it also <em>freezes</em>. <em>Frozen</em> data can&#39;t be 
-modified via the original object until all references to it go out of scope:</p>
+                        <h3 id="1432-">14.3.2 値のフリーズ</h3>
+<!-- When data is immutably borrowed, it also *freezes*. *Frozen* data can't be
+modified via the original object until all references to it go out of scope: -->
+<p>(訳注: ミュータブルな)データがイミュータブルに借用された場合、同時に<em>フリーズ</em>します。<em>フリーズ</em>したデータは、参照が全てスコープから出て行かないかぎり、元のオブジェクトを介して変更することはできません。</p>
 <div id="active-code">
 <button class="btn btn-primary" type="button" id="run-code">Run</button>
 <button class="btn btn-primary" type="button" id="reset-code">Reset</button>
@@ -2868,17 +2869,17 @@ modified via the original object until all references to it go out of scope:</p>
     let mut &#95;mutable&#95;integer = 7i32;
 
     {
-        // Borrow &#96;&#95;mutable&#95;integer&#96;
+        // &#96;&#95;mutable&#95;integer&#96;を借用
         let &#95;large&#95;integer = &amp;&#95;mutable&#95;integer;
 
-        // Error! &#96;&#95;mutable&#95;integer&#96; is frozen in this scope
+        // エラー! &#96;&#95;mutable&#95;integer&#96;はこのスコープではフリーズしている。
         &#95;mutable&#95;integer = 50;
-        // FIXME ^ Comment out this line
+        // FIXME ^ この行をコメントアウトしましょう。
 
-        // &#96;&#95;large&#95;integer&#96; goes out of scope
+        // &#96;&#95;large&#95;integer&#96;はスコープを抜ける
     }
 
-    // Ok! &#96;&#95;mutable&#95;integer&#96; is not frozen in this scope
+    // OK! &#96;&#95;mutable&#95;integer&#96;はこのスコープではフリーズしていない。
     &#95;mutable&#95;integer = 3;
 }</div>
 <div id="result"></div>
@@ -2893,10 +2894,10 @@ modified via the original object until all references to it go out of scope:</p>
         </div>
 
         
-        <a href="../../scope/borrow/mut.html" class="navigation navigation-prev " aria-label="Previous page: Mutability"><i class="fa fa-angle-left"></i></a>
+        <a href="../../scope/borrow/mut.html" class="navigation navigation-prev " aria-label="Previous page: ミュータビリティ"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../../scope/borrow/alias.html" class="navigation navigation-next " aria-label="Next page: Aliasing"><i class="fa fa-angle-right"></i></a>
+        <a href="../../scope/borrow/alias.html" class="navigation navigation-next " aria-label="Next page: エイリアス"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
